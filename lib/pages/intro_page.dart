@@ -1,4 +1,4 @@
-import 'package:darth_runner/pages/home_page.dart';
+import 'package:darth_runner/pages/navigator_page.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
@@ -36,7 +36,7 @@ class IntroPage extends StatelessWidget {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  const HomePage()
+                  builder: (context) =>  const NotHomePage()
                   )
               ),
               child: Padding(
