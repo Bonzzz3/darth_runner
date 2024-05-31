@@ -5,8 +5,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
-import 'screens/login/login.dart';
-import 'screens/register/register.dart';
+//import 'screens/login/login.dart';
+// import 'screens/register/register.dart';
+
+import 'dart:async';
+import 'auth/login_screen.dart';
 
 Future<void> main() async {
   final WidgetsBinding widgetsBinding =
