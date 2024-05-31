@@ -2,6 +2,7 @@ import 'package:darth_runner/components/bottom_nav_bar.dart';
 import 'package:darth_runner/pages/profile.dart';
 import 'package:darth_runner/pages/run.dart';
 import 'package:darth_runner/pages/home.dart';
+import 'package:darth_runner/pages/stats_display.dart';
 import 'package:flutter/material.dart';
 
 class NotHomePage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _NotHomePageState extends State<NotHomePage> {
   final List<Widget> _pages = [
     const HomePage(),
     const Run(),
+    const StatsDisplay(),
     const Profile()
   ];
 

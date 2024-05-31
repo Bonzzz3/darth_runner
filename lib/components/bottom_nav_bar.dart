@@ -44,26 +44,41 @@ class MyBottomNavBar extends StatelessWidget {
         activeColor: const Color.fromARGB(255, 32, 2, 59),
         tabActiveBorder: Border.all(style:BorderStyle.none),
         tabBackgroundColor: const Color.fromARGB(255, 203, 64, 64),
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         iconSize: 25,
         tabBorderRadius: 20,
         rippleColor: const Color.fromARGB(255, 30, 5, 76),
         curve: Curves.bounceIn,
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 43, vertical: 20),
         onTabChange: (value) => onTabChange!(value),
         tabs: const [
         GButton(
           icon: Icons.home,
           text: '  HOME',
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
         ),
         GButton(
           icon: Icons.run_circle_outlined,
           text: '  RUN',
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        GButton(
+          icon: Icons.bar_chart_sharp,
+          text: '  STATS',
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
         ),
         GButton(
           icon: Icons.person,
           text: '  PROFILE',
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
         ),
       ]
       );

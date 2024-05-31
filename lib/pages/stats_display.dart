@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class StatsDisplay extends StatelessWidget {
+  const StatsDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                AppBar(
                   backgroundColor: Colors.transparent,
                   // elevation: 0,
-                  title: const Text('Welcome Home',
+                  title: const Text('YOUR STATS',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold
