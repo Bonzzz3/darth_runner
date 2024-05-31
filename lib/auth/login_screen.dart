@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'auth_service.dart';
 import 'signup_screen.dart';
-import '../home_screen.dart';
 import '../widgets/button.dart';
 import '../widgets/textfield.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = AuthService();
+
+  bool isLoading = false;
 
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -54,6 +53,21 @@ class _LoginScreenState extends State<LoginScreen> {
               label: "Login",
               onPressed: _login,
             ),
+            const SizedBox(height: 10),
+            isLoading
+              ? CircularProgressIndicator()
+              :CustomButton(
+              label: "SignIn with Google",
+              onPressed: () async {
+                setState(() {
+                  isLoading = true;
+                });
+                await _auth.loginWithGoogle();
+                setState(() {
+                  isLoading = false;
+                });
+              },
+            ),
             const SizedBox(height: 5),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Text("Already have an account? "),
@@ -75,18 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (context) => const SignupScreen()),
       );
 
-  goToHome(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
-
   _login() async {
-    final user =
-        await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
-
-    if (user != null) {
-      log("User Logged In");
-      goToHome(context);
-    }
+    await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
   }
 }

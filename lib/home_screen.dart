@@ -1,5 +1,5 @@
 import 'auth/auth_service.dart';
-import 'auth/login_screen.dart';
+//import 'auth/login_screen.dart';
 import 'widgets/button.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
               label: "Sign Out",
               onPressed: () async {
                 await auth.signout();
-                goToLogin(context);
               },
             )
           ],
@@ -33,8 +32,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  goToLogin(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
 }

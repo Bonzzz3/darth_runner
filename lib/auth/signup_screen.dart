@@ -1,4 +1,4 @@
-import 'dart:developer';
+//import 'dart:developer';
 
 import 'auth_service.dart';
 import 'login_screen.dart';
@@ -91,11 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
       );
 
   _signup() async {
-    final user =
-        await _auth.createUserWithEmailAndPassword(_email.text, _password.text);
-    if (user != null) {
-      log("User Created Succesfully");
-      goToHome(context);
-    }
+    await _auth.createUserWithEmailAndPassword(_email.text, _password.text);
+    Navigator.pop(context);
   }
 }
