@@ -1,4 +1,5 @@
 import 'package:darth_runner/auth/login_screen.dart';
+import 'package:darth_runner/auth/verification_screen.dart';
 import 'package:darth_runner/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,13 @@ class Wrapper extends StatelessWidget {
                 if (snapshot.data == null) {
                   return const LoginScreen();
                 } else {
-                  return const HomeScreen();
+                  if (snapshot.data!.emailVerified == true) {
+                    return const HomeScreen();
+                  } else {
+                    return VerificationScreen(
+                      user: snapshot.data!,
+                    );
+                  }
                 }
               }
             }));

@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 10),
             isLoading
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               :CustomButton(
               label: "SignIn with Google",
               onPressed: () async {
