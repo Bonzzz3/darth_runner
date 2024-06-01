@@ -30,10 +30,7 @@ class _NotHomePageState extends State<NotHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      backgroundColor: const Color.fromARGB(255, 172, 12, 0),
-    
+    return Scaffold(   
       body: _pages[_selectedIndex],
       bottomNavigationBar:  MyBottomNavBar(
         onTabChange: (index) => navigateBottomBar(index) ,

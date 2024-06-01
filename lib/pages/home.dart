@@ -21,6 +21,15 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          const Positioned(
+            top: 52,
+            right:20,
+            child: CircleAvatar(
+              minRadius: 25,
+              maxRadius: 25,
+              foregroundImage: AssetImage('lib/assets/images/darthrunner_logo.jpeg'),
+            ),
+          ),
           Positioned(
             top: 0,
             left: 0,
@@ -35,7 +44,7 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   ),
                   ),
-                
+                  
                 ),
               )
         ],        

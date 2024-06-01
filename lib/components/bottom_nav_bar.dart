@@ -39,48 +39,61 @@ class MyBottomNavBar extends StatelessWidget {
    
    
   //test using google bar
-   GNav(
-        color: const Color.fromARGB(255, 11, 10, 10),
-        activeColor: const Color.fromARGB(255, 32, 2, 59),
+   Container(
+    color:Colors.black,
+     child: Padding(
+       padding: const EdgeInsets.all(5),
+       child: GNav(
+        backgroundColor: Colors.black,
+        padding: const EdgeInsets.all( 20),
+        color: Colors.white,
         tabActiveBorder: Border.all(style:BorderStyle.none),
-        tabBackgroundColor: const Color.fromARGB(255, 203, 64, 64),
+        tabBackgroundColor: const Color.fromARGB(255, 45, 44, 44),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        activeColor: Colors.white,
         iconSize: 25,
         tabBorderRadius: 20,
         rippleColor: const Color.fromARGB(255, 30, 5, 76),
         curve: Curves.bounceIn,
         duration: const Duration(milliseconds: 300),
         onTabChange: (value) => onTabChange!(value),
-        tabs: const [
-        GButton(
-          icon: Icons.home,
-          text: '  HOME',
-          textStyle: TextStyle(
-            fontWeight: FontWeight.bold
+        gap:  8,
+            tabs: const [
+            GButton(
+              icon: Icons.home,
+              text: 'HOME',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+            GButton(
+              icon: Icons.run_circle_outlined,
+              text: 'RUN',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+            GButton(
+              icon: Icons.bar_chart_sharp,
+              text: 'STATS',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+            GButton(
+              icon: Icons.person,
+              text: 'PROFILE',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+          ]
           ),
-        ),
-        GButton(
-          icon: Icons.run_circle_outlined,
-          text: '  RUN',
-          textStyle: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-        ),
-        GButton(
-          icon: Icons.bar_chart_sharp,
-          text: '  STATS',
-          textStyle: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-        ),
-        GButton(
-          icon: Icons.person,
-          text: '  PROFILE',
-          textStyle: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-        ),
-      ]
-      );
+     ),
+   );
   }
 }

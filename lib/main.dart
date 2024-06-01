@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 
 void main() {
 // enable the app to be in full screen, hiding the notification bar
+// uncomment the below and package import
+// problems when loading screen, need to add padding around appbar 
+// the bottom nav bar end up hiding
 
   // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
   runApp(const MyApp());
 }
 

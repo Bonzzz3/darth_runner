@@ -11,13 +11,13 @@ class StatsDisplay extends StatelessWidget {
           Container(
             decoration:const BoxDecoration(
             gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             // begin: Alignment(-1,-1),
             // end: Alignment(0.7,1),
             colors: [
               Color.fromARGB(255, 6, 4,120),
-               Color.fromARGB(255, 174, 12,0)],
+              Color.fromARGB(255, 174, 12,0)],
               ),
             ),
           ),
@@ -34,10 +34,11 @@ class StatsDisplay extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold
                   ),
-                  ),
-                
                 ),
-              )
+                
+              ),
+            ),
+          
         ],        
       )
     );
