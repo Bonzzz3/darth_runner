@@ -1,3 +1,5 @@
+import 'package:darth_runner/auth/forgot_pass.dart';
+
 import 'auth_service.dart';
 import 'signup_screen.dart';
 import '../widgets/button.dart';
@@ -48,6 +50,19 @@ class _LoginScreenState extends State<LoginScreen> {
               label: "Password",
               controller: _password,
             ),
+            Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ForgotPassword()
+                        )
+                    );
+                  },
+                  child: const Text("Forgot Password?"),
+                )),
             const SizedBox(height: 30),
             CustomButton(
               label: "Login",
@@ -55,19 +70,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 10),
             isLoading
-              ? const CircularProgressIndicator()
-              :CustomButton(
-              label: "SignIn with Google",
-              onPressed: () async {
-                setState(() {
-                  isLoading = true;
-                });
-                await _auth.loginWithGoogle();
-                setState(() {
-                  isLoading = false;
-                });
-              },
-            ),
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    label: "SignIn with Google",
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await _auth.loginWithGoogle();
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  ),
             const SizedBox(height: 5),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Text("Already have an account? "),
