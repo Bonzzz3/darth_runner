@@ -18,7 +18,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
   late Timer timer;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _auth.sendEmailVerificationLink();
     timer = Timer.periodic(const Duration(seconds: 5), (timer) {
