@@ -10,7 +10,7 @@ class AuthService {
     try {
       await _auth.currentUser?.sendEmailVerification();
     } catch (e) {
-      print (e.toString());
+      print(e.toString());
     }
   }
 
@@ -18,7 +18,7 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print (e.toString());
+      print(e.toString());
     }
   }
 
@@ -32,6 +32,7 @@ class AuthService {
           idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
       return await _auth.signInWithCredential(cred);
     } catch (e) {
+      log("Something went wrong");
       print(e.toString());
     }
     return null;

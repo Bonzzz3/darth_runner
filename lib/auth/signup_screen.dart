@@ -32,49 +32,57 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          children: [
-            const Spacer(),
-            const Text("Signup",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500)),
-            const SizedBox(
-              height: 50,
-            ),
-            CustomTextField(
-              hint: "Enter Name",
-              label: "Name",
-              controller: _name,
-            ),
-            const SizedBox(height: 20),
-            CustomTextField(
-              hint: "Enter Email",
-              label: "Email",
-              controller: _email,
-            ),
-            const SizedBox(height: 20),
-            CustomTextField(
-              hint: "Enter Password",
-              label: "Password",
-              isPassword: true,
-              controller: _password,
-            ),
-            const SizedBox(height: 30),
-            CustomButton(
-              label: "Signup",
-              onPressed: _signup,
-            ),
-            const SizedBox(height: 5),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text("Already have an account? "),
-              InkWell(
-                onTap: () => goToLogin(context),
-                child: const Text("Login", style: TextStyle(color: Colors.red)),
-              )
-            ]),
-            const Spacer()
-          ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/img/Wallpaper.jpeg"), fit: BoxFit.cover),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              const Spacer(),
+              const Text("Sign Up",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500,  color: Colors.white)),
+              const SizedBox(
+                height: 50,
+              ),
+              CustomTextField(
+                hint: "Enter Name",
+                label: "Name",
+                controller: _name,
+              ),
+              const SizedBox(height: 20),
+              CustomTextField(
+                hint: "Enter Email",
+                label: "Email",
+                controller: _email,
+              ),
+              const SizedBox(height: 20),
+              CustomTextField(
+                hint: "Enter Password",
+                label: "Password",
+                isPassword: true,
+                controller: _password,
+              ),
+              const SizedBox(height: 30),
+              CustomButton(
+                label: "Signup",
+                onPressed: _signup,
+              ),
+              const SizedBox(height: 5),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Text("Already have an account?", style: TextStyle(color: Colors.grey),),
+                const SizedBox(width: 10,),
+                InkWell(
+                  onTap: () => goToLogin(context),
+                  child: const Text("Login", style: TextStyle(color: Colors.red)),
+                )
+              ]),
+              const Spacer()
+            ],
+          ),
         ),
       ),
     );
