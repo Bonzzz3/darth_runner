@@ -29,7 +29,7 @@ class IntroPage extends StatelessWidget {
             style: TextStyle(
               color: Color.fromARGB(202, 255, 255, 255),
               fontWeight: FontWeight.bold,
-              fontSize: 30
+              fontSize: 27
               ),
             ),
             const SizedBox(height: 10,),
@@ -57,18 +57,15 @@ class IntroPage extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
-                
-                        ),
-                     )
+                      ),
+                    )
                   )
                 ),
               ),
             )
-
-
           ],
         ),
       )
-      );
+    );
   }
 }
