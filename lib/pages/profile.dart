@@ -43,7 +43,10 @@ class Profile extends StatelessWidget {
               label: "Sign Out",
               onPressed: () async {
                 await auth.signout();
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
               },
             )
             
