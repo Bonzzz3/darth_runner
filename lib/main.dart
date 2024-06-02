@@ -1,11 +1,9 @@
-
 import 'package:darth_runner/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'dart:async';
-import 'package:darth_runner/pages/intro_page.dart';
-import 'package:flutter/material.dart';
+// import 'package:darth_runner/pages/intro_page.dart';
 // import 'package:flutter/services.dart';
 
 
@@ -16,8 +14,7 @@ Future<void> main() async {
 // the bottom nav bar end up hiding
 
   // WidgetsFlutterBinding.ensureInitialized();
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
@@ -36,7 +33,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-      home: Wrapper(),
+      home: const Wrapper(),
       //wrapper direct to homepage which is IntroPage()
     );
   }
