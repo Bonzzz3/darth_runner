@@ -1,5 +1,6 @@
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/auth/login_screen.dart';
+// import 'package:darth_runner/home_screen.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,7 @@ class Profile extends StatelessWidget {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
               },
             )
+            
           ],
         )
       ],

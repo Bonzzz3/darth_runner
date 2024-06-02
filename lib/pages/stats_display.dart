@@ -40,50 +40,31 @@ class _StatsDisplayState extends State<StatsDisplay> {
                   ),
                 ),
               ),
-              TableCalendar(
-                focusedDay: today,
-                 firstDay: DateTime.utc(2020,1,1), 
-                 lastDay: DateTime.utc(2030,12,31),
-                 headerVisible: true,
-                 headerStyle: const HeaderStyle(
-                  titleCentered: true,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                  ),
                   
-                  ),  
+                  child: TableCalendar(
+                    focusedDay: today,
+                     firstDay: DateTime.utc(2020,1,1), 
+                     lastDay: DateTime.utc(2030,12,31),
+                     headerVisible: true,
+                     headerStyle: const HeaderStyle(
+                      titleCentered: true,
+                      
+                      ),  
+                  ),
+                ),
               ),
                   
               ]
               ),
             ],
-          )
-          // Positioned(
-          //   top: 0,
-          //   left: 0,
-          //   right: 0,
-          //   child:
-          //      AppBar(
-          //         backgroundColor: Colors.transparent,
-          //         // elevation: 0,
-          //         title: const Text('YOUR STATS',
-          //         style: TextStyle(
-          //           color: Colors.white,
-          //           fontWeight: FontWeight.bold
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // Positioned(
-          //   // top: 150,
-          //   child: TableCalendar(
-          //       focusedDay: today,
-          //        firstDay: DateTime.utc(2020,1,1), 
-          //        lastDay: DateTime.utc(2030,12,31),
-          //        headerVisible: true,
-          //        headerStyle: const HeaderStyle(
-          //         titleCentered: true
-          //        ),
-              
-          //   ),
-          // ),  
+          ) 
       );
   }
 }
