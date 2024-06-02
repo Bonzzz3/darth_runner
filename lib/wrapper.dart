@@ -1,6 +1,5 @@
 import 'package:darth_runner/auth/login_screen.dart';
 import 'package:darth_runner/auth/verification_screen.dart';
-import 'package:darth_runner/home_screen.dart';
 import 'package:darth_runner/pages/intro_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
