@@ -1,9 +1,9 @@
 flutter_native_splash:
-  color: "#FFFFFF"
-  image: assets/logo.jpeg
+  color: "#00001E"
+  image: assets/img/circle_logo.png
 
   android_12:
-    color: "#FFFFFF"
-    image: assets/logo.jpeg
+    color: "#00001E"
+    image: assets/img/circle_logo.png
 
   web: false
