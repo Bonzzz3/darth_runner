@@ -1,3 +1,10 @@
+import 'package:darth_runner/auth/auth_service.dart';
+import 'package:darth_runner/auth/login_screen.dart';
+import 'package:darth_runner/auth/verification_screen.dart';
+import 'package:darth_runner/home_screen.dart';
+import 'package:darth_runner/pages/intro_page.dart';
+import 'package:darth_runner/widgets/button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
@@ -5,6 +12,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   final auth = AuthService();
     return Scaffold(
       body: Stack(
         children: [
@@ -21,24 +29,23 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child:
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: const Text('Your Profile',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
-                ),
 
-              ) 
-            )
-        ],        
+        Column(
+          children: [
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: const Text('Your Profile',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold
+              ),
+              ),
+            ),
+          ]
+        ) 
+            
+        ]
       )
     );
   }

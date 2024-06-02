@@ -1,6 +1,8 @@
 import 'package:darth_runner/pages/navigator_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 
+// THis is the intro page with a first time per new account,
+// tutorial screen
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
