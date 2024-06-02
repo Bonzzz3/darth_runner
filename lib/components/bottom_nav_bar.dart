@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 
@@ -45,14 +46,14 @@ class MyBottomNavBar extends StatelessWidget {
        padding: const EdgeInsets.all(5),
        child: GNav(
         backgroundColor: Colors.black,
-        padding: const EdgeInsets.all( 20),
+        padding: const EdgeInsets.all(20),
         color: Colors.white,
         tabActiveBorder: Border.all(style:BorderStyle.none),
         tabBackgroundColor: const Color.fromARGB(255, 45, 44, 44),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         activeColor: Colors.white,
         iconSize: 25,
-        tabBorderRadius: 20,
+        tabBorderRadius: 30,
         rippleColor: const Color.fromARGB(255, 30, 5, 76),
         curve: Curves.bounceIn,
         duration: const Duration(milliseconds: 300),
