@@ -1,9 +1,10 @@
 import 'package:darth_runner/auth/auth_service.dart';
-//import 'package:darth_runner/auth/login_screen.dart';
-// import 'package:darth_runner/home_screen.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:restart_app/restart_app.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+//import 'package:restart_app/restart_app.dart';
+//import 'package:darth_runner/auth/login_screen.dart';
+// import 'package:darth_runner/home_screen.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -44,7 +45,8 @@ class Profile extends StatelessWidget {
               label: "Sign Out",
               onPressed: () async {
                 await auth.signout();
-                Restart.restartApp();
+                Phoenix.rebirth(context);
+                //Restart.restartApp();
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => const LoginScreen()),
