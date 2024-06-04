@@ -48,6 +48,7 @@ dependencies:
   pedometer: ^4.0.1
   intl: ^0.19.0
   shared_preferences: ^2.2.3
+  restart_app: ^1.2.1
 
 dev_dependencies:
   flutter_test:
