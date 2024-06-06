@@ -1,4 +1,5 @@
 import 'package:darth_runner/auth/auth_service.dart';
+import 'package:darth_runner/bmi/home_screen.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -39,6 +40,16 @@ class Profile extends StatelessWidget {
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+              label: "BMI",
+              onPressed: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              },
             ),
             const SizedBox(height: 20),
             CustomButton(
