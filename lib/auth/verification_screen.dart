@@ -36,25 +36,37 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Align(
-            alignment: Alignment.center,
-            child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "We have sent an email for verification. If you did not receive an email, please tap on resend.",
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      label: "Resend Email",
-                      onPressed: () async {
-                        _auth.sendEmailVerificationLink();
-                      },
-                    ),
-                  ],
-                ))));
+        body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/img/Wallpaper.jpeg"), fit: BoxFit.cover),
+      ),
+      child: Align(
+          alignment: Alignment.center,
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "We have sent an email for verification. If you did not receive an email, please tap on resend.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    label: "Resend Email",
+                    onPressed: () async {
+                      _auth.sendEmailVerificationLink();
+                    },
+                  ),
+                ],
+              ))),
+    ));
   }
 }
