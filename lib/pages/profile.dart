@@ -1,5 +1,6 @@
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/bmi/home_screen.dart';
+import 'package:darth_runner/social/home_social.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -42,6 +43,19 @@ class Profile extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
+            CustomButton(
+              label: "Social",
+              onPressed: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeSocial()));
+              },
+            ),
+            const SizedBox(height: 20),
+
+            // BMI button
             CustomButton(
               label: "BMI",
               onPressed: () async {
@@ -52,6 +66,8 @@ class Profile extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
+
+            // Signout button
             CustomButton(
               label: "Sign Out",
               onPressed: () async {

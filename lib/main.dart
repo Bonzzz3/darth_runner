@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
       theme: (ThemeData(primarySwatch: Colors.blue)),
       debugShowCheckedModeBanner: false,
       home: const Wrapper(),
-      //wrapper direct to homepage which is IntroPage()
     );
   }
 }

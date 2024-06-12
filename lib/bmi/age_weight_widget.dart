@@ -29,7 +29,6 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     counter = widget.initValue;
   }

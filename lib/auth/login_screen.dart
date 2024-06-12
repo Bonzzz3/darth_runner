@@ -55,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hint: "Enter Password",
                 label: "Password",
                 controller: _password,
+                isPassword: true,
               ),
               Align(
                   alignment: Alignment.centerRight,

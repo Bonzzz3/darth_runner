@@ -55,6 +55,7 @@ dependencies:
   flutter_3d_choice_chip: ^0.1.4
   page_transition: ^2.1.0
   swipeable_button_view: ^0.0.2
+  cloud_firestore: ^4.17.5
 
 dev_dependencies:
   flutter_test:
