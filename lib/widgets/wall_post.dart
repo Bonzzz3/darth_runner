@@ -24,40 +24,37 @@ class WallPost extends StatefulWidget {
 }
 
 class _WallPostState extends State<WallPost> {
+  //user
+  final currentUser = FirebaseAuth.instance.currentUser!;
+  bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.likes.contains(currentUser.email);
+  }
+
+  void toggleLike() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+
+    DocumentReference postRef =
+        FirebaseFirestore.instance.collection('User Posts').doc(widget.postId);
+
+    if (isLiked) {
+      postRef.update({
+        'Likes': FieldValue.arrayUnion([currentUser.email])
+      });
+    } else {
+      postRef.update({
+        'Likes': FieldValue.arrayRemove([currentUser.email])
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    //user
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    bool isLiked = false;
-
-    @override
-    void initState() {
-      super.initState();
-      isLiked = widget.likes.contains(currentUser.email);
-    }
-
-    void toggleLike() {
-      setState(() {
-        log("toggle like");
-        isLiked = !isLiked;
-        log(isLiked.toString());
-      });
-
-      DocumentReference postRef = FirebaseFirestore.instance
-          .collection('User Posts')
-          .doc(widget.postId);
-
-      if (isLiked) {
-        postRef.update({
-          'Likes': FieldValue.arrayUnion([currentUser.email])
-        });
-      } else {
-        postRef.update({
-          'Likes': FieldValue.arrayRemove([currentUser.email])
-        });
-      }
-    }
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -83,6 +80,13 @@ class _WallPostState extends State<WallPost> {
               LikeButton(
                 isLiked: isLiked,
                 onTap: toggleLike,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                widget.likes.length.toString(),
+                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),

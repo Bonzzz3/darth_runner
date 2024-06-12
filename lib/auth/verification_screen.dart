@@ -16,6 +16,7 @@ class VerificationScreen extends StatefulWidget {
 class _VerificationScreenState extends State<VerificationScreen> {
   final _auth = AuthService();
   late Timer timer;
+  
   @override
   void initState() {
     super.initState();

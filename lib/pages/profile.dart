@@ -1,15 +1,21 @@
 import 'package:darth_runner/auth/auth_service.dart';
-import 'package:darth_runner/bmi/home_screen.dart';
-import 'package:darth_runner/social/home_social.dart';
 import 'package:darth_runner/widgets/button.dart';
+import 'package:darth_runner/widgets/text_box.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-//import 'package:restart_app/restart_app.dart';
-//import 'package:darth_runner/auth/login_screen.dart';
-// import 'package:darth_runner/home_screen.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
+  Future<void> editField(String field) async {}
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class Profile extends StatelessWidget {
         ),
         Column(
           children: [
+            //title
             AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -44,40 +51,66 @@ class Profile extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            CustomButton(
-              label: "Social",
-              onPressed: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeSocial()));
-              },
-            ),
-            const SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //profile picture
+                const Center(
+                  child: Icon(
+                    Icons.person,
+                    size: 72,
+                  ),
+                ),
 
-            // BMI button
-            CustomButton(
-              label: "BMI",
-              onPressed: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-              },
-            ),
-            const SizedBox(height: 20),
+                const SizedBox(
+                  height: 20,
+                ),
 
+                //user email
+                Center(
+                  child: Text(
+                    currentUser.email!,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                //details
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    'My Details',
+                    style: TextStyle(color: Colors.grey[300], fontSize: 20),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+
+                MyTextBox(
+                  text: 'darth',
+                  sectionName: 'username',
+                  onPressed: () => editField('username'),
+                ),
+
+                MyTextBox(
+                  text: 'empty bio',
+                  sectionName: 'bio',
+                  onPressed: () => editField('bio'),
+                ),
+              ],
+            ),
+
+            const SizedBox(
+              height: 100,
+            ),
             // Signout button
             CustomButton(
               label: "Sign Out",
               onPressed: () async {
                 await auth.signout();
                 Phoenix.rebirth(context);
-                //Restart.restartApp();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const LoginScreen()),
-                // );
               },
             )
           ],
