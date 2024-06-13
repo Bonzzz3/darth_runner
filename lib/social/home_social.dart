@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darth_runner/helper/helper_methods.dart';
 import 'package:darth_runner/widgets/text_fill.dart';
 import 'package:darth_runner/widgets/wall_post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -63,13 +64,14 @@ class _HomeSocialState extends State<HomeSocial> {
                           return WallPost(
                             message: post['Message'],
                             user: post['UserEmail'],
+                            time: formatDate(post['TimeStamp']),
                             postId: post.id,
                             likes: List<String>.from(post['Likes'] ?? []),
                           );
                         });
                   } else if (snapshot.hasError) {
                     return Center(
-                      child: Text('Error: ' + snapshot.error.toString()),
+                      child: Text('Error: ${snapshot.error}'),
                     );
                   }
                   return const Center(
@@ -98,7 +100,14 @@ class _HomeSocialState extends State<HomeSocial> {
               ),
 
               //logged in as user
-              Text("Logged in as: " + currentUser.email!),
+              Text(
+                "Logged in as: ${currentUser.email!}",
+                style: TextStyle(color: Colors.grey),
+              ),
+
+              const SizedBox(
+                height: 5,
+              )
             ],
           ),
         ),
