@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -38,10 +40,14 @@ class AuthService {
   }
 
   Future<User?> createUserWithEmailAndPassword(
-      String email, String password) async {
+      TextEditingController email, String password) async {
     try {
       final cred = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email.text, password: password);
+      FirebaseFirestore.instance.collection("Users").doc(cred.user!.email).set({
+        'username': email.text.split('@')[0],
+        'bio': 'Empty bio..',
+      });
       return cred.user;
     } on FirebaseAuthException catch (e) {
       exceptionHandler(e.code);

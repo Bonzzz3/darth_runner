@@ -1,13 +1,16 @@
+import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/bmi/home_screen.dart';
 import 'package:darth_runner/social/home_social.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final auth = AuthService();
     return Scaffold(
         body: Stack(
       children: [
@@ -75,6 +78,13 @@ class HomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
+              CustomButton(
+                label: "Sign Out",
+                onPressed: () async {
+                  await auth.signout();
+                  Phoenix.rebirth(context);
+                },
+              )
             ],
           ),
         ),
