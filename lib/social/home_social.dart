@@ -102,7 +102,7 @@ class _HomeSocialState extends State<HomeSocial> {
               //logged in as user
               Text(
                 "Logged in as: ${currentUser.email!}",
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
 
               const SizedBox(
