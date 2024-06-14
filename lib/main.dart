@@ -8,7 +8,7 @@ import 'dart:async';
 
 
 Future<void> main() async {
- // enable the app to be in full screen, hiding the notification bar
+// enable the app to be in full screen, hiding the notification bar
 // uncomment the below and package import
 // problems when loading screen, need to add padding around appbar 
 // the bottom nav bar end up hiding
