@@ -60,6 +60,7 @@ class _WallPostState extends State<WallPost> {
 
   //add a comment
   void addComment(String commentText) {
+    ////// add username
     FirebaseFirestore.instance
         .collection("User Posts")
         .doc(widget.postId)
@@ -67,6 +68,7 @@ class _WallPostState extends State<WallPost> {
         .add({
       "CommentText": commentText,
       "CommentedBy": currentUser.email,
+      "CommentedName": currentUser.displayName,
       "CommentTime": Timestamp.now()
     });
   }
@@ -162,11 +164,13 @@ class _WallPostState extends State<WallPost> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(width: 25),
-          //user and message
+
+          // seperate content with cancel button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // main post message and user and time
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -177,35 +181,36 @@ class _WallPostState extends State<WallPost> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //user
-                      Text(
-                        widget.user,
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
-                      //time
-                      Text(
-                        widget.time,
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ),
 
               // delete button
-              if (widget.user == currentUser.email)
+              if (widget.user == currentUser.displayName)
                 DeleteButton(
                   onTap: deletePost,
                 ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //user
+              Text(
+                widget.user,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
+              //time
+              Text(
+                widget.time,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
             ],
           ),
 
@@ -296,7 +301,7 @@ class _WallPostState extends State<WallPost> {
 
                     return Comment(
                       text: commentData["CommentText"],
-                      user: commentData["CommentedBy"],
+                      user: commentData["CommentedName"],
                       time: formatDate(commentData["CommentTime"]),
                     );
                   }).toList(),

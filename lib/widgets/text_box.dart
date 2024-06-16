@@ -13,14 +13,12 @@ class MyTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // decoration: BoxDecoration(
-        //   color: Colors.grey,
-        //   borderRadius: BorderRadius.circular(2),
-        // ),
-        width: 400,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
         padding: const EdgeInsets.only(left: 15, bottom: 15),
         margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

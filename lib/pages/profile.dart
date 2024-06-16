@@ -15,7 +15,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final currentUser = FirebaseAuth.instance.currentUser!;
-
   final usersCollection = FirebaseFirestore.instance.collection("Users");
 
   Future<void> editField(String field) async {
@@ -68,44 +67,35 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     final auth = AuthService();
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          //elevation: 0,
+          title: const Text(
+            'Your Profile',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          //centerTitle: true,
+          automaticallyImplyLeading: false,
+          titleSpacing: 25,
+        ),
+        extendBodyBehindAppBar: true,
         body: StreamBuilder<DocumentSnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("Users")
-                .doc(currentUser.email)
-                .snapshots(),
+            stream: usersCollection.doc(currentUser.email).snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final userData = snapshot.data!.data() as Map<String, dynamic>;
-                return Stack(
-                  //clipBehavior: Clip.hardEdge,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          // begin: Alignment(-1,-1),
-                          // end: Alignment(0.7,1),
-                          colors: [
-                            Color.fromARGB(255, 6, 4, 120),
-                            Color.fromARGB(255, 174, 12, 0)
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
+                return Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/img/gradient.png"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: SafeArea(
+                    child: Column(
                       children: [
                         //title
-                        AppBar(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          title: const Text(
-                            'Your Profile',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
                         const SizedBox(height: 20),
 
                         Column(
@@ -146,11 +136,49 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
 
-                            MyTextBox(
-                              text: userData['username'],
-                              sectionName: 'username',
-                              onPressed: () => editField("username"),
-                            ),
+                            // MyTextBox(
+                            //   text: userData['username'],
+                            //   sectionName: 'username',
+                            //   onPressed: () {
+                            //     //editField("username");
+                            //     // currentUser.updateDisplayName("");
+                            //   },
+                            // ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                padding:
+                                    const EdgeInsets.only(left: 15, bottom: 15),
+                                margin: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "username",
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      userData['username'],
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                  ],
+                                )),
 
                             MyTextBox(
                               text: userData['bio'],
@@ -172,8 +200,8 @@ class _ProfileState extends State<Profile> {
                           },
                         )
                       ],
-                    )
-                  ],
+                    ),
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return Center(

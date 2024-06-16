@@ -32,22 +32,24 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: const Text(
           "BMI Calculator",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
       ),
+      extendBodyBehindAppBar: true,
       body: Container(
-        color: Colors.black,
-        padding: const EdgeInsets.all(12),
-        child: Card(
-          color: Colors.black,
-          elevation: 12,
-          shape: const RoundedRectangleBorder(),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+        ),
+        child: SafeArea(
           child: Column(
             children: [
               const SizedBox(
-                height: 16,
+                height: 50,
               ),
               // Gender
               GenderWidget(

@@ -57,7 +57,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/Wallpaper.jpeg"),
+              image: AssetImage("assets/img/wallpaper.jpeg"),
               fit: BoxFit.cover),
         ),
         child: Align(

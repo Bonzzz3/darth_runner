@@ -39,13 +39,15 @@ class AuthService {
     return null;
   }
 
-  Future<User?> createUserWithEmailAndPassword(
+  Future<User?> createUserWithEmailAndPassword(TextEditingController username,
       TextEditingController email, String password) async {
     try {
       final cred = await _auth.createUserWithEmailAndPassword(
           email: email.text, password: password);
+      await cred.user!.updateDisplayName(username.text);
+      log(username.text);
       FirebaseFirestore.instance.collection("Users").doc(cred.user!.email).set({
-        'username': email.text.split('@')[0],
+        'username': username.text,
         'bio': 'Empty bio..',
       });
       return cred.user;

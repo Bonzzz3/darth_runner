@@ -36,21 +36,39 @@ class _SignupScreenState extends State<SignupScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/img/Wallpaper.jpeg"), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage("assets/img/wallpaper.jpeg"),
+              fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
-              const Text("Sign Up",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500,  color: Colors.white)),
+              const Center(
+                child: Text("Sign Up",
+                    style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white)),
+              ),
               const SizedBox(
                 height: 50,
               ),
+              const Text(
+                "  Username cannot be changed after signing up",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               CustomTextField(
-                hint: "Enter Name",
-                label: "Name",
+                hint: "Enter Username",
+                label: "Username",
                 controller: _name,
               ),
               const SizedBox(height: 20),
@@ -67,17 +85,25 @@ class _SignupScreenState extends State<SignupScreen> {
                 controller: _password,
               ),
               const SizedBox(height: 30),
-              CustomButton(
-                label: "Signup",
-                onPressed: _signup,
+              Center(
+                child: CustomButton(
+                  label: "Signup",
+                  onPressed: _signup,
+                ),
               ),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text("Already have an account?", style: TextStyle(color: Colors.grey),),
-                const SizedBox(width: 10,),
+                const Text(
+                  "Already have an account?",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
                 InkWell(
                   onTap: () => goToLogin(context),
-                  child: const Text("Login", style: TextStyle(color: Colors.red)),
+                  child:
+                      const Text("Login", style: TextStyle(color: Colors.red)),
                 )
               ]),
               const Spacer()
@@ -99,7 +125,7 @@ class _SignupScreenState extends State<SignupScreen> {
       );
 
   _signup() async {
-    await _auth.createUserWithEmailAndPassword(_email, _password.text);
+    await _auth.createUserWithEmailAndPassword(_name, _email, _password.text);
     Navigator.pop(context);
   }
 }

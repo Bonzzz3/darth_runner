@@ -12,48 +12,46 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = AuthService();
     return Scaffold(
-        body: Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              // begin: Alignment(-1,-1),
-              // end: Alignment(0.7,1),
-              colors: [
-                Color.fromARGB(255, 6, 4, 120),
-                Color.fromARGB(255, 174, 12, 0)
-              ],
-            ),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        //elevation: 0,
+        title: const Text(
+          'Welcome Home',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        const Positioned(
-          top: 52,
-          right: 20,
-          child: CircleAvatar(
+        //centerTitle: false,
+        titleSpacing: 25,
+        automaticallyImplyLeading: false,
+        actions: const [
+          // IconButton(
+          //   icon: Image.asset('lib/assets/images/darthrunner_logo.jpeg'),
+          //   color: Colors.white,
+          //   onPressed: () {
+          //     // do something
+          //   },
+          // ),
+          CircleAvatar(
             minRadius: 25,
             maxRadius: 25,
             foregroundImage:
                 AssetImage('lib/assets/images/darthrunner_logo.jpeg'),
           ),
+          SizedBox(
+            width: 25,
+          ),
+        ],
+      ),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
+        child: SafeArea(
           child: Column(
             children: [
-              AppBar(
-                backgroundColor: Colors.transparent,
-                // elevation: 0,
-                title: const Text(
-                  'Welcome Home',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-              ),
-
               const SizedBox(height: 50),
 
               CustomButton(
@@ -88,7 +86,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ],
-    ));
+      ),
+    );
   }
 }

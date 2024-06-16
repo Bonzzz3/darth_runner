@@ -3,53 +3,40 @@ import 'package:pedometer/pedometer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 
-
 class Run extends StatelessWidget {
   const Run({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration:const BoxDecoration(
-            gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            // begin: Alignment(-1,-1),
-            // end: Alignment(0.7,1),
-            colors: [
-              Color.fromARGB(255, 6, 4,120),
-               Color.fromARGB(255, 174, 12,0)],
-              ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          //elevation: 0,
+          title: const Text(
+            "Let's Run",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          
-          Column(
-            children: [
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: const Text('Lets Run',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
-                ),
-              
-              ),
-              PedometerApp(
-
-              )
-            ],
-          ) 
-
-            
-        ],        
-      )
-    );
-    
+          //centerTitle: true,
+          automaticallyImplyLeading: false,
+          titleSpacing: 25,
+        ),
+        extendBodyBehindAppBar: true,
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/img/gradient.png"),
+                fit: BoxFit.cover),
+          ),
+          child: SafeArea(
+              child: Column(
+            children: [PedometerApp()],
+          )),
+        ));
   }
 }
 
@@ -80,14 +67,14 @@ class _PedometerAppState extends State<PedometerApp> {
   void _onStepCount(StepCount event) {
     final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
     final lastSavedDay = _prefs.getString('lastSavedDay') ?? today;
-    
+
     if (today != lastSavedDay) {
       _dailySteps = event.steps;
       _prefs.setString('lastSavedDay', today);
     } else {
       _dailySteps = event.steps - (_prefs.getInt('stepsAtMidnight') ?? 0);
     }
-    
+
     setState(() {
       _dailySteps = _dailySteps < 0 ? 0 : _dailySteps;
     });
@@ -106,32 +93,31 @@ class _PedometerAppState extends State<PedometerApp> {
 
     Future.delayed(durationUntilMidnight, () {
       _prefs.setInt('stepsAtMidnight', _dailySteps);
-      _prefs.setString('lastSavedDay', DateFormat('yyyy-MM-dd').format(DateTime.now()));
+      _prefs.setString(
+          'lastSavedDay', DateFormat('yyyy-MM-dd').format(DateTime.now()));
       _resetStepsAtMidnight();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-      
-      Column(
-      
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 40,),
-            const Text(
-              'Steps taken today:',
-              style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-            Text(
-              '$_dailySteps',
-              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-          ],
-        );
-    
-    
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const SizedBox(
+          height: 40,
+        ),
+        const Text(
+          'Steps taken today:',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+        Text(
+          '$_dailySteps',
+          style: const TextStyle(
+              fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+      ],
+    );
   }
 }
 

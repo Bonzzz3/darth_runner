@@ -24,7 +24,7 @@ class TextFill extends StatelessWidget {
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        fillColor: Colors.grey[300],
+        fillColor: Colors.grey[50],
         filled: true,
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey[600]),

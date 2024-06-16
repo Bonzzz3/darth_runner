@@ -20,6 +20,7 @@ class _HomeSocialState extends State<HomeSocial> {
   void postMessage() {
     if (textController.text.isNotEmpty) {
       FirebaseFirestore.instance.collection("User Posts").add({
+        'Username': currentUser.displayName,
         'UserEmail': currentUser.email,
         'Message': textController.text,
         'TimeStamp': Timestamp.now(),
@@ -39,76 +40,88 @@ class _HomeSocialState extends State<HomeSocial> {
         centerTitle: true,
         title: const Text(
           "The Wall",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
+            //fontSize: 28,
+          ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
+      extendBodyBehindAppBar: true,
       body: Container(
-        color: Colors.black,
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection("User Posts")
-                    .orderBy("TimeStamp", descending: false)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final post = snapshot.data!.docs[index];
-                          return WallPost(
-                            message: post['Message'],
-                            user: post['UserEmail'],
-                            time: formatDate(post['TimeStamp']),
-                            postId: post.id,
-                            likes: List<String>.from(post['Likes'] ?? []),
-                          );
-                        });
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                    child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("User Posts")
+                      .orderBy("TimeStamp", descending: false)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final post = snapshot.data!.docs[index];
+                            return WallPost(
+                              message: post['Message'],
+                              user: post['Username'],
+                              time: formatDate(post['TimeStamp']),
+                              postId: post.id,
+                              likes: List<String>.from(post['Likes'] ?? []),
+                            );
+                          });
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              )),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: TextFill(
-                            controller: textController,
-                            hintText: "Write something on the Wall..",
-                            obscureText: false)),
-                    IconButton(
-                        onPressed: postMessage,
-                        icon: const Icon(
-                          Icons.arrow_circle_up,
-                          color: Colors.white60,
-                          size: 38,
-                        ))
-                  ],
+                  },
+                )),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: TextFill(
+                              controller: textController,
+                              hintText: "Write something on the Wall..",
+                              obscureText: false)),
+                      IconButton(
+                          onPressed: postMessage,
+                          icon: const Icon(
+                            Icons.arrow_circle_up,
+                            color: Colors.white,
+                            size: 38,
+                          ))
+                    ],
+                  ),
                 ),
-              ),
 
-              //logged in as user
-              Text(
-                "Logged in as: ${currentUser.email!}",
-                style: const TextStyle(color: Colors.grey),
-              ),
+                //logged in as user
+                Text(
+                  "Logged in as: ${currentUser.displayName}, ${currentUser.email!}",
+                  style: const TextStyle(color: Colors.white),
+                ),
 
-              const SizedBox(
-                height: 5,
-              )
-            ],
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            ),
           ),
         ),
       ),
