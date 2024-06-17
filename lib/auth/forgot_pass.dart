@@ -25,7 +25,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/img/wallpaper.jpeg"),
+                image: AssetImage("assets/img/galaxy.jpeg"),
                 fit: BoxFit.cover),
           ),
           child: Padding(

@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class WallPost extends StatefulWidget {
+  final String comName;
   final String message;
   final String user;
   final String time;
@@ -16,6 +17,7 @@ class WallPost extends StatefulWidget {
 
   const WallPost({
     super.key,
+    required this.comName,
     required this.message,
     required this.user,
     required this.time,
@@ -44,8 +46,11 @@ class _WallPostState extends State<WallPost> {
       isLiked = !isLiked;
     });
 
-    DocumentReference postRef =
-        FirebaseFirestore.instance.collection('User Posts').doc(widget.postId);
+    DocumentReference postRef = FirebaseFirestore.instance
+        .collection("Communities")
+        .doc(widget.comName)
+        .collection('User Posts')
+        .doc(widget.postId);
 
     if (isLiked) {
       postRef.update({
@@ -62,6 +67,8 @@ class _WallPostState extends State<WallPost> {
   void addComment(String commentText) {
     ////// add username
     FirebaseFirestore.instance
+        .collection("Communities")
+        .doc(widget.comName)
         .collection("User Posts")
         .doc(widget.postId)
         .collection("Comments")
@@ -90,6 +97,7 @@ class _WallPostState extends State<WallPost> {
                   onPressed: () {
                     Navigator.pop(context);
                     _commentTextController.clear();
+                    FocusScope.of(context).unfocus();
                   },
                   child: const Text("Cancel"),
                 ),
@@ -97,9 +105,12 @@ class _WallPostState extends State<WallPost> {
                 //save button
                 TextButton(
                   onPressed: () {
-                    addComment(_commentTextController.text);
-                    Navigator.pop(context);
-                    _commentTextController.clear();
+                    if (_commentTextController.text.isNotEmpty) {
+                      addComment(_commentTextController.text);
+                      Navigator.pop(context);
+                      _commentTextController.clear();
+                      FocusScope.of(context).unfocus();
+                    }
                   },
                   child: const Text("Post"),
                 ),
@@ -111,44 +122,55 @@ class _WallPostState extends State<WallPost> {
   void deletePost() {
     //show dialog to confirm
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Text("Delete Post"),
-              content: const Text("Are you sure you want to delete this post?"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancel"),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    final commentDocs = await FirebaseFirestore.instance
-                        .collection("User Posts")
-                        .doc(widget.postId)
-                        .collection("Comments")
-                        .get();
-                    for (var doc in commentDocs.docs) {
-                      await FirebaseFirestore.instance
-                          .collection("User Posts")
-                          .doc(widget.postId)
-                          .collection("Comments")
-                          .doc(doc.id)
-                          .delete();
-                    }
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Delete Post"),
+        content: const Text("Are you sure you want to delete this post?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              FocusScope.of(context).unfocus();
+            },
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final commentDocs = await FirebaseFirestore.instance
+                  .collection("Communities")
+                  .doc(widget.comName)
+                  .collection("User Posts")
+                  .doc(widget.postId)
+                  .collection("Comments")
+                  .get();
+              for (var doc in commentDocs.docs) {
+                await FirebaseFirestore.instance
+                    .collection("Communities")
+                    .doc(widget.comName)
+                    .collection("User Posts")
+                    .doc(widget.postId)
+                    .collection("Comments")
+                    .doc(doc.id)
+                    .delete();
+              }
 
-                    FirebaseFirestore.instance
-                        .collection("User Posts")
-                        .doc(widget.postId)
-                        .delete()
-                        .then((value) => print("post deleted"))
-                        .catchError(
-                            (error) => print("failed to delete post: $error"));
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Delete"),
-                )
-              ],
-            ));
+              FirebaseFirestore.instance
+                  .collection("Communities")
+                  .doc(widget.comName)
+                  .collection("User Posts")
+                  .doc(widget.postId)
+                  .delete()
+                  .then((value) => print("post deleted"))
+                  .catchError(
+                      (error) => print("failed to delete post: $error"));
+              Navigator.pop(context);
+              FocusScope.of(context).unfocus();
+            },
+            child: const Text("Delete"),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -253,6 +275,8 @@ class _WallPostState extends State<WallPost> {
                   ),
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
+                        .collection("Communities")
+                        .doc(widget.comName)
                         .collection("User Posts")
                         .doc(widget.postId)
                         .collection("Comments")
@@ -282,6 +306,8 @@ class _WallPostState extends State<WallPost> {
           //comment lists
           StreamBuilder(
               stream: FirebaseFirestore.instance
+                  .collection("Communities")
+                  .doc(widget.comName)
                   .collection("User Posts")
                   .doc(widget.postId)
                   .collection("Comments")
@@ -293,13 +319,46 @@ class _WallPostState extends State<WallPost> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                // final post = snapshot.data!.docs[index];
+                //       return ListView.builder(
+                //         itemCount: snapshot.data!.docs.length,
+                //         itemBuilder: (context, index) {
+                //           final post = snapshot.data!.docs[index];
+                //           return WallPost(
+                //             comName: widget.comName,
+                //             message: post['Message'],
+                //             user: post['Username'],
+                //             time: formatDate(post['TimeStamp']),
+                //             postId: post.id,
+                //             likes: List<String>.from(post['Likes'] ?? []),
+                //           );
+                //         },
+                //       );
+
+                // return ListView.builder(
+                //     shrinkWrap: true,
+                //     physics: const NeverScrollableScrollPhysics(),
+                //     itemBuilder: (context, index) {
+                //       final commentData = snapshot.data!.docs[index];
+                //       return Comment(
+                //         comName: widget.comName,
+                //         postId: widget.postId,
+                //         commentId: commentData.id,
+                //         text: commentData["CommentText"],
+                //         user: commentData["CommentedName"],
+                //         time: formatDate(commentData["CommentTime"]),
+                //       );
+                //     });
+
                 return ListView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: snapshot.data!.docs.map((doc) {
-                    final commentData = doc.data() as Map<String, dynamic>;
+                    final commentData = doc.data();
 
                     return Comment(
+                      comName: widget.comName,
+                      postId: widget.postId,
                       text: commentData["CommentText"],
                       user: commentData["CommentedName"],
                       time: formatDate(commentData["CommentTime"]),

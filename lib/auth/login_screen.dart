@@ -35,7 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/img/wallpaper.jpeg"), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -43,7 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const Spacer(),
               const Text("Login",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500, color: Colors.white)),
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white)),
               const SizedBox(height: 50),
               CustomTextField(
                 hint: "Enter Email",
@@ -64,11 +68,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ForgotPassword()
-                          )
-                      );
+                              builder: (context) => const ForgotPassword()));
                     },
-                    child: const Text("Forgot Password?", style: TextStyle(color: Colors.white70),),
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.white70),
+                    ),
                   )),
               const SizedBox(height: 30),
               CustomButton(
@@ -76,28 +81,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _login,
               ),
               const SizedBox(height: 10),
-              isLoading
-                  ? const CircularProgressIndicator()
-                  : CustomButton(
-                      label: "Sign In with Google",
-                      onPressed: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        await _auth.loginWithGoogle();
-                        setState(() {
-                          isLoading = false;
-                        });
-                      },
-                    ),
+              // isLoading
+              //     ? const CircularProgressIndicator()
+              //     : CustomButton(
+              //         label: "Sign In with Google",
+              //         onPressed: () async {
+              //           setState(() {
+              //             isLoading = true;
+              //           });
+              //           await _auth.loginWithGoogle();
+              //           setState(() {
+              //             isLoading = false;
+              //           });
+              //         },
+              //       ),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text("Don't have an account?", style: TextStyle(color: Colors.grey),),
-                const SizedBox(width: 10,),
+                const Text(
+                  "Don't have an account?",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
                 InkWell(
                   onTap: () => goToSignup(context),
-                  child:
-                      const Text("Sign Up", style: TextStyle(color: Colors.red)),
+                  child: const Text("Sign Up",
+                      style: TextStyle(color: Colors.red)),
                 )
               ]),
               const Spacer()

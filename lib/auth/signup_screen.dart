@@ -1,5 +1,3 @@
-//import 'dart:developer';
-
 import 'auth_service.dart';
 import 'login_screen.dart';
 import '../home_screen.dart';
@@ -37,8 +35,7 @@ class _SignupScreenState extends State<SignupScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/wallpaper.jpeg"),
-              fit: BoxFit.cover),
+              image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -58,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 50,
               ),
               const Text(
-                "  Username cannot be changed after signing up",
+                "  Note: Username cannot be changed after signing up",
                 style: TextStyle(
                   color: Colors.white,
                 ),

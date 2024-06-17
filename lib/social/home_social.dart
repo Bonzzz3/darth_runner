@@ -6,7 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeSocial extends StatefulWidget {
-  const HomeSocial({super.key});
+  final String comName;
+  const HomeSocial({super.key, required this.comName});
 
   @override
   State<HomeSocial> createState() => _HomeSocialState();
@@ -18,7 +19,11 @@ class _HomeSocialState extends State<HomeSocial> {
 
   void postMessage() {
     if (textController.text.isNotEmpty) {
-      FirebaseFirestore.instance.collection("User Posts").add({
+      FirebaseFirestore.instance
+          .collection("Communities")
+          .doc(widget.comName)
+          .collection("User Posts")
+          .add({
         'Username': currentUser.displayName,
         'UserEmail': currentUser.email,
         'Message': textController.text,
@@ -30,6 +35,7 @@ class _HomeSocialState extends State<HomeSocial> {
     setState(() {
       textController.clear();
     });
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -37,9 +43,9 @@ class _HomeSocialState extends State<HomeSocial> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "The Wall",
-          style: TextStyle(
+        title: Text(
+          widget.comName,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w800,
             //fontSize: 28,
@@ -49,77 +55,87 @@ class _HomeSocialState extends State<HomeSocial> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       extendBodyBehindAppBar: true,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
-        ),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Expanded(
-                    child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection("User Posts")
-                      .orderBy("TimeStamp", descending: false)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/img/gradient.png"),
+                fit: BoxFit.cover),
+          ),
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
+                      child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("Communities")
+                        .doc(widget.comName)
+                        .collection("User Posts")
+                        .orderBy("TimeStamp", descending: false)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             final post = snapshot.data!.docs[index];
                             return WallPost(
+                              comName: widget.comName,
                               message: post['Message'],
                               user: post['Username'],
                               time: formatDate(post['TimeStamp']),
                               postId: post.id,
                               likes: List<String>.from(post['Likes'] ?? []),
                             );
-                          });
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
+                          },
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                )),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: TextFill(
-                              controller: textController,
-                              hintText: "Write something on the Wall..",
-                              obscureText: false)),
-                      IconButton(
-                          onPressed: postMessage,
-                          icon: const Icon(
-                            Icons.arrow_circle_up,
-                            color: Colors.white,
-                            size: 38,
-                          ))
-                    ],
+                    },
+                  )),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: TextFill(
+                                controller: textController,
+                                hintText: "Write something..",
+                                obscureText: false)),
+                        IconButton(
+                            onPressed: postMessage,
+                            icon: const Icon(
+                              Icons.arrow_circle_up,
+                              color: Colors.white,
+                              size: 38,
+                            ))
+                      ],
+                    ),
                   ),
-                ),
 
-                //logged in as user
-                Text(
-                  "Logged in as: ${currentUser.displayName}, ${currentUser.email!}",
-                  style: const TextStyle(color: Colors.white),
-                ),
+                  //logged in as user
+                  Text(
+                    "Logged in as: ${currentUser.displayName}, ${currentUser.email!}",
+                    style: const TextStyle(color: Colors.white),
+                  ),
 
-                const SizedBox(
-                  height: 5,
-                )
-              ],
+                  const SizedBox(
+                    height: 5,
+                  )
+                ],
+              ),
             ),
           ),
         ),

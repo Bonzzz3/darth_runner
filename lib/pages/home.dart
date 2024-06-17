@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 50),
 
               CustomButton(
-                label: "Community",
+                label: "Communities",
                 onPressed: () async {
                   Navigator.push(
                       context,
@@ -65,15 +65,6 @@ class HomePage extends StatelessWidget {
                 },
               ),
 
-              CustomButton(
-                label: "Social",
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeSocial()));
-                },
-              ),
               const SizedBox(height: 20),
 
               // BMI button

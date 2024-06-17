@@ -45,7 +45,6 @@ class AuthService {
       final cred = await _auth.createUserWithEmailAndPassword(
           email: email.text, password: password);
       await cred.user!.updateDisplayName(username.text);
-      log(username.text);
       FirebaseFirestore.instance.collection("Users").doc(cred.user!.email).set({
         'username': username.text,
         'bio': 'Empty bio..',

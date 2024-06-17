@@ -5,13 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CommunityCard extends StatefulWidget {
-  final String title;
+  final String comName;
   final String username;
   final String userEmail;
   final String time;
   const CommunityCard(
       {super.key,
-      required this.title,
+      required this.comName,
       required this.username,
       required this.userEmail,
       required this.time});
@@ -38,25 +38,45 @@ class _CommunityCardState extends State<CommunityCard> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    final commentDocs = await FirebaseFirestore.instance
+                    // delete the posts after deleting comments
+                    final postDocs = await FirebaseFirestore.instance
                         .collection("Communities")
-                        .doc(widget.title)
-                        .collection("Comments")
+                        .doc(widget.comName)
+                        .collection("User Posts")
                         .get();
-                    for (var doc in commentDocs.docs) {
-                      await FirebaseFirestore.instance
+                    for (var doc in postDocs.docs) {
+                      //delete comments
+                      final commentDocs = await FirebaseFirestore.instance
+                          .collection("Communities")
+                          .doc(widget.comName)
                           .collection("User Posts")
-                          .doc(widget.title)
+                          .doc(doc.id)
                           .collection("Comments")
+                          .get();
+                      for (var docComment in commentDocs.docs) {
+                        await FirebaseFirestore.instance
+                            .collection("Communities")
+                            .doc(widget.comName)
+                            .collection("User Posts")
+                            .doc(doc.id)
+                            .collection("Comments")
+                            .doc(docComment.id)
+                            .delete();
+                      }
+                      await FirebaseFirestore.instance
+                          .collection("Communities")
+                          .doc(widget.comName)
+                          .collection("User Posts")
                           .doc(doc.id)
                           .delete();
                     }
 
+                    // finally delete community
                     FirebaseFirestore.instance
-                        .collection("User Posts")
-                        .doc(widget.title)
+                        .collection("Communities")
+                        .doc(widget.comName)
                         .delete()
-                        .then((value) => print("post deleted"))
+                        .then((value) => print("Community deleted"))
                         .catchError(
                             (error) => print("failed to delete post: $error"));
                     Navigator.pop(context);
@@ -71,18 +91,24 @@ class _CommunityCardState extends State<CommunityCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomeSocial()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeSocial(
+                      comName: widget.comName,
+                    )));
       },
       child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-          padding: const EdgeInsets.all(25),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          //border: Border.all(color: Colors.black, width: 5),
+        ),
+        margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             const SizedBox(width: 25),
 
             // seperate content with cancel button
@@ -95,8 +121,11 @@ class _CommunityCardState extends State<CommunityCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.title,
-                      style: const TextStyle(fontSize: 26),
+                      widget.comName,
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -107,8 +136,8 @@ class _CommunityCardState extends State<CommunityCard> {
                 // delete button
                 if (widget.username == currentUser.displayName)
                   DeleteButton(
-                    onTap: () {},
-                    //onTap: deleteCommunity,
+                    //onTap: () {},
+                    onTap: deleteCommunity,
                   ),
               ],
             ),
@@ -118,11 +147,11 @@ class _CommunityCardState extends State<CommunityCard> {
               children: [
                 //user
                 Text(
-                  widget.username,
+                  "Created by: ${widget.username}",
                   style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12,
-                  ),
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
                 //time
                 Text(
@@ -134,11 +163,9 @@ class _CommunityCardState extends State<CommunityCard> {
                 ),
               ],
             ),
-
-            const SizedBox(
-              height: 10,
-            ),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 }

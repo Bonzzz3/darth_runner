@@ -59,7 +59,7 @@ class _CommunityHomeState extends State<CommunityHome> {
     //update in Firestore
     if (newValue.trim().isNotEmpty) {
       FirebaseFirestore.instance.collection("Communities").doc(newValue).set({
-        'Title': newValue,
+        'Community Name': newValue,
         'Username': currentUser.displayName,
         'UserEmail': currentUser.email,
         'TimeStamp': Timestamp.now(),
@@ -89,7 +89,7 @@ class _CommunityHomeState extends State<CommunityHome> {
           ),
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white, size: 30),
         actions: [
           IconButton(
               onPressed: createNewCommunity,
@@ -126,7 +126,7 @@ class _CommunityHomeState extends State<CommunityHome> {
                       itemBuilder: (context, index) {
                         final post = snapshot.data!.docs[index];
                         return CommunityCard(
-                          title: post['Title'],
+                          comName: post['Community Name'],
                           username: post['Username'],
                           userEmail: post['UserEmail'],
                           time: formatDate(post['TimeStamp']),
