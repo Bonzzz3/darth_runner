@@ -14,7 +14,6 @@ class HomeSocial extends StatefulWidget {
 
 class _HomeSocialState extends State<HomeSocial> {
   final currentUser = FirebaseAuth.instance.currentUser!;
-
   final textController = TextEditingController();
 
   void postMessage() {

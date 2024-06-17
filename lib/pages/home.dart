@@ -1,5 +1,6 @@
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/bmi/home_screen.dart';
+import 'package:darth_runner/social/community_home.dart';
 import 'package:darth_runner/social/home_social.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,16 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 50),
+
+              CustomButton(
+                label: "Community",
+                onPressed: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CommunityHome()));
+                },
+              ),
 
               CustomButton(
                 label: "Social",
