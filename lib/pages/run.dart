@@ -1,3 +1,4 @@
+import 'package:darth_runner/map/map_page.dart';
 import 'package:flutter/material.dart';
 
 class Run extends StatelessWidget {
@@ -6,6 +7,7 @@ class Run extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //remove stack in the future
       body: Stack(
         children: [
           Container(
@@ -36,7 +38,18 @@ class Run extends StatelessWidget {
               
               ),
             ],
-          ) 
+          ), 
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(
+                        builder: (context) => const MapPage()
+                        )
+                  );
+              },
+              child: const Text('start running')),
+          )
 
             
         ],        
