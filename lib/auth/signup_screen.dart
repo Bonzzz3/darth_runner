@@ -14,7 +14,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _auth = AuthService();
-
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -122,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
       );
 
   _signup() async {
-    await _auth.createUserWithEmailAndPassword(_name, _email, _password.text);
+    await _auth.createUserWithUsernameEmailAndPassword(_name.text, _email.text, _password.text);
     Navigator.pop(context);
   }
 }

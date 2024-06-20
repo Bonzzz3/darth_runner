@@ -77,14 +77,6 @@ class HomePage extends StatelessWidget {
                           builder: (context) => const HomeScreen()));
                 },
               ),
-              const SizedBox(height: 20),
-              CustomButton(
-                label: "Sign Out",
-                onPressed: () async {
-                  await auth.signout();
-                  Phoenix.rebirth(context);
-                },
-              )
             ],
           ),
         ),

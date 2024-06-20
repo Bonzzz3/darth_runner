@@ -67,151 +67,154 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     final auth = AuthService();
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          //elevation: 0,
-          title: const Text(
-            'Your Profile',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          //centerTitle: true,
-          automaticallyImplyLeading: false,
-          titleSpacing: 25,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        //elevation: 0,
+        title: const Text(
+          'Your Profile',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        extendBodyBehindAppBar: true,
-        body: StreamBuilder<DocumentSnapshot>(
-            stream: usersCollection.doc(currentUser.email).snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final userData = snapshot.data!.data() as Map<String, dynamic>;
-                return Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/img/gradient.png"),
-                        fit: BoxFit.cover),
-                  ),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        //title
-                        const SizedBox(height: 20),
+        //centerTitle: true,
+        automaticallyImplyLeading: false,
+        titleSpacing: 25,
+      ),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            //physics: NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                StreamBuilder<DocumentSnapshot>(
+                  stream: usersCollection.doc(currentUser.email).snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final userData =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //profile picture
+                          const Center(
+                            child: Icon(
+                              Icons.person,
+                              size: 72,
+                            ),
+                          ),
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //profile picture
-                            const Center(
-                              child: Icon(
-                                Icons.person,
-                                size: 72,
+                          const SizedBox(
+                            height: 20,
+                          ),
+
+                          //user email
+                          Center(
+                            child: Text(
+                              currentUser.email!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
                               ),
                             ),
+                          ),
+                          const SizedBox(height: 20),
 
-                            const SizedBox(
-                              height: 20,
+                          //details
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'My Details',
+                              style: TextStyle(
+                                  color: Colors.grey[300], fontSize: 20),
+                              textAlign: TextAlign.left,
                             ),
+                          ),
 
-                            //user email
-                            Center(
-                              child: Text(
-                                currentUser.email!,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                          // MyTextBox(
+                          //   text: userData['username'],
+                          //   sectionName: 'username',
+                          //   onPressed: () {
+                          //     //editField("username");
+                          //     // currentUser.updateDisplayName("");
+                          //   },
+                          // ),
+                          Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                            ),
-                            const SizedBox(height: 20),
-
-                            //details
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                'My Details',
-                                style: TextStyle(
-                                    color: Colors.grey[300], fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-
-                            // MyTextBox(
-                            //   text: userData['username'],
-                            //   sectionName: 'username',
-                            //   onPressed: () {
-                            //     //editField("username");
-                            //     // currentUser.updateDisplayName("");
-                            //   },
-                            // ),
-                            Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                padding:
-                                    const EdgeInsets.only(left: 15, bottom: 15),
-                                margin: const EdgeInsets.only(
-                                    left: 20, right: 20, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "username",
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.grey,
-                                          ),
+                              padding:
+                                  const EdgeInsets.only(left: 15, bottom: 15),
+                              margin: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "username",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey,
                                         ),
-                                      ],
-                                    ),
-                                    Text(
-                                      userData['username'],
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                )),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    userData['username'],
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              )),
 
-                            MyTextBox(
-                              text: userData['bio'],
-                              sectionName: 'bio',
-                              onPressed: () => editField("bio"),
+                          MyTextBox(
+                            text: userData['bio'],
+                            sectionName: 'bio',
+                            onPressed: () => editField("bio"),
+                          ),
+                          const SizedBox(
+                            height: 200,
+                          ),
+                          // Signout button
+                          Center(
+                            child: CustomButton(
+                              label: "Sign Out",
+                              onPressed: () async {
+                                await auth.signout();
+                                Phoenix.rebirth(context);
+                              },
                             ),
-                          ],
-                        ),
-
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        // Signout button
-                        CustomButton(
-                          label: "Sign Out",
-                          onPressed: () async {
-                            await auth.signout();
-                            Phoenix.rebirth(context);
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error${snapshot.error}'),
-                );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }));
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error${snapshot.error}'),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
