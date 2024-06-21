@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
@@ -29,7 +30,7 @@ class AuthService {
     }
   }
 
-    Future<User?> createUserWithUsernameEmailAndPassword(
+  Future<User?> createUserWithUsernameEmailAndPassword(
       String username, String email, String password) async {
     try {
       final cred = await _auth.createUserWithEmailAndPassword(

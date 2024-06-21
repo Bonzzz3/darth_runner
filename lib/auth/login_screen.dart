@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:darth_runner/auth/forgot_pass.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/utils.dart';
 
 import 'auth_service.dart';
 import 'signup_screen.dart';
@@ -15,11 +19,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = AuthService();
-
-  bool isLoading = false;
-
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool isLoading = false;
+  bool isSuccess = true;
+  String _errorMessage = '';
 
   @override
   void dispose() {
@@ -53,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hint: "Enter Email",
                 label: "Email",
                 controller: _email,
+                isEmail: true,
               ),
               const SizedBox(height: 20),
               CustomTextField(
@@ -79,6 +84,20 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomButton(
                 label: "Login",
                 onPressed: _login,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: isSuccess
+                    ? const Text("")
+                    : Text(
+                        _errorMessage,
+                        style: const TextStyle(
+                          color: Colors.red,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
               ),
               const SizedBox(height: 10),
               // isLoading
@@ -124,6 +143,12 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
   _login() async {
+    //await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
     await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
+    setState(() {
+      isSuccess = false;
+    });
+    _errorMessage = '';
+    _errorMessage += "Please enter valid credentials";
   }
 }

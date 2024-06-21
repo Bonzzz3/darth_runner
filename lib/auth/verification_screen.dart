@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:darth_runner/auth/auth_service.dart';
-// import 'package:darth_runner/auth/signup_screen.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:darth_runner/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,8 +55,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/galaxy.jpeg"),
-              fit: BoxFit.cover),
+              image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: Align(
           alignment: Alignment.center,
@@ -68,7 +65,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "We have sent an email for verification. Please wait for a few seconds for the screen to reload after verifying. If you did not receive an email, please tap on resend.",
+                  "We have sent an email for verification. You will only be able to proceed after verifying.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+                const Text(
+                  "Please wait for a few seconds for the screen to reload after verifying. If you did not receive an email, please tap on resend.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 16,

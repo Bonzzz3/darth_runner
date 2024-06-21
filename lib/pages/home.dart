@@ -1,10 +1,7 @@
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/bmi/home_screen.dart';
 import 'package:darth_runner/social/community_home.dart';
-import 'package:darth_runner/social/home_social.dart';
-import 'package:darth_runner/widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -55,28 +52,90 @@ class HomePage extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
 
-              CustomButton(
-                label: "Communities",
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CommunityHome()));
-                },
+              // BMI button
+              SizedBox(
+                width: 350,
+                height: 200,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    image: DecorationImage(
+                        image: AssetImage("assets/img/redstairs.jpg"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()));
+                    },
+                    child: const Text(
+                      "BMI Calculator",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
+
+              // CustomButton(
+              //   label: "Communities",
+              //   onPressed: () async {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => const CommunityHome()));
+              //   },
+              // ),
 
               const SizedBox(height: 20),
-
-              // BMI button
-              CustomButton(
-                label: "BMI",
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                },
+              // Communities button
+              SizedBox(
+                width: 350,
+                height: 200,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    image: DecorationImage(
+                        image: AssetImage("assets/img/communities.jpg"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CommunityHome()));
+                    },
+                    child: const Text(
+                      "Communities",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
+              // CustomButton(
+              //   label: "BMI",
+              //   onPressed: () async {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => const HomeScreen()));
+              //   },
+              // ),
             ],
           ),
         ),
