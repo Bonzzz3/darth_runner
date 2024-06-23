@@ -41,6 +41,7 @@ class _PlaybarState extends State<Playbar> {
             isRunning ? Icons.pause : Icons.play_arrow_sharp,          
             ),
           ),
+          
         // stop button
         ElevatedButton(
           style: ElevatedButton.styleFrom(
