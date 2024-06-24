@@ -1,5 +1,6 @@
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/bmi/home_screen.dart';
+import 'package:darth_runner/heartrate/heartrate_home.dart';
 import 'package:darth_runner/social/community_home.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = AuthService();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
 
               // BMI button
               SizedBox(
@@ -120,6 +120,40 @@ class HomePage extends StatelessWidget {
                     child: const Text(
                       "Communities",
                       style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              // Heartrate button
+              SizedBox(
+                width: 350,
+                height: 200,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    image: DecorationImage(
+                        image: AssetImage("assets/img/galaxy.jpeg"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HeartrateHome()));
+                    },
+                    child: const Text(
+                      "Heart Rate calculator",
+                      style: TextStyle(
+                        color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),

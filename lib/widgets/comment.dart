@@ -77,9 +77,11 @@ class _CommentState extends State<Comment> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                widget.text,
-                style: const TextStyle(fontSize: 16),
+              Flexible(
+                child: Text(
+                  widget.text,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
               // if (widget.user == currentUser.displayName)
               //   DeleteButton(

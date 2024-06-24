@@ -193,17 +193,19 @@ class _WallPostState extends State<WallPost> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // main post message and user and time
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.message,
-                    style: const TextStyle(fontSize: 26),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.message,
+                      style: const TextStyle(fontSize: 26),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
               ),
 
               // delete button

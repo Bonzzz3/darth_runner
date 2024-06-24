@@ -1,6 +1,5 @@
 import 'auth_service.dart';
 import 'login_screen.dart';
-import '../home_screen.dart';
 import '../widgets/button.dart';
 import '../widgets/textfield.dart';
 import 'package:flutter/material.dart';
@@ -180,11 +179,6 @@ class _SignupScreenState extends State<SignupScreen> {
   goToLogin(BuildContext context) => Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-
-  goToHome(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
 
   _signup() async {

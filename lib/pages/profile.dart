@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:darth_runner/achievements/achieve_home.dart';
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:darth_runner/widgets/text_box.dart';
@@ -184,9 +185,40 @@ class _ProfileState extends State<Profile> {
                             sectionName: 'bio',
                             onPressed: () => editField("bio"),
                           ),
+
                           const SizedBox(
-                            height: 200,
+                            height: 30,
                           ),
+
+                          // achievements
+                          Center(
+                            child: SizedBox(
+                              width: 300,
+                              height: 50,
+                              child: ElevatedButton(
+                                child: const Text(
+                                  "My achievements",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AchieveHome()));
+                                },
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(
+                            height: 100,
+                          ),
+
                           // Signout button
                           Center(
                             child: CustomButton(

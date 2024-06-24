@@ -117,20 +117,22 @@ class _CommunityCardState extends State<CommunityCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // title, user and time
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.comName,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.comName,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
 
                 // delete button
