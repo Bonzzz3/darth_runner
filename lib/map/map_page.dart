@@ -4,8 +4,8 @@ import 'package:darth_runner/pages/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-// import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'dart:math';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -15,20 +15,37 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  Location locationController = Location();
+  
+  // POSITION VARIABLES
   static const LatLng _towngreen = LatLng(1.3051320676351397, 103.77317545254137);
   LatLng? currentPosition;
 
-  // to store the positions and list the locations and draw the polyline
+  // POLYLINE SET AND LIST OF LAT AND LONG FOR PLACES BEEN.
   List<LatLng> polyLineCoordinates = [];
   Set<Polyline> polyLine = {};
 
-  final Stopwatch stopWatch = Stopwatch();
+  // CREATING INSTANCE OF STOPWATCH.
+  final StopWatchTimer stopWatch = StopWatchTimer();
+
+  // CREATING CONTROLLERS.
   final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
+  Location locationController = Location();
+
+  // PLAY PAUSE STATE.
   bool isRunning = false;
+
+  // VARIABLES FOR DISTANCE TRACKING.
   double distanceTravelled = 0.0;
   double appendDist = 0.0;
-  
+
+  // VARIABLES FOR STOPWATCH.
+  late String displayTime;
+
+
+  int currentTime = 0;
+  int lastTime = 0;
+  double pace = 0.0;
+
 
   @override
   void initState() {
@@ -36,6 +53,13 @@ class _MapPageState extends State<MapPage> {
     WidgetsBinding.instance.
     addPostFrameCallback((_) async => await fetchLocation());
   }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await stopWatch.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +71,22 @@ class _MapPageState extends State<MapPage> {
           GoogleMap(
           onMapCreated: (GoogleMapController controller) => mapController.complete(controller),
 
-          //setting the initial position when the map is loaded.
+          // SETS INITIAL CAMERA POSITION.
           initialCameraPosition: const CameraPosition(
-            target: _towngreen, // change the target to show the user's current position.
+            target: _towngreen, // MIGHT SHOW USER CURRENT LOCATION IMMEDIATELY SO REDUNDANT CODE.
             zoom: 16, 
           ),
           markers: {
             Marker(
               markerId: const MarkerId('currentLocation'),
-              icon: BitmapDescriptor.defaultMarker, // edit the icon of the current position
+              icon: BitmapDescriptor.defaultMarker, // EDIT ICON OF USER POSITION.
               position: currentPosition!
               )
           },
           polylines: polyLine,
         ),
   
-        // Container to print the current stats:
-        // Change the decoration.
+        // CONTAINER SHOWING STATS OF THE RUN.
         Positioned(
           bottom: 20,
           right: 20,
@@ -86,9 +109,9 @@ class _MapPageState extends State<MapPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Column(
+                  Column(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(9),
                         child: Text('Pace',
                         style: TextStyle(
@@ -97,12 +120,17 @@ class _MapPageState extends State<MapPage> {
                           ),
                         ), 
                       ),
-                      // Text('paceValue')
+                      Text((pace).toStringAsFixed(2),
+                       style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                       ),
+                      )
                     ],
                   ),
-                  const Column(
+                  Column(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(9),
                         child: Text('Time',
                         style: TextStyle(
@@ -111,8 +139,21 @@ class _MapPageState extends State<MapPage> {
                           ),
                         ), 
                       ),
-                      // Text('Time stamp')
-                    ],
+                      StreamBuilder<int>(
+                          stream: stopWatch.rawTime,
+                          initialData: 0,
+                          builder: (context, snap) {
+                            currentTime = snap.data!;
+                            displayTime =
+                                '${StopWatchTimer.getDisplayTimeHours(currentTime)}:${StopWatchTimer.getDisplayTimeMinute(currentTime)}:${StopWatchTimer.getDisplayTimeSecond(currentTime)}';
+                            return Text(displayTime,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    )
+                                );})
+  
+                   ],
                   ),
                   Column(
                     children: [
@@ -146,7 +187,7 @@ class _MapPageState extends State<MapPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      padding: EdgeInsets.zero,
+                      padding: const EdgeInsets.only(bottom: 20),
                       fixedSize: const Size.square(50),
                       iconColor: const Color.fromARGB(255, 0, 0, 0)  ,
                       backgroundColor: Colors.grey
@@ -155,6 +196,13 @@ class _MapPageState extends State<MapPage> {
                     onPressed: () {
                       setState(() {
                         isRunning = !isRunning;
+                        if (isRunning) {
+                          stopWatch.onStartTimer();
+                        }
+                        else {
+                          polyLineCoordinates.clear();
+                          stopWatch.onStopTimer();
+                        }
                       });
                     } ,
                     child: Icon(
@@ -262,22 +310,6 @@ class _MapPageState extends State<MapPage> {
           // CENTERING THE CAMERA ON LOCATION CHANGE.
           cameraToPosition(currentPosition!); 
 
-          // FUNCTION TO CONVERT DEGREES TO RADIAN.
-          double degToRadians (double degrees) {
-            return degrees * pi / 180;
-          }
-
-          // FUNCTION TO GET DISTANCE FROM LAT AND LONG USING HAVERSINE FORMULA.
-          double distanceBetween (double lat1,lon1,lat2,lon2){
-            const R = 6371e3; // EARTH RADIUS IN METERS
-            var dLat = degToRadians(lat2 - lat1);
-            var dLon = degToRadians(lon2 - lon1);
-            var a = sin(dLat / 2) * sin(dLat / 2) +
-                cos(degToRadians(lat1)) * cos(degToRadians(lat2)) * sin(dLon / 2) * sin(dLon / 2);
-            var c = 2 * asin(sqrt(a));
-            return R * c;
-          }
-
           // FUNCTION TO CALCULATE THE DISTANCE TRAVELLED WHILE PLAY BUTTON ACTIVE.
           if (isRunning) {
             if (polyLineCoordinates.length >= 2)  {
@@ -287,25 +319,24 @@ class _MapPageState extends State<MapPage> {
                 secondLastLocation.longitude,
                 loc.latitude, 
                 loc.longitude);
-              // appendDist = distanceBetween(
-              //   polyLineCoordinates.last.latitude,
-              //   polyLineCoordinates.last.longitude,
-              //   loc.latitude, 
-              //   loc.longitude
-              // );
-              debugPrint('${polyLineCoordinates.last}');
-              debugPrint('$loc');
-              debugPrint('distance between old and new position is : $appendDist in meters i guess');
+              
+              
               distanceTravelled += appendDist;
-              debugPrint('total distance travelled is $distanceTravelled in meters i guess');
+              int timeDuration = currentTime - lastTime;
+
+              if (timeDuration != 0){
+                pace = (timeDuration*60)/(appendDist*1000);
+                
+              }
             }
-            else{
-              distanceTravelled = 0.0;
-            }
-          }
+            
+        }
+        lastTime = currentTime;
+        debugPrint('$pace');
         });
       }
    
     });
   }
 }
+
