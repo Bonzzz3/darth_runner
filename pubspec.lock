@@ -544,7 +544,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-
   geolocator:
     dependency: "direct main"
     description:
@@ -593,7 +592,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.3"
-
   get:
     dependency: "direct main"
     description:
@@ -786,7 +784,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
-
   io:
     dependency: transitive
     description:
@@ -795,25 +792,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-
   js:
     dependency: transitive
     description:
       name: js
-
-      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.1"
-  json_annotation:
-    dependency: transitive
-    description:
-      name: json_annotation
-      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.9.0"
-
       sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
       url: "https://pub.dev"
     source: hosted
@@ -826,7 +808,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
-
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -859,24 +848,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
-  logging:
-    dependency: transitive
-    description:
-      name: logging
-      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
-
   location:
     dependency: "direct main"
     description:
@@ -901,7 +872,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.0"
-
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:
@@ -1142,7 +1128,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-
   rx:
     dependency: transitive
     description:
@@ -1151,7 +1136,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0"
-
   rxdart:
     dependency: transitive
     description:
@@ -1160,7 +1144,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-
   sanitize_html:
     dependency: transitive
     description:
@@ -1169,7 +1152,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-
   share_plus:
     dependency: "direct main"
     description:

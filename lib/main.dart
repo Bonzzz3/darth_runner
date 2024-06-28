@@ -5,6 +5,7 @@ import 'firebase_options.dart';
 import 'dart:async';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:developer';
 // import 'package:darth_runner/pages/intro_page.dart';
 // import 'package:flutter/services.dart';
 
@@ -15,9 +16,10 @@ Future<void> main() async {
 // the bottom nav bar end up hiding
 
   WidgetsFlutterBinding.ensureInitialized();
-
+  
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
   runApp(
     Phoenix(
       child: const MyApp(),
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('hello');
     return MaterialApp(
+      
       theme: (ThemeData(primarySwatch: Colors.blue)),
       debugShowCheckedModeBanner: false,
       home: const Wrapper(),
