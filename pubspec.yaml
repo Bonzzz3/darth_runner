@@ -31,8 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   google_nav_bar: ^5.0.6
-
   flutter_native_splash: ^2.4.0
+  google_maps_flutter: ^2.7.0
+  location: ^5.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +56,7 @@ dependencies:
   flutter_3d_choice_chip: ^0.1.4
   page_transition: ^2.1.0
   swipeable_button_view: ^0.0.2
+
   cloud_firestore: ^4.17.5
   fpdart: ^1.1.0
   mockito: ^5.4.4
@@ -65,7 +67,10 @@ dependencies:
   provider: ^6.1.2
   flutter_dotenv: ^5.1.0
   firebase_core_platform_interface: ^5.1.0
-  
+
+  geolocator: ^12.0.0
+  stop_watch_timer: ^3.1.1
+
 
 dev_dependencies:
   flutter_test:
