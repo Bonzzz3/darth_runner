@@ -1,12 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
-  // final _auth = FirebaseAuth.instance;
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
 
@@ -71,22 +69,6 @@ class AuthService {
     }
   }
 
-  // Future<UserCredential?> loginWithGoogle() async {
-  //   try {
-  //     final googleUser = await GoogleSignIn().signIn();
-
-  //     final googleAuth = await googleUser?.authentication;
-
-  //     final cred = GoogleAuthProvider.credential(
-  //         idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
-  //     return await _auth.signInWithCredential(cred);
-  //   } catch (e) {
-  //     log("Something went wrong");
-  //     print(e.toString());
-  //   }
-  //   return null;
-  // }
-
   exceptionHandler(String code) {
     switch (code) {
       case "invalid-credential":
@@ -100,33 +82,3 @@ class AuthService {
     }
   }
 }
-
-// import 'dart:developer';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-
-// class AuthService {
-//   final FirebaseAuth _auth;
-
-//   AuthService({FirebaseAuth? auth})
-//       : _auth = auth ?? FirebaseAuth.instance;
-
-//   Future<User?> loginUserWithEmailAndPassword(
-//       String email, String password) async {
-//     try {
-//       final cred = await _auth.signInWithEmailAndPassword(
-//           email: email, password: password);
-//       return cred.user;
-//     } on FirebaseAuthException catch (e) {
-//       exceptionHandler(e.code);
-//     } catch (e) {
-//       log("Something went wrong");
-//     }
-//     return null;
-//   }
-
-//   void exceptionHandler(String code) {
-//     // Handle exceptions
-//     log("FirebaseAuthException: $code");
-//   }
-// }

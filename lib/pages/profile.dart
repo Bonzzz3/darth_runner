@@ -17,6 +17,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   final usersCollection = FirebaseFirestore.instance.collection("Users");
+  bool _isLoading = false;
 
   Future<void> editField(String field) async {
     String newValue = "";
@@ -221,13 +222,23 @@ class _ProfileState extends State<Profile> {
 
                           // Signout button
                           Center(
-                            child: CustomButton(
-                              label: "Sign Out",
-                              onPressed: () async {
-                                await auth.signout();
-                                Phoenix.rebirth(context);
-                              },
-                            ),
+                            child: _isLoading
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : CustomButton(
+                                    label: "Sign Out",
+                                    onPressed: () async {
+                                      setState(() {
+                                        _isLoading = true;
+                                      });
+                                      await auth.signout();
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                      Phoenix.rebirth(context);
+                                    },
+                                  ),
                           ),
                         ],
                       );

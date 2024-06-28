@@ -89,6 +89,7 @@ class _HomeSocialState extends State<HomeSocial> {
                               comName: widget.comName,
                               message: post['Message'],
                               user: post['Username'],
+                              userEmail: post['UserEmail'],
                               time: formatDate(post['TimeStamp']),
                               postId: post.id,
                               likes: List<String>.from(post['Likes'] ?? []),

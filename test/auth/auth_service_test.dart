@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:darth_runner/auth/auth_service.dart'; // Update this import to your actual service path
-import 'auth_service_test.mock.mocks.dart';
+import 'package:darth_runner/auth/auth_service.dart';
+import '../mocks.mocks.dart';
 
 void main() {
   late MockFirebaseAuth mockFirebaseAuth;
@@ -136,7 +136,8 @@ void main() {
         .called(1);
     verify(mockUser.updateDisplayName(username)).called(1);
     verify(mockCollectionReference.doc(email)).called(1);
-    verify(mockDocumentReference.set({'username': username, 'bio': 'Empty bio..'})).called(1);
+    verify(mockDocumentReference
+        .set({'username': username, 'bio': 'Empty bio..'})).called(1);
     expect(result, mockUser);
   });
 

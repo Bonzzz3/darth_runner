@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'auth_service.dart';
 import 'login_screen.dart';
 import '../widgets/button.dart';
@@ -17,6 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool _isLoading = false;
   bool _isValid = false;
   String _errorMessage = '';
 
@@ -126,17 +130,27 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 30),
               Center(
-                child: CustomButton(
-                    label: "Signup",
-                    onPressed: () {
-                      setState(() {
-                        _isValid = _validateFields(
-                            _name.text, _email.text, _password.text);
-                      });
-                      if (_isValid) {
-                        _signup;
-                      }
-                    }),
+                child: _isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : CustomButton(
+                        label: "Signup",
+                        onPressed: () async {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          setState(() {
+                            _isValid = _validateFields(
+                                _name.text, _email.text, _password.text);
+                          });
+                          if (_isValid) {
+                            await _signup();
+                          }
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }),
               ),
               const SizedBox(height: 10),
               Center(
@@ -178,7 +192,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   goToLogin(BuildContext context) => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(
+            builder: (context) => LoginScreen(
+                  auth: AuthService(),
+                )),
       );
 
   _signup() async {

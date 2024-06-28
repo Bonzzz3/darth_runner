@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'dart:async';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:darth_runner/pages/intro_page.dart';
 // import 'package:flutter/services.dart';
 
@@ -13,9 +14,9 @@ Future<void> main() async {
 // problems when loading screen, need to add padding around appbar
 // the bottom nav bar end up hiding
 
-  // WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     Phoenix(

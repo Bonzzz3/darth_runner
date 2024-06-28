@@ -136,7 +136,7 @@ class _CommunityCardState extends State<CommunityCard> {
                 ),
 
                 // delete button
-                if (widget.username == currentUser.displayName)
+                if (widget.userEmail == currentUser.email)
                   DeleteButton(
                     //onTap: () {},
                     onTap: deleteCommunity,

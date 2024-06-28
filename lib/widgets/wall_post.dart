@@ -11,6 +11,7 @@ class WallPost extends StatefulWidget {
   final String comName;
   final String message;
   final String user;
+  final String userEmail;
   final String time;
   final String postId;
   final List<String> likes;
@@ -20,16 +21,17 @@ class WallPost extends StatefulWidget {
     required this.comName,
     required this.message,
     required this.user,
+    required this.userEmail,
     required this.time,
     required this.postId,
     required this.likes,
   });
 
   @override
-  State<WallPost> createState() => _WallPostState();
+  State<WallPost> createState() => WallPostState();
 }
 
-class _WallPostState extends State<WallPost> {
+class WallPostState extends State<WallPost> {
   //user
   final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
@@ -65,7 +67,7 @@ class _WallPostState extends State<WallPost> {
 
   //add a comment
   void addComment(String commentText) {
-    ////// add username
+    // add username
     FirebaseFirestore.instance
         .collection("Communities")
         .doc(widget.comName)
@@ -209,7 +211,7 @@ class _WallPostState extends State<WallPost> {
               ),
 
               // delete button
-              if (widget.user == currentUser.displayName)
+              if (widget.userEmail == currentUser.email)
                 DeleteButton(
                   onTap: deletePost,
                 ),

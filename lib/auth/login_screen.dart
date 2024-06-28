@@ -1,9 +1,6 @@
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:darth_runner/auth/forgot_pass.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/utils.dart';
-
 import 'auth_service.dart';
 import 'signup_screen.dart';
 import '../widgets/button.dart';
@@ -11,18 +8,19 @@ import '../widgets/textfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final AuthService auth;
+  const LoginScreen({super.key, required this.auth});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = AuthService();
+  //final _auth = AuthService();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  bool isLoading = false;
-  bool isSuccess = true;
+  bool _isLoading = false;
+  bool _isSuccess = true;
   String _errorMessage = '';
 
   @override
@@ -81,15 +79,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   )),
               const SizedBox(height: 30),
-              CustomButton(
-                label: "Login",
-                onPressed: _login,
-              ),
+
+              //login button
+              _isLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : CustomButton(
+                      label: "Login",
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        await login();
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }),
               const SizedBox(
                 height: 10,
               ),
               Center(
-                child: isSuccess
+                child: _isSuccess
                     ? const Text("")
                     : Text(
                         _errorMessage,
@@ -142,11 +153,12 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (context) => const SignupScreen()),
       );
 
-  _login() async {
+  login() async {
     //await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
-    await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
+    await widget.auth
+        .loginUserWithEmailAndPassword(_email.text, _password.text);
     setState(() {
-      isSuccess = false;
+      _isSuccess = false;
     });
     _errorMessage = '';
     _errorMessage += "Please enter valid credentials";

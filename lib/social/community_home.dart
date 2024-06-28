@@ -12,11 +12,17 @@ class CommunityHome extends StatefulWidget {
 }
 
 class _CommunityHomeState extends State<CommunityHome> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
-  // final textController = TextEditingController();
+  User? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    currentUser = FirebaseAuth.instance.currentUser;
+  }
 
   Future<void> createNewCommunity() async {
-    // Future<void> editField(String field) async {
+    if (currentUser == null) return;
+
     String newValue = "";
     await showDialog(
       context: context,
@@ -56,27 +62,29 @@ class _CommunityHomeState extends State<CommunityHome> {
       ),
     );
 
-    //update in Firestore
     if (newValue.trim().isNotEmpty) {
       FirebaseFirestore.instance.collection("Communities").doc(newValue).set({
         'Community Name': newValue,
-        'Username': currentUser.displayName,
-        'UserEmail': currentUser.email,
+        'Username': currentUser!.displayName,
+        'UserEmail': currentUser!.email,
         'TimeStamp': Timestamp.now(),
       });
     }
-    //}
-    // if (textController.text.isNotEmpty) {
-    //   FirebaseFirestore.instance.collection("Communities").doc(textController.text).set({
-    //     'Title': textController.text,
-    //     'User': currentUser.displayName,
-    //     'TimeStamp': Timestamp.now(),
-    //   });
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (currentUser == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Communities"),
+        ),
+        body: const Center(
+          child: Text("User not logged in"),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -85,7 +93,6 @@ class _CommunityHomeState extends State<CommunityHome> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w800,
-            //fontSize: 28,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -114,44 +121,41 @@ class _CommunityHomeState extends State<CommunityHome> {
           child: Column(
             children: [
               Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection("Communities")
-                    .orderBy("TimeStamp", descending: false)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final post = snapshot.data!.docs[index];
-                        return CommunityCard(
-                          comName: post['Community Name'],
-                          username: post['Username'],
-                          userEmail: post['UserEmail'],
-                          time: formatDate(post['TimeStamp']),
-                        );
-                      },
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("Communities")
+                      .orderBy("TimeStamp", descending: false)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final post = snapshot.data!.docs[index];
+                          return CommunityCard(
+                            comName: post['Community Name'],
+                            username: post['Username'],
+                            userEmail: post['UserEmail'],
+                            time: formatDate(post['TimeStamp']),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              )),
-              //logged in as user
+                  },
+                ),
+              ),
               Text(
-                "Logged in as: ${currentUser.displayName}, ${currentUser.email!}",
+                "Logged in as: ${currentUser!.displayName}, ${currentUser!.email!}",
                 style: const TextStyle(color: Colors.white),
               ),
-
-              const SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 5),
             ],
           ),
         ),
