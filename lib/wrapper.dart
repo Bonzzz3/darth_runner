@@ -1,3 +1,4 @@
+import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/auth/login_screen.dart';
 import 'package:darth_runner/auth/verification_screen.dart';
 import 'package:darth_runner/pages/intro_page.dart';
@@ -23,7 +24,9 @@ class Wrapper extends StatelessWidget {
                 );
               } else {
                 if (snapshot.data == null) {
-                  return const LoginScreen();
+                  return LoginScreen(
+                    auth: AuthService(),
+                  );
                 } else {
                   if (snapshot.data!.emailVerified == true) {
                     return const IntroPage();

@@ -15,7 +15,7 @@ class _HeightWidgetState extends State<HeightWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 8),
       child: Card(
           elevation: 12,
           shape: const RoundedRectangleBorder(

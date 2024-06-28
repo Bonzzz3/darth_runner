@@ -1,5 +1,6 @@
-import 'package:darth_runner/auth/forgot_pass.dart';
+import 'dart:io';
 
+import 'package:darth_runner/auth/forgot_pass.dart';
 import 'auth_service.dart';
 import 'signup_screen.dart';
 import '../widgets/button.dart';
@@ -7,19 +8,20 @@ import '../widgets/textfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final AuthService auth;
+  const LoginScreen({super.key, required this.auth});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = AuthService();
-
-  bool isLoading = false;
-
+  //final _auth = AuthService();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool _isLoading = false;
+  bool _isSuccess = true;
+  String _errorMessage = '';
 
   @override
   void dispose() {
@@ -35,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/img/Wallpaper.jpeg"), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -43,18 +46,23 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const Spacer(),
               const Text("Login",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500, color: Colors.white)),
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white)),
               const SizedBox(height: 50),
               CustomTextField(
                 hint: "Enter Email",
                 label: "Email",
                 controller: _email,
+                isEmail: true,
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 hint: "Enter Password",
                 label: "Password",
                 controller: _password,
+                isPassword: true,
               ),
               Align(
                   alignment: Alignment.centerRight,
@@ -63,40 +71,73 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ForgotPassword()
-                          )
-                      );
+                              builder: (context) => const ForgotPassword()));
                     },
-                    child: const Text("Forgot Password?", style: TextStyle(color: Colors.white70),),
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.white70),
+                    ),
                   )),
               const SizedBox(height: 30),
-              CustomButton(
-                label: "Login",
-                onPressed: _login,
-              ),
-              const SizedBox(height: 10),
-              isLoading
-                  ? const CircularProgressIndicator()
+
+              //login button
+              _isLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
                   : CustomButton(
-                      label: "Sign In with Google",
+                      label: "Login",
                       onPressed: () async {
                         setState(() {
-                          isLoading = true;
+                          _isLoading = true;
                         });
-                        await _auth.loginWithGoogle();
+                        await login();
                         setState(() {
-                          isLoading = false;
+                          _isLoading = false;
                         });
-                      },
-                    ),
+                      }),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: _isSuccess
+                    ? const Text("")
+                    : Text(
+                        _errorMessage,
+                        style: const TextStyle(
+                          color: Colors.red,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+              ),
+              const SizedBox(height: 10),
+              // isLoading
+              //     ? const CircularProgressIndicator()
+              //     : CustomButton(
+              //         label: "Sign In with Google",
+              //         onPressed: () async {
+              //           setState(() {
+              //             isLoading = true;
+              //           });
+              //           await _auth.loginWithGoogle();
+              //           setState(() {
+              //             isLoading = false;
+              //           });
+              //         },
+              //       ),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text("Don't have an account?", style: TextStyle(color: Colors.grey),),
-                const SizedBox(width: 10,),
+                const Text(
+                  "Don't have an account?",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
                 InkWell(
                   onTap: () => goToSignup(context),
-                  child:
-                      const Text("Sign Up", style: TextStyle(color: Colors.red)),
+                  child: const Text("Sign Up",
+                      style: TextStyle(color: Colors.red)),
                 )
               ]),
               const Spacer()
@@ -112,7 +153,14 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (context) => const SignupScreen()),
       );
 
-  _login() async {
-    await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
+  login() async {
+    //await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
+    await widget.auth
+        .loginUserWithEmailAndPassword(_email.text, _password.text);
+    setState(() {
+      _isSuccess = false;
+    });
+    _errorMessage = '';
+    _errorMessage += "Please enter valid credentials";
   }
 }

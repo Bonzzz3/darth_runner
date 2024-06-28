@@ -25,8 +25,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/img/Wallpaper.jpeg"),
-                fit: BoxFit.cover),
+                image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -44,7 +43,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 20,
                 ),
                 CustomTextField(
-                    controller: _email, hint: "Enter Email", label: "Email"),
+                  controller: _email,
+                  hint: "Enter Email",
+                  label: "Email",
+                  isEmail: true,
+                ),
                 const SizedBox(
                   height: 20,
                 ),

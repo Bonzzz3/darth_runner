@@ -7,7 +7,7 @@ class Run extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //remove stack in the future
+      //REMOVE STACK 
       body: Stack(
         children: [
           Container(
@@ -33,9 +33,8 @@ class Run extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold
+                  ),
                 ),
-                ),
-              
               ),
             ],
           ), 
@@ -45,17 +44,15 @@ class Run extends StatelessWidget {
                 Navigator.push(
                   context, MaterialPageRoute(
                         builder: (context) => const MapPage()
-                        )
-                  );
+                  )
+                );
               },
               child: const Text('start running')),
           )
-
-            
         ],        
       )
-    );
-    
+    ); 
   }
 }
+
 
