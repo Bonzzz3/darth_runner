@@ -22,6 +22,7 @@ class _MapPageState extends State<MapPage> {
 
   // POLYLINE SET AND LIST OF LAT AND LONG FOR PLACES BEEN.
   List<LatLng> polyLineCoordinates = [];
+  List<LatLng> polyDisplay = [];
   Set<Polyline> polyLine = {};
 
   // CREATING INSTANCE OF STOPWATCH.
@@ -113,7 +114,7 @@ class _MapPageState extends State<MapPage> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.all(9),
-                        child: Text('Pace',
+                        child: Text('Pace min/km',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold
@@ -122,7 +123,7 @@ class _MapPageState extends State<MapPage> {
                       ),
                       Text((pace).toStringAsFixed(2),
                        style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                        ),
                       )
@@ -148,7 +149,7 @@ class _MapPageState extends State<MapPage> {
                                 '${StopWatchTimer.getDisplayTimeHours(currentTime)}:${StopWatchTimer.getDisplayTimeMinute(currentTime)}:${StopWatchTimer.getDisplayTimeSecond(currentTime)}';
                             return Text(displayTime,
                                     style: const TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 23,
                                       fontWeight: FontWeight.bold,
                                     )
                                 );})
@@ -159,7 +160,7 @@ class _MapPageState extends State<MapPage> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.all(9),
-                        child: Text('Distance',
+                        child: Text('Distance km',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold
@@ -168,7 +169,7 @@ class _MapPageState extends State<MapPage> {
                       ),
                       Text((distanceTravelled / 1000).toStringAsFixed(2),
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 23,
                               fontWeight: FontWeight.bold,
                             )
                       )
@@ -176,39 +177,50 @@ class _MapPageState extends State<MapPage> {
                   ),
                 ],
               ),
-              const Divider(), //add parameters
-              const SizedBox(
-                height: 70,
-              ),
+              const Divider(
+                indent: 10,
+                endIndent: 10,
+                height: 29,
+                thickness: 5,
+                color: Colors.black
+                ,
+              ), //add parameters
+              // const SizedBox(
+                
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //play and pause Button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.only(bottom: 20),
-                      fixedSize: const Size.square(50),
-                      iconColor: const Color.fromARGB(255, 0, 0, 0)  ,
-                      backgroundColor: Colors.grey
-                              
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isRunning = !isRunning;
-                        if (isRunning) {
-                          stopWatch.onStartTimer();
-                        }
-                        else {
-                          polyLineCoordinates.clear();
-                          stopWatch.onStopTimer();
-                        }
-                      });
-                    } ,
-                    child: Icon(
-                      isRunning ? Icons.pause : Icons.play_arrow_sharp,          
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: EdgeInsets.zero,
+                        fixedSize: const Size.square(75),
+                        iconColor: const Color.fromARGB(255, 0, 0, 0)  ,
+                        backgroundColor: Colors.grey
+                                
                       ),
-                    ),
+                      onPressed: () {
+                        setState(() {
+                          isRunning = !isRunning;
+                          if (isRunning) {
+                            stopWatch.onStartTimer();
+                          }
+                          else {
+                            polyLineCoordinates.clear();
+                            stopWatch.onStopTimer();
+                          }
+                        });
+                      } ,
+                      child: Icon(
+                        isRunning ? Icons.pause : Icons.play_arrow_sharp,    
+                        size: 40,      
+                        ),
+                      ),
+                  ),
           
                   // stop button
                   ElevatedButton(
@@ -217,7 +229,7 @@ class _MapPageState extends State<MapPage> {
                       backgroundColor: Colors.grey,
                       shape: const CircleBorder(),
                       padding: EdgeInsets.zero,
-                      fixedSize: const Size.square(50),
+                      fixedSize: const Size.square(75),
                     ),
                     onPressed:() {
                               Navigator.push(
@@ -228,6 +240,7 @@ class _MapPageState extends State<MapPage> {
                             },
                     child: const Icon(
                       Icons.stop,
+                      size: 40,
                                   )
                                 )
                     ],
@@ -295,15 +308,17 @@ class _MapPageState extends State<MapPage> {
           // ADD CURRENT POSITION TO ROUTE TRAVELLED (!!!! ONLY IF PLAY BUTTON ACTIVE).
           if (isRunning) {
             polyLineCoordinates.add(currentPosition!);
+            
           }
+          polyDisplay.add(currentPosition!);
 
           // ADD POLYLINE TO SET.
           polyLine.add(
             Polyline(
               polylineId: const PolylineId('beenHere'),
-              points: polyLineCoordinates,
-              width: 5, //this width is a bit too small but need to check with update on zoom.
-              color: Colors.deepPurpleAccent, // can make this a customizable feature.
+              points: polyDisplay,
+              width: 6,
+              color: isRunning? Colors.deepPurpleAccent: Colors.blueGrey, // can make this a customizable feature.
             ) 
           );
 
