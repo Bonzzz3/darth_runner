@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "502538905752",
+    "project_id": "darth-runner",
+    "storage_bucket": "darth-runner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502538905752:android:85226a7b195a5f68dfc8ed",
+        "android_client_info": {
+          "package_name": "com.darth.darth_runner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502538905752-s37v27j33ks5piep7pd0763782ct2h56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.darth.darth_runner",
+            "certificate_hash": "1dc4a6e9a7824f900dc339b82b18f0eabc9653e8"
+          }
+        },
+        {
+          "client_id": "502538905752-g1sq31v9is8pjahq2s4q92u2n3ii5drt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwHfeUlWqhe8CmtBQJ6l-cD188TLaUUF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502538905752-g1sq31v9is8pjahq2s4q92u2n3ii5drt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502538905752-3uju2de5d9ri7agp33jhnq8am3tbep5k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.darthRunner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

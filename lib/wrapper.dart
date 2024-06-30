@@ -1,0 +1,42 @@
+import 'package:darth_runner/auth/auth_service.dart';
+import 'package:darth_runner/auth/login_screen.dart';
+import 'package:darth_runner/auth/verification_screen.dart';
+import 'package:darth_runner/pages/intro_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+class Wrapper extends StatelessWidget {
+  const Wrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Error"),
+                );
+              } else {
+                if (snapshot.data == null) {
+                  return LoginScreen(
+                    auth: AuthService(),
+                  );
+                } else {
+                  if (snapshot.data!.emailVerified == true) {
+                    return const IntroPage();
+                  } else {
+                    return VerificationScreen(
+                      user: snapshot.data!,
+                    );
+                  }
+                }
+              }
+            }));
+  }
+}
