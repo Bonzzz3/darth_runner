@@ -4,7 +4,6 @@ import 'package:darth_runner/pages/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'dart:math';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class MapPage extends StatefulWidget {
@@ -65,8 +64,20 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentPosition == null
-          ? const Center(child: CircularProgressIndicator())
+      body: currentPosition == null?
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+                Text('Ensure your location is turned on')
+              ],
+            )
+            
+          // ? const Center(
+          //   child: CircularProgressIndicator()
+          //   )
       :Stack(
         children: [
           GoogleMap(
