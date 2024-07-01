@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heart_bpm/heart_bpm.dart';
-import 'package:heart_bpm/chart.dart';
+//import 'package:heart_bpm/chart.dart';
 
 class HeartrateHome extends StatefulWidget {
   const HeartrateHome({super.key});
@@ -18,7 +18,7 @@ class _HeartrateHomeState extends State<HeartrateHome> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Heart BPM Demo'),
+        title: const Text('Heart BPM Demo'),
         iconTheme: const IconThemeData(color: Colors.black, size: 30),
       ),
       body: Center(

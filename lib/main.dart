@@ -5,7 +5,7 @@ import 'firebase_options.dart';
 import 'dart:async';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // import 'package:darth_runner/pages/intro_page.dart';
@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('hello');
     return MaterialApp(
       
       theme: (ThemeData(primarySwatch: Colors.blue)),

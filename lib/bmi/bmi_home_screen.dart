@@ -19,7 +19,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
   int _height = 160;
   int _age = 25;
   int _weight = 60;
-  bool _isFinished = false;
+  //bool _isFinished = false;
   double _bmiScore = 0;
 
   @override
