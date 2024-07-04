@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             minRadius: 25,
             maxRadius: 25,
             foregroundImage:
-                AssetImage('lib/assets/images/darthrunner_logo.jpeg'),
+                AssetImage('assets/img/darthrunner_logo.jpeg'),
           ),
           SizedBox(
             width: 25,

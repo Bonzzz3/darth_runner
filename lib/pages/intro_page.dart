@@ -19,7 +19,7 @@ class IntroPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 50, top: 200, right: 50),
                   child: Image.asset(
-                    'lib/assets/images/darthrunner_logo.jpeg',
+                    'assets/img/darthrunner_logo.jpeg',
                   ),
                 ),
                 const SizedBox(height: 40),
