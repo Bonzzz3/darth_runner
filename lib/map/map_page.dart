@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'package:darth_runner/database/rundata.dart';
+import 'package:flutter/gestures.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:darth_runner/pages/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:location/location.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -202,7 +205,9 @@ class _MapPageState extends State<MapPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //play and pause Button
+
+                  //PLAY AND PAUSE BUTTON
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
@@ -233,7 +238,8 @@ class _MapPageState extends State<MapPage> {
                       ),
                   ),
           
-                  // stop button
+                  // STOP BUTTON
+
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       iconColor: Colors.black,
@@ -243,11 +249,7 @@ class _MapPageState extends State<MapPage> {
                       fixedSize: const Size.square(75),
                     ),
                     onPressed:() {
-                              Navigator.push(
-                                context, MaterialPageRoute(
-                                  builder: (context) => const NotHomePage()
-                                  )
-                                );
+                      stopRunning();
                             },
                     child: const Icon(
                       Icons.stop,
@@ -266,13 +268,55 @@ class _MapPageState extends State<MapPage> {
   }
 
 
-  // function that repositions the map to center the user's
-  // current location.
+  // FUNCTION ON STOP BUTTON PRESSED TO STORE DATA IN HIVE.
+
+  void stopRunning() async {
+    String? runTitle = await showTitleDialog(context);
+    runTitle ??= '';
+    var box = Hive.box<Rundata>('runDataBox');
+    var runData = Rundata(
+      hiveDistance: double.parse((distanceTravelled / 1000).toStringAsFixed(2)) ,
+      hiveDate: DateTime.now(),
+      hiveTime: displayTime, 
+      hivePace: pace, 
+      hiveRunTitle: runTitle);
+    await box.add(runData);
+    
+    if (!mounted) return;
+    Navigator.pop(context);
+  }
+
+  Future<String?> showTitleDialog(BuildContext context) async {
+    TextEditingController controller = TextEditingController();
+
+    return showDialog<String>(
+      context: context,
+      builder: (context){
+        return AlertDialog(
+          title: const Text('Enter Your Run Title'),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(hintText: 'Title'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(controller.text);
+              }, 
+              child: const Text('Save'))
+          ],
+        );
+      }
+      );
+  }
+
+  // FUNCTION TO CENTER THE USER LOCATION ON THE MAP.
+
   Future<void> cameraToPosition (LatLng pos) async {
     final GoogleMapController controller = await mapController.future;
     CameraPosition newCameraPosition = CameraPosition(
       target: pos,
-      zoom: 16, //might need to optimize the zoom value
+      zoom: 16, // OPTIMIZE ZOOM VALUE
     );
     await controller.animateCamera(CameraUpdate.newCameraPosition(newCameraPosition ));
   }
@@ -280,6 +324,7 @@ class _MapPageState extends State<MapPage> {
   
   // FUNCTION TO FETCH LOCATION.
   // CHECKS IF LOCATION SERVICES ARE ENABLED AND REQUESTS IF NECESSARY.
+
   Future<void> fetchLocation() async{
 
     // INITIALIZING VARIABLES.
@@ -303,6 +348,7 @@ class _MapPageState extends State<MapPage> {
     }
 
     // LISTENER THAT GETS CURRENT POSITION LAT AND LONG.
+    
     locationController.onLocationChanged.listen((LocationData currentLocation) {
 
       LatLng loc = LatLng(currentLocation.latitude!,currentLocation.longitude!);
@@ -311,12 +357,14 @@ class _MapPageState extends State<MapPage> {
         setState(() {
 
           // SETS CURRENT POSITION 
+
           currentPosition = 
             LatLng(
               currentLocation.latitude!,
               currentLocation.longitude!);
 
           // ADD CURRENT POSITION TO ROUTE TRAVELLED (!!!! ONLY IF PLAY BUTTON ACTIVE).
+
           if (isRunning) {
             polyLineCoordinates.add(currentPosition!);
             
@@ -324,6 +372,7 @@ class _MapPageState extends State<MapPage> {
           polyDisplay.add(currentPosition!);
 
           // ADD POLYLINE TO SET.
+
           polyLine.add(
             Polyline(
               polylineId: const PolylineId('beenHere'),
@@ -334,9 +383,11 @@ class _MapPageState extends State<MapPage> {
           );
 
           // CENTERING THE CAMERA ON LOCATION CHANGE.
+          
           cameraToPosition(currentPosition!); 
 
           // FUNCTION TO CALCULATE THE DISTANCE TRAVELLED WHILE PLAY BUTTON ACTIVE.
+
           if (isRunning) {
             if (polyLineCoordinates.length >= 2)  {
               LatLng secondLastLocation = polyLineCoordinates[polyLineCoordinates.length-2];

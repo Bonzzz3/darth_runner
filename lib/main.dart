@@ -1,3 +1,5 @@
+import 'package:darth_runner/database/run_box.dart';
+import 'package:darth_runner/database/rundata.dart';
 import 'package:darth_runner/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,21 +7,18 @@ import 'firebase_options.dart';
 import 'dart:async';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'dart:developer';
 import 'package:hive_flutter/hive_flutter.dart';
 
-// import 'package:darth_runner/pages/intro_page.dart';
-// import 'package:flutter/services.dart';
 
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(RundataAdapter());
+  runBox = await Hive.openBox<Rundata>('runDataBox');
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  //CREATING BOX
-  var box = await Hive.openBox('myRuns');
   
   runApp(
     Phoenix(
