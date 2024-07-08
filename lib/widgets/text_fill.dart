@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TextFill extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final TextInputType? textInputType;
+  final List<TextInputFormatter>? textInputFormatter;
 
-  const TextFill(
-      {super.key,
-      required this.controller,
-      required this.hintText,
-      required this.obscureText});
+  const TextFill({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.obscureText,
+    this.textInputType,
+    this.textInputFormatter,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
+      keyboardType: textInputType,
+      inputFormatters: textInputFormatter,
       obscureText: obscureText,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -27,7 +35,7 @@ class TextFill extends StatelessWidget {
         fillColor: Colors.grey[50],
         filled: true,
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey[600]),
+        hintStyle: TextStyle(color: Colors.grey[500]),
       ),
     );
   }

@@ -37,6 +37,7 @@ class AuthService {
       _firestore.collection("Users").doc(email).set({
         'username': username,
         'bio': 'Empty bio..',
+        'doneOnboarding': false,
       });
       return cred.user;
     } on FirebaseAuthException catch (e) {

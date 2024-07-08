@@ -8,21 +8,18 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-// import 'package:darth_runner/pages/intro_page.dart';
-// import 'package:flutter/services.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await dotenv.load(fileName: ".env");
-  // await Firebase.initializeApp();
+
   if (Platform.isAndroid) {
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
-      } else if (Platform.isIOS) {
-        await Firebase.initializeApp();
-      }
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else if (Platform.isIOS) {
+    await Firebase.initializeApp();
+  }
 
   //CREATING BOX
   var box = await Hive.openBox('myRuns');

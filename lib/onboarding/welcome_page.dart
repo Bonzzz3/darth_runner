@@ -39,10 +39,12 @@ class IntroPage extends StatelessWidget {
 
                 // Start button
                 GestureDetector(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NotHomePage())),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NotHomePage()));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(40),
                     child: Container(

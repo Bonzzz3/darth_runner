@@ -38,26 +38,6 @@ class _SignupScreenState extends State<SignupScreen> {
       _errorMessage += 'Password must be at least 8 characters.\n';
     }
 
-    // // Contains at least one uppercase letter
-    // if (!password.contains(RegExp(r'[A-Z]'))) {
-    //   _errorMessage += '• Uppercase letter is missing.\n';
-    // }
-
-    // // Contains at least one lowercase letter
-    // if (!password.contains(RegExp(r'[a-z]'))) {
-    //   _errorMessage += '• Lowercase letter is missing.\n';
-    // }
-
-    // // Contains at least one digit
-    // if (!password.contains(RegExp(r'[0-9]'))) {
-    //   _errorMessage += '• Digit is missing.\n';
-    // }
-
-    // // Contains at least one special character
-    // if (!password.contains(RegExp(r'[!@#%^&*(),.?":{}|<>]'))) {
-    //   _errorMessage += '• Special character is missing.\n';
-    // }
-
     // If there are no error messages, the password is valid
     return _errorMessage.isEmpty;
   }
@@ -126,6 +106,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 controller: _password,
               ),
               const SizedBox(height: 30),
+
+              // Signup Button and validate before creating acc
               Center(
                 child: _isLoading
                     ? const CircularProgressIndicator(

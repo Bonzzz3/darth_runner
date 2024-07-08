@@ -188,6 +188,17 @@ class _ProfileState extends State<Profile> {
                           ),
 
                           const SizedBox(
+                            height: 20,
+                          ),
+
+                          Center(
+                            child: FilledButton(
+                              onPressed: () {},
+                              child: Text("Personal details"),
+                            ),
+                          ),
+
+                          const SizedBox(
                             height: 30,
                           ),
 
@@ -217,7 +228,7 @@ class _ProfileState extends State<Profile> {
                           ),
 
                           const SizedBox(
-                            height: 100,
+                            height: 80,
                           ),
 
                           // Signout button
