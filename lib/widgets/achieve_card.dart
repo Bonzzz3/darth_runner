@@ -82,7 +82,7 @@ class _AchieveCardState extends State<AchieveCard> {
           widget.isCompleted!
               ? const Text(
                   "Completed",
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.green,
                   ),
                 )

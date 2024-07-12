@@ -1,16 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HeightWidget extends StatefulWidget {
   final Function(int) onChange;
 
-  const HeightWidget({Key? key, required this.onChange}) : super(key: key);
+  const HeightWidget({
+    super.key,
+    required this.onChange,
+  });
 
   @override
-  _HeightWidgetState createState() => _HeightWidgetState();
+  State<HeightWidget> createState() => _HeightWidgetState();
 }
 
 class _HeightWidgetState extends State<HeightWidget> {
   int _height = 160;
+  TextEditingController _heightcon = TextEditingController();
+
+  void _validateHeight(String value) {
+    final intValue = int.tryParse(value);
+    if (value.isEmpty || intValue == null || intValue > 240) {
+      setState(() {
+        _height = 160;
+        _heightcon.text = '160';
+      });
+    } else {
+      setState(() {
+        _height = intValue;
+      });
+    }
+    widget.onChange(_height);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _heightcon = TextEditingController(text: _height.toInt().toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +59,34 @@ class _HeightWidgetState extends State<HeightWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    _height.toString(),
-                    style: const TextStyle(fontSize: 40),
+                  // height value
+                  SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: TextFormField(
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      controller: _heightcon,
+                      onChanged: (value) {
+                        _validateHeight(value);
+                      },
+                      onEditingComplete: () {
+                        _validateHeight(_heightcon.text);
+                        FocusScope.of(context).unfocus();
+                      },
+                      style: const TextStyle(fontSize: 40),
+                    ),
                   ),
+
                   const SizedBox(
                     width: 10,
                   ),
                   const Text(
                     "cm",
                     style: TextStyle(fontSize: 20, color: Colors.black54),
-                  )
+                  ),
                 ],
               ),
               Slider(
@@ -54,6 +97,7 @@ class _HeightWidgetState extends State<HeightWidget> {
                 onChanged: (value) {
                   setState(() {
                     _height = value.toInt();
+                    _heightcon.text = _height.toString();
                   });
                   widget.onChange(_height);
                 },

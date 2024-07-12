@@ -125,8 +125,8 @@ void main() {
     when(mockFirestore.collection('Users')).thenReturn(mockCollectionReference);
     when(mockCollectionReference.doc(email)).thenReturn(mockDocumentReference);
     when(mockDocumentReference
-            .set({'username': username, 'bio': 'Empty bio..'}))
-        .thenAnswer((_) async => null);
+            .set({'username': username, 'bio': 'Empty bio..', 'doneOnboarding': false}))
+        .thenAnswer((_) async {});
 
     final result = await authService.createUserWithUsernameEmailAndPassword(
         username, email, password);
@@ -137,7 +137,7 @@ void main() {
     verify(mockUser.updateDisplayName(username)).called(1);
     verify(mockCollectionReference.doc(email)).called(1);
     verify(mockDocumentReference
-        .set({'username': username, 'bio': 'Empty bio..'})).called(1);
+        .set({'username': username, 'bio': 'Empty bio..', 'doneOnboarding': false})).called(1);
     expect(result, mockUser);
   });
 

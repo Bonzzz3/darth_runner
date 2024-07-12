@@ -35,15 +35,15 @@ class _Intro3State extends State<Intro3> {
       _errorMessage += 'Please enter a valid height.\n';
     } else if (tempHeight > 260) {
       _errorMessage += "Please enter a valid height.\n";
-    } else if (tempHeight < 100) {
+    } else if (tempHeight < 50) {
       _errorMessage += "Please enter a valid height.\n";
     }
 
     if (tempWeight == null) {
       _errorMessage += 'Please enter a valid weight.\n';
-    } else if (tempWeight > 1000) {
+    } else if (tempWeight > 700) {
       _errorMessage += "Please enter a valid weight.\n";
-    } else if (tempWeight < 5) {
+    } else if (tempWeight < 10) {
       _errorMessage += "Please enter a valid weight.\n";
     }
     return _errorMessage.isEmpty;
@@ -65,23 +65,23 @@ class _Intro3State extends State<Intro3> {
     prefs.setString('weight', weight);
   }
 
-  void _saveToFirebase(
-      String gender, String age, String height, String weight, bool doneOnboarding) {
+  void _saveToFirebase(String gender, String age, String height, String weight,
+      bool doneOnboarding) {
     usersCollection.doc(currentUser.email).update({
       'Gender': gender,
       'Age': age,
       'Height': height,
       'Weight': weight,
-      'doneOnboarding' : doneOnboarding,
+      'doneOnboarding': doneOnboarding,
     });
   }
-
 
   @override
   void initState() {
     super.initState();
     _loadHeightWeight();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,8 +179,13 @@ class _Intro3State extends State<Intro3> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           await _saveHeightWeight(_height, _weight);
-                          _saveToFirebase(prefs.getString('gender') ?? "",
-                              prefs.getString('age') ?? "", _height, _weight, true);
+                          _saveToFirebase(
+                              prefs.getString('gender') ?? "",
+                              prefs.getString('age') ?? "",
+                              _height,
+                              _weight,
+                              true);
+                          await prefs.clear();
                           await Navigator.push(
                             context,
                             MaterialPageRoute(

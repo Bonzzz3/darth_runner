@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darth_runner/helper/helper_methods.dart';
 import 'package:darth_runner/widgets/comment.dart';
@@ -162,9 +164,9 @@ class WallPostState extends State<WallPost> {
                   .collection("User Posts")
                   .doc(widget.postId)
                   .delete()
-                  .then((value) => print("post deleted"))
+                  .then((value) => log("post deleted"))
                   .catchError(
-                      (error) => print("failed to delete post: $error"));
+                      (error) => log("failed to delete post: $error"));
               Navigator.pop(context);
               FocusScope.of(context).unfocus();
             },

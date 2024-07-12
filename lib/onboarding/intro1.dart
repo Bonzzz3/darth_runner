@@ -26,7 +26,6 @@ class _Intro1State extends State<Intro1> {
 
   Future<void> _loadGender() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
     setState(() {
       _gender = prefs.getString('gender') ?? "Male";
     });

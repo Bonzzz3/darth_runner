@@ -4,17 +4,16 @@ import 'package:share_plus/share_plus.dart';
 
 class ScoreScreen extends StatelessWidget {
   final double bmiScore;
-
   final int age;
-
   String? bmiStatus;
-
   String? bmiInterpretation;
-
   Color? bmiStatusColor;
 
-  ScoreScreen({Key? key, required this.bmiScore, required this.age})
-      : super(key: key);
+  ScoreScreen({
+    super.key,
+    required this.bmiScore,
+    required this.age,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,7 @@ class ScoreScreen extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/galaxy.jpeg"),
-              fit: BoxFit.cover),
+              image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: Column(

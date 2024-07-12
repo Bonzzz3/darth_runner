@@ -16,7 +16,7 @@ class AuthService {
     try {
       await _auth.currentUser?.sendEmailVerification();
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 
@@ -24,7 +24,7 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 

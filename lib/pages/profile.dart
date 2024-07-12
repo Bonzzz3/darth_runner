@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darth_runner/achievements/achieve_home.dart';
 import 'package:darth_runner/auth/auth_service.dart';
+import 'package:darth_runner/userprofile/personal_details.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:darth_runner/widgets/text_box.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -124,7 +125,30 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
+
+                          //personal details
+                          Center(
+                            child: FilledButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PersonalDetails()));
+                              },
+                              style: const ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll<Color>(Colors.grey),
+                              ),
+                              child: const Text(
+                                "Edit personal details",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
 
                           //details
                           Padding(
@@ -185,17 +209,6 @@ class _ProfileState extends State<Profile> {
                             text: userData['bio'],
                             sectionName: 'bio',
                             onPressed: () => editField("bio"),
-                          ),
-
-                          const SizedBox(
-                            height: 20,
-                          ),
-
-                          Center(
-                            child: FilledButton(
-                              onPressed: () {},
-                              child: Text("Personal details"),
-                            ),
                           ),
 
                           const SizedBox(

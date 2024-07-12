@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AgeWeightWidget extends StatefulWidget {
   final Function(int) onChange;
-
   final String title;
-
   final int initValue;
-
   final int min;
-
   final int max;
 
   const AgeWeightWidget(
-      {Key? key,
+      {super.key,
       required this.onChange,
       required this.title,
       required this.initValue,
       required this.min,
-      required this.max})
-      : super(key: key);
+      required this.max});
 
   @override
-  _AgeWeightWidgetState createState() => _AgeWeightWidgetState();
+  State<AgeWeightWidget> createState() => _AgeWeightWidgetState();
 }
 
 class _AgeWeightWidgetState extends State<AgeWeightWidget> {
+  final TextEditingController _controller = TextEditingController();
   int counter = 0;
+
+  void _validateInput(String value) {
+    final intValue = int.tryParse(value);
+    if (intValue == null || intValue < widget.min || intValue > widget.max) {
+      setState(() {
+        counter = widget.initValue;
+        _controller.text = widget.initValue.toString();
+      });
+    } else {
+      setState(() {
+        counter = intValue;
+      });
+      widget.onChange(counter);
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     counter = widget.initValue;
+    _controller.text = counter.toString();
   }
 
   @override
@@ -57,6 +70,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
+                    // decrease
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
@@ -67,6 +81,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                         setState(() {
                           if (counter > widget.min) {
                             counter--;
+                            _controller.text = counter.toString();
                           }
                         });
                         widget.onChange(counter);
@@ -75,17 +90,41 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                     const SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      counter.toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
+
+                    SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.center,
+                        keyboardType: const TextInputType.numberWithOptions(),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        controller: _controller,
+                        // onChanged: (value) {
+                        //   _validateInput(value);
+                        // },
+                        onEditingComplete: () {
+                          _validateInput(_controller.text);
+                          FocusScope.of(context).unfocus();
+                        },
+                        style: const TextStyle(fontSize: 18),
+                      ),
                     ),
+                    // value shown
+                    // Text(
+                    //   counter.toString(),
+                    //   textAlign: TextAlign.center,
+                    //   style: const TextStyle(
+                    //       color: Colors.black87,
+                    //       fontSize: 18,
+                    //       fontWeight: FontWeight.w500),
+                    // ),
                     const SizedBox(
                       width: 15,
                     ),
+
+                    // increase
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
@@ -96,6 +135,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                         setState(() {
                           if (counter < widget.max) {
                             counter++;
+                            _controller.text = counter.toString();
                           }
                         });
                         widget.onChange(counter);

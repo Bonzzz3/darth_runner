@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class BMIHomeScreen extends StatefulWidget {
-  const BMIHomeScreen({Key? key}) : super(key: key);
+  const BMIHomeScreen({super.key});
 
   @override
-  _BMIHomeScreenState createState() => _BMIHomeScreenState();
+  State<BMIHomeScreen> createState() => _BMIHomeScreenState();
 }
 
 class _BMIHomeScreenState extends State<BMIHomeScreen> {
@@ -44,6 +44,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
                 const SizedBox(
@@ -110,7 +111,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                               type: PageTransitionType.fade));
                     },
                   ),
-            
+
                   // SwipeableButtonView(
                   //   isFinished: _isFinished,
                   //   onFinish: () async {
@@ -122,7 +123,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                   //               age: _age,
                   //             ),
                   //             type: PageTransitionType.fade));
-            
+
                   //     setState(() {
                   //       _isFinished = false;
                   //     });
@@ -130,7 +131,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                   //   onWaitingProcess: () {
                   //     //Calculate BMI here
                   //     calculateBmi();
-            
+
                   //     Future.delayed(Duration(seconds: 1), () {
                   //       setState(() {
                   //         _isFinished = true;
