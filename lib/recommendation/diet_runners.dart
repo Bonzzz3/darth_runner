@@ -119,10 +119,7 @@ class _DietRunnersState extends State<DietRunners> {
     );
 
     if (newTitle.trim().isNotEmpty && newValue.trim().isNotEmpty) {
-      usersCollection
-          .doc(currentUser.email)
-          .collection("Runner Plans")
-          .add({
+      usersCollection.doc(currentUser.email).collection("Runner Plans").add({
         'Username': currentUser.displayName,
         'UserEmail': currentUser.email,
         'PlanTitle': newTitle,
@@ -268,7 +265,8 @@ class _DietRunnersState extends State<DietRunners> {
                             //border: Border.all(color: Colors.black, width: 5),
                           ),
                           padding: const EdgeInsets.all(10),
-                          child: const Text(''),
+                          child: const Text(
+                              'A good diet can boost your physical health and help you meet your fitness goals. Make sure your meals emphasize the following basic components:\nFruit and vegetables for vitamins, minerals and antioxidants\nLean protein such as fish, poultry, beans, lentils and tofu\nHealthy fats such as olive oil, avocado and nuts\nHealthy carbohydrates such as rice, whole grain breads/pastas and oatmeal\nIndividuals may have different optimal balances, but in general, people who include running or jogging as part of their fitness regimen should get 60% to 70% of their calories from carbohydrates, with lean protein and healthy fats each accounting for 15% to 20% of their remaining calories.\n\nBy https://www.hopkinsmedicine.org/health/wellness-and-prevention/runners-diet'),
                         ),
                       ),
                     ],

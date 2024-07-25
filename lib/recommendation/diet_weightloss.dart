@@ -269,7 +269,8 @@ class _DietWeightlossState extends State<DietWeightloss> {
                             //border: Border.all(color: Colors.black, width: 5),
                           ),
                           padding: const EdgeInsets.all(10),
-                          child: const Text(''),
+                          child: const Text(
+                              '10 Diet Tips to Lose Weight and Improve Health:\n1. Fill up on Fiber\n2. Ditch Added Sugar\n3. Make Room for Healthy Fat\n4. Have a Protein-Rich Breakfast\n5. Stay Hydrated\n6. Practice Mindful Eating\n7. Cut Back on Refined Carbs\n8. Avoid Fad Diets\n9. Snack Smart\n10. Increase Vegetable Intake\n\n By https://www.healthline.com/nutrition/25-best-diet-tips'),
                         ),
                       ),
                     ],

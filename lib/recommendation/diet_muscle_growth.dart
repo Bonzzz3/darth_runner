@@ -268,7 +268,8 @@ class _DietMuscleGrowthState extends State<DietMuscleGrowth> {
                             //border: Border.all(color: Colors.black, width: 5),
                           ),
                           padding: const EdgeInsets.all(10),
-                          child: const Text(''),
+                          child: const Text(
+                              '9 Diet Tips To Gain Muscles:\n1. Consume more calories than you burn\n2. Do not skip meals\n3. Consume more protein\n4. Consume good fats\n5. Drink plenty of water\n6. Eat at least 2 pieces of fruit per day\n7. Avoid sugar and processed foods\n8. Avoid drinking alcohol\n9. Eat complex carbohydrates\n\nhttps://www.tuasaude.com/en/what-to-eat-to-gain-muscle/'),
                         ),
                       ),
                     ],
