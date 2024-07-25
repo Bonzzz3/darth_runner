@@ -34,7 +34,6 @@ class WallPost extends StatefulWidget {
 }
 
 class WallPostState extends State<WallPost> {
-  //user
   final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
   final _commentTextController = TextEditingController();

@@ -24,19 +24,26 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
   final TextEditingController _controller = TextEditingController();
   int counter = 0;
 
-  void _validateInput(String value) {
-    final intValue = int.tryParse(value);
-    if (intValue == null || intValue < widget.min || intValue > widget.max) {
-      setState(() {
-        counter = widget.initValue;
-        _controller.text = widget.initValue.toString();
-      });
-    } else {
-      setState(() {
-        counter = intValue;
-      });
-      widget.onChange(counter);
-    }
+  // void _validateInput(String value) {
+  //   final intValue = int.tryParse(value);
+  //   if (intValue == null || intValue < widget.min || intValue > widget.max) {
+  //     setState(() {
+  //       counter = widget.initValue;
+  //       _controller.text = widget.initValue.toString();
+  //     });
+  //   } else {
+  //     setState(() {
+  //       counter = intValue;
+  //     });
+  //     widget.onChange(counter);
+  //   }
+  // }
+  void _onFieldChanged(String value) {
+    final intValue = int.tryParse(value) ?? widget.initValue;
+    setState(() {
+      counter = intValue;
+    });
+    widget.onChange(counter);
   }
 
   @override
@@ -101,25 +108,18 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                           FilteringTextInputFormatter.digitsOnly,
                         ],
                         controller: _controller,
+                        onChanged: _onFieldChanged,
                         // onChanged: (value) {
-                        //   _validateInput(value);
+                        //   setState(() {
+                        //     counter = widget.initValue;
+                        //     _controller.text = widget.initValue.toString();
+                        //     widget.onChange(counter);
+                        //   });
                         // },
-                        onEditingComplete: () {
-                          _validateInput(_controller.text);
-                          FocusScope.of(context).unfocus();
-                        },
                         style: const TextStyle(fontSize: 18),
                       ),
                     ),
-                    // value shown
-                    // Text(
-                    //   counter.toString(),
-                    //   textAlign: TextAlign.center,
-                    //   style: const TextStyle(
-                    //       color: Colors.black87,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w500),
-                    // ),
+
                     const SizedBox(
                       width: 15,
                     ),

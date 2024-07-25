@@ -1,4 +1,5 @@
 import 'package:darth_runner/bmi/bmi_home_screen.dart';
+import 'package:darth_runner/recommendation/recom_home.dart';
 import 'package:darth_runner/social/community_home.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,7 @@ class HomePage extends StatelessWidget {
           CircleAvatar(
             minRadius: 25,
             maxRadius: 25,
-            foregroundImage:
-                AssetImage('assets/img/darthrunner_logo.jpeg'),
+            foregroundImage: AssetImage('assets/img/darthrunner_logo.jpeg'),
           ),
           SizedBox(
             width: 25,
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
 
                 // BMI button
                 SizedBox(
-                  width: 350,
+                  width: 300,
                   height: 200,
                   child: Container(
                     width: double.infinity,
@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 // Communities button
                 SizedBox(
-                  width: 350,
+                  width: 300,
                   height: 200,
                   child: Container(
                     width: double.infinity,
@@ -128,6 +128,38 @@ class HomePage extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 20),
+
+                SizedBox(
+                  width: 300,
+                  height: 200,
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      image: DecorationImage(
+                          image: AssetImage("assets/img/galaxy.jpeg"),
+                          fit: BoxFit.cover),
+                    ),
+                    child: GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RecomHome()));
+                      },
+                      child: const Text(
+                        "Recommendations",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 // Heartrate button
                 // SizedBox(
                 //   width: 350,
@@ -160,6 +192,10 @@ class HomePage extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
+
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),

@@ -37,95 +37,97 @@ class ScoreScreen extends StatelessWidget {
               image: AssetImage("assets/img/galaxy.jpeg"), fit: BoxFit.cover),
         ),
         child: SafeArea(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              const Text(
-                "Your Score",
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              PrettyGauge(
-                gaugeSize: 300,
-                minValue: 0,
-                maxValue: 40,
-                startMarkerStyle: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
                 ),
-                endMarkerStyle: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+                const Text(
+                  "Your Score",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
-                segments: [
-                  GaugeSegment('UnderWeight', 18.5, Colors.red),
-                  GaugeSegment('Normal', 6.4, Colors.green),
-                  GaugeSegment('OverWeight', 5, Colors.yellow),
-                  GaugeSegment('Obese', 10.1, Colors.red),
-                ],
-                valueWidget: Text(
-                  bmiScore.toStringAsFixed(1),
-                  style: const TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                const SizedBox(
+                  height: 10,
                 ),
-                currentValue: bmiScore.toDouble(),
-                needleColor: Colors.blue,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                bmiStatus!,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: bmiStatusColor!,
-                  fontWeight: FontWeight.bold,
+                PrettyGauge(
+                  gaugeSize: 300,
+                  minValue: 0,
+                  maxValue: 40,
+                  startMarkerStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  endMarkerStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  segments: [
+                    GaugeSegment('UnderWeight', 18.5, Colors.red),
+                    GaugeSegment('Normal', 6.4, Colors.green),
+                    GaugeSegment('OverWeight', 5, Colors.yellow),
+                    GaugeSegment('Obese', 10.1, Colors.red),
+                  ],
+                  valueWidget: Text(
+                    bmiScore.toStringAsFixed(1),
+                    style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  currentValue: bmiScore.toDouble(),
+                  needleColor: Colors.blue,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                bmiInterpretation!,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  bmiStatus!,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: bmiStatusColor!,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  bmiInterpretation!,
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          "Re-calculate",
+                          style: TextStyle(fontSize: 18),
+                        )),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Share.share(
+                            "My BMI is ${bmiScore.toStringAsFixed(1)} at age $age");
                       },
                       child: const Text(
-                        "Re-calculate",
+                        "Share",
                         style: TextStyle(fontSize: 18),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Share.share(
-                          "My BMI is ${bmiScore.toStringAsFixed(1)} at age $age");
-                    },
-                    child: const Text(
-                      "Share",
-                      style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

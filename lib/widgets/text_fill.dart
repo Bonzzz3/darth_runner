@@ -21,7 +21,9 @@ class TextFill extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: textInputType,
+      keyboardType: TextInputType.multiline,
+      minLines: 1,
+      maxLines: null,
       inputFormatters: textInputFormatter,
       obscureText: obscureText,
       decoration: InputDecoration(

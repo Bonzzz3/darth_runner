@@ -114,9 +114,3 @@ class _Intro1State extends State<Intro1> {
     );
   }
 }
-
-// void main() {
-//   runApp(const MaterialApp(
-//     home: Intro1(),
-//   ));
-// }

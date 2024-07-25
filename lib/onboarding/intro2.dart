@@ -54,7 +54,6 @@ class _Intro2State extends State<Intro2> {
     _loadAge();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

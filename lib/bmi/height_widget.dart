@@ -19,7 +19,7 @@ class _HeightWidgetState extends State<HeightWidget> {
 
   void _validateHeight(String value) {
     final intValue = int.tryParse(value);
-    if (value.isEmpty || intValue == null || intValue > 240) {
+    if (value.isEmpty || intValue == null || intValue > 260) {
       setState(() {
         _height = 160;
         _heightcon.text = '160';
@@ -91,7 +91,7 @@ class _HeightWidgetState extends State<HeightWidget> {
               ),
               Slider(
                 min: 0,
-                max: 240,
+                max: 260,
                 value: _height.toDouble(),
                 thumbColor: Colors.red,
                 onChanged: (value) {

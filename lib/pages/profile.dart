@@ -16,6 +16,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final auth = AuthService();
   final currentUser = FirebaseAuth.instance.currentUser!;
   final usersCollection = FirebaseFirestore.instance.collection("Users");
   bool _isLoading = false;
@@ -68,7 +69,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = AuthService();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
