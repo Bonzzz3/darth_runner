@@ -1,9 +1,24 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+
+// should import bt can't open app because
+// Execution failed for task ':app:checkDebugDuplicateClasses'.
+// dependencies {
+//   // Import the Firebase BoM
+//   implementation platform('com.google.firebase:firebase-bom:33.0.0')
+
+
+//   // TODO: Add the dependencies for Firebase products you want to use
+//   // When using the BoM, don't specify versions in Firebase dependencies
+//   // https://firebase.google.com/docs/android/setup#available-libraries
+// }
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
@@ -35,10 +50,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.darth_runner"
+        applicationId = "com.darth.darth_runner"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion
+        minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
