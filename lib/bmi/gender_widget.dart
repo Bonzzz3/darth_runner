@@ -4,10 +4,13 @@ import 'package:flutter_3d_choice_chip/flutter_3d_choice_chip.dart';
 class GenderWidget extends StatefulWidget {
   final Function(int) onChange;
 
-  const GenderWidget({Key? key, required this.onChange}) : super(key: key);
+  const GenderWidget({
+    super.key,
+    required this.onChange,
+  });
 
   @override
-  _GenderWidgetState createState() => _GenderWidgetState();
+  State<GenderWidget> createState() => _GenderWidgetState();
 }
 
 class _GenderWidgetState extends State<GenderWidget> {

@@ -16,7 +16,7 @@ class AuthService {
     try {
       await _auth.currentUser?.sendEmailVerification();
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 
@@ -24,7 +24,7 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 
@@ -37,6 +37,7 @@ class AuthService {
       _firestore.collection("Users").doc(email).set({
         'username': username,
         'bio': 'Empty bio..',
+        'doneOnboarding': false,
       });
       return cred.user;
     } on FirebaseAuthException catch (e) {
