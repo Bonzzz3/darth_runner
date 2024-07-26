@@ -45,13 +45,13 @@ class _AchieveCardState extends State<AchieveCard> {
           ),
 
           const SizedBox(
-            width: 15,
+            width: 5,
           ),
 
           // title and description
           SizedBox(
             //height: 50,
-            width: 170,
+            width: 140,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

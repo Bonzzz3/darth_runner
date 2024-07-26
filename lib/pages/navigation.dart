@@ -1,7 +1,7 @@
 import 'package:darth_runner/pages/profile.dart';
 import 'package:darth_runner/pages/run.dart';
 import 'package:darth_runner/pages/home.dart';
-import 'package:darth_runner/pages/stats_display.dart';
+import 'package:darth_runner/calendar/stats_display.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 

@@ -47,9 +47,9 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
-		<string>NSLocationWhenInUseUsageDescription</string>
-		<key>To display and track location</key>
-		<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-		<key>To display and track location</key>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>To display and track location</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>To display and track location</string>
 	</dict>
 </plist>
