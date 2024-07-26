@@ -64,7 +64,7 @@ class _RecomHomeState extends State<RecomHome> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/img/gradient.png"),
+                image: AssetImage("assets/img/gradient red blue wp.png"),
                 fit: BoxFit.cover),
           ),
           child: const SafeArea(
