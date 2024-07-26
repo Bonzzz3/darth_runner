@@ -28,8 +28,7 @@ class RundataAdapter extends TypeAdapter<Rundata> {
   @override
   void write(BinaryWriter writer, Rundata obj) {
     writer
-      ..writeByte(4)
-      ..write(obj.hiveRunTitle)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.hiveDistance)
       ..writeByte(1)
@@ -37,7 +36,9 @@ class RundataAdapter extends TypeAdapter<Rundata> {
       ..writeByte(2)
       ..write(obj.hivePace)
       ..writeByte(3)
-      ..write(obj.hiveDate);
+      ..write(obj.hiveDate)
+      ..writeByte(4)
+      ..write(obj.hiveRunTitle);
   }
 
   @override
