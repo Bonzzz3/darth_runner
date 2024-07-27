@@ -124,7 +124,7 @@ class _CommunityHomeState extends State<CommunityHome> {
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection("Communities")
-                      .orderBy("TimeStamp", descending: false)
+                      .orderBy("TimeStamp", descending: true)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {

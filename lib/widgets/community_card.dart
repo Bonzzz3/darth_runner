@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darth_runner/social/home_social.dart';
 import 'package:darth_runner/widgets/delete_button.dart';
@@ -76,9 +78,9 @@ class _CommunityCardState extends State<CommunityCard> {
                         .collection("Communities")
                         .doc(widget.comName)
                         .delete()
-                        .then((value) => print("Community deleted"))
+                        .then((value) => log("Community deleted"))
                         .catchError(
-                            (error) => print("failed to delete post: $error"));
+                            (error) => log("failed to delete post: $error"));
                     Navigator.pop(context);
                   },
                   child: const Text("Delete"),

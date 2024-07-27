@@ -77,7 +77,7 @@ class _HomeSocialState extends State<HomeSocial> {
                         .collection("Communities")
                         .doc(widget.comName)
                         .collection("User Posts")
-                        .orderBy("TimeStamp", descending: false)
+                        .orderBy("TimeStamp", descending: true)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {

@@ -1017,13 +1017,20 @@ PODS:
     - nanopb (< 2.30911.0, >= 2.30908.0)
   - FirebaseSharedSwift (10.28.0)
   - Flutter (1.0.0)
+  - flutter_inappwebview_ios (0.0.1):
+    - Flutter
+    - flutter_inappwebview_ios/Core (= 0.0.1)
+    - OrderedSet (~> 5.0)
+  - flutter_inappwebview_ios/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 5.0)
   - flutter_native_splash (0.0.1):
     - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
   - google_maps_flutter_ios (0.0.1):
     - Flutter
-    - GoogleMaps (< 9.0, >= 8.4)
+    - GoogleMaps (< 10.0, >= 8.4)
   - google_sign_in_ios (0.0.1):
     - AppAuth (>= 1.7.4)
     - Flutter
@@ -1155,6 +1162,7 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
+  - OrderedSet (5.0.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -1169,6 +1177,8 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
@@ -1176,6 +1186,7 @@ DEPENDENCIES:
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
+  - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
@@ -1186,6 +1197,7 @@ DEPENDENCIES:
   - restart_app (from `.symlinks/plugins/restart_app/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -1210,6 +1222,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - OrderedSet
     - PromisesObjC
     - RecaptchaInterop
 
@@ -1224,6 +1237,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
+  flutter_inappwebview_ios:
+    :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   geolocator_apple:
@@ -1244,12 +1259,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   BoringSSL-GRPC: 1e2348957acdbcad360b80a264a90799984b2ba6
-  camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
+  camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   cloud_firestore: 003d53b6b8b392600b7769acf9421cc4f23e5911
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
   firebase_auth: 5719ddc9f654b813405899480e84971bd8e61235
@@ -1263,9 +1280,10 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternal: 04b8afa77b4e5b84e86ab5ad985193e9573239fa
   FirebaseSharedSwift: 48de4aec81a6b79bb30404e5e6db43ea74848fed
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
-  google_maps_flutter_ios: c454f18e0e22df6ac0e9f2a4df340858f5a3680c
+  google_maps_flutter_ios: 5bc2be60ad012e79b182ce0fb0ef5030a50fb03e
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
@@ -1277,6 +1295,7 @@ SPEC CHECKSUMS:
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   pedometer: 381969883680ade42559782cc41a3bbd453d8234
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
@@ -1284,6 +1303,7 @@ SPEC CHECKSUMS:
   restart_app: 806659942bf932f6ce51c5372f91ce5e81c8c14a
   share_plus: 8875f4f2500512ea181eef553c3e27dba5135aad
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 1959d098c91d8a792531a723c4a9d7e9f6a01e38
 
