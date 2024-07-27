@@ -3,13 +3,14 @@ import 'package:hive/hive.dart';
 part 'rundata.g.dart';
 
 @HiveType(typeId: 1)
-class Rundata {
+class Rundata extends HiveObject{
   Rundata({
     required this.hiveDistance,
     required this.hiveDate,
     required this.hiveTime,
     required this.hivePace,
-    required this.hiveRunTitle
+    required this.hiveRunTitle,
+    this.snapshotUrl
   });
   
   @HiveField(0)
@@ -26,6 +27,20 @@ class Rundata {
 
   @HiveField(4)
   String hiveRunTitle;
+
+  @HiveField(5)
+  String? snapshotUrl;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'hiveDistance': hiveDistance,
+      'hiveDate': hiveDate,
+      'hiveTime': hiveTime,
+      'hivePace': hivePace,
+      'hiveRunTitle': hiveRunTitle,
+      'snapshotUrl': snapshotUrl,
+    };
+  }
 
   
 }

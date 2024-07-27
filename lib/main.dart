@@ -16,7 +16,14 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(RundataAdapter());
-  await Hive.openBox<Rundata>('runDataBox');
+  var box = await Hive.openBox<Rundata>('runDataBox');
+  for (var key in box.keys) {
+    var runData = box.get(key) as Rundata?;
+    if (runData != null && runData.snapshotUrl == null) {
+      runData.snapshotUrl = '';
+      await box.put(key, runData);
+    }
+  }
   
   runApp(
     Phoenix(
