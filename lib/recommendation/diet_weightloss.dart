@@ -210,7 +210,7 @@ class _DietWeightlossState extends State<DietWeightloss> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return Container(
+                        return SizedBox(
                           height: 400,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,

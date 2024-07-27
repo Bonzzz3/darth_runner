@@ -208,7 +208,7 @@ class _RunBeginnerState extends State<RunBeginner> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return Container(
+                        return SizedBox(
                           height: 400,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,

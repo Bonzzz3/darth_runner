@@ -207,7 +207,7 @@ class _RunRaceState extends State<RunRace> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return Container(
+                        return SizedBox(
                           height: 400,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,

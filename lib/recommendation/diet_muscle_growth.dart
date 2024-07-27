@@ -209,7 +209,7 @@ class _DietMuscleGrowthState extends State<DietMuscleGrowth> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return Container(
+                        return SizedBox(
                           height: 400,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
