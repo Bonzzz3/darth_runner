@@ -24,7 +24,7 @@ class _AchieveCardState extends State<AchieveCard> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        //border: Border.all(color: Colors.black, width: 5),
+        border: Border.all(color: Colors.black, width: 2),
       ),
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
       padding: const EdgeInsets.all(25),
