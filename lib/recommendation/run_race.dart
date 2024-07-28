@@ -155,7 +155,7 @@ class _RunRaceState extends State<RunRace> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"), fit: BoxFit.cover),
         ),
         padding: const EdgeInsets.all(20),
         child: SafeArea(

@@ -258,7 +258,8 @@ class _PersonalDetailsState extends State<PersonalDetails> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -290,14 +291,14 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           //height
                           MyTextBox(
                             text: userData['Height'],
-                            sectionName: 'Height',
+                            sectionName: 'Height (cm)',
                             onPressed: () => editNumField('Height'),
                           ),
 
                           //weight
                           MyTextBox(
                             text: userData['Weight'],
-                            sectionName: 'Weight',
+                            sectionName: 'Weight (kg)',
                             onPressed: () => editNumField('Weight'),
                           ),
                         ],

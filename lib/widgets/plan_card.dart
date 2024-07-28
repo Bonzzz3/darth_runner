@@ -142,7 +142,7 @@ class _PlanCardState extends State<PlanCard> {
     return Padding(
       padding: const EdgeInsets.only(right: 12),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 360),
+        constraints: const BoxConstraints(maxWidth: 340),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),

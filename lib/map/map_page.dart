@@ -1,12 +1,17 @@
-
 import 'dart:async';
+import 'dart:io';
 import 'package:darth_runner/database/rundata.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:location/location.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -59,6 +64,75 @@ class _MapPageState extends State<MapPage> {
     locationSubscription?.cancel();
     stopWatch.dispose();
     super.dispose();
+  }
+
+  Future<String> generateStaticMap(List<LatLng> path) async {
+    String apiKey = dotenv.env['GOOGLEMAPS_API_KEY']!;
+    String pathString = path.map((latLng) => '${latLng.latitude},${latLng.longitude}').join('|');
+
+    final String url = 'https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=color:0x0000ff|weight:5|$pathString&key=$apiKey';
+
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.png';
+      final file = File(filePath);
+      await file.writeAsBytes(response.bodyBytes);
+      return filePath;
+    } else {
+      throw Exception('Failed to load static map');
+    }
+  }
+
+  Future<String?> captureAndUploadSnapshot(List<LatLng> path) async {
+    final filePath = await generateStaticMap(path);
+
+    // Upload to Firebase Storage
+    final storageRef = FirebaseStorage.instance.ref().child('run_images/${DateTime.now().millisecondsSinceEpoch}.png');
+    await storageRef.putFile(File(filePath));
+    return await storageRef.getDownloadURL();
+  }
+
+Future<void> stopRunning() async {
+    String? runTitle = await showTitleDialog(context);
+    runTitle ??= '';
+    String? snapshotUrl = await captureAndUploadSnapshot(polyLineCoordinates);
+    var runData = Rundata(
+      hiveDistance: double.parse((distanceTravelled / 1000).toStringAsFixed(2)),
+      hiveDate: DateTime.now(),
+      hiveTime: displayTime,
+      hivePace: pace,
+      hiveRunTitle: runTitle,
+      snapshotUrl: snapshotUrl ?? '',
+    );
+    await Hive.box<Rundata>('runDataBox').add(runData);
+    print('Run data saved: $runData');
+    if (!mounted) return;
+    Navigator.pop(context);
+  }
+
+  Future<String?> showTitleDialog(BuildContext context) async {
+    TextEditingController controller = TextEditingController();
+    return showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Enter Your Run Title'),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(hintText: 'Title'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(controller.text);
+              },
+              child: const Text('Save'),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -244,46 +318,6 @@ class _MapPageState extends State<MapPage> {
     );
   }
 
-  void stopRunning() async {
-    String? runTitle = await showTitleDialog(context);
-    runTitle ??= '';
-    var box = Hive.box<Rundata>('runDataBox');
-    var runData = Rundata(
-      hiveDistance: double.parse((distanceTravelled / 1000).toStringAsFixed(2)),
-      hiveDate: DateTime.now(),
-      hiveTime: displayTime,
-      hivePace: pace,
-      hiveRunTitle: runTitle,
-    );
-    await box.add(runData);
-    if (!mounted) return;
-    Navigator.pop(context);
-  }
-
-  Future<String?> showTitleDialog(BuildContext context) async {
-    TextEditingController controller = TextEditingController();
-    return showDialog<String>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Enter Your Run Title'),
-          content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(hintText: 'Title'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(controller.text);
-              },
-              child: const Text('Save'),
-            )
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await mapController.future;
     CameraPosition newCameraPosition = CameraPosition(
@@ -312,7 +346,7 @@ class _MapPageState extends State<MapPage> {
     }
 
     locationSubscription = locationController.onLocationChanged.listen((LocationData currentLocation) {
-      if (!mounted) return;
+      
       LatLng loc = LatLng(currentLocation.latitude!, currentLocation.longitude!);
 
       if (currentLocation.latitude != null && currentLocation.longitude != null) {
@@ -331,41 +365,36 @@ class _MapPageState extends State<MapPage> {
               width: 6,
               color: isRunning ? Colors.deepPurpleAccent : Colors.blueGrey,
             ),
-
           );
 
           // CENTERING THE CAMERA ON LOCATION CHANGE.
-          
-          cameraToPosition(currentPosition!); 
+          cameraToPosition(currentPosition!);
 
           // FUNCTION TO CALCULATE THE DISTANCE TRAVELLED WHILE PLAY BUTTON ACTIVE.
-
           if (isRunning) {
             if (polyLineCoordinates.length >= 2)  {
               LatLng secondLastLocation = polyLineCoordinates[polyLineCoordinates.length-2];
-              appendDist =  Geolocator.distanceBetween(
+              appendDist = Geolocator.distanceBetween(
                 secondLastLocation.latitude,
                 secondLastLocation.longitude,
-                loc.latitude, 
-                loc.longitude);
-              
-              
+                loc.latitude,
+                loc.longitude,
+              );
+
               distanceTravelled += appendDist;
               int timeDuration = currentTime - lastTime;
 
-              if (timeDuration != 0){
-                pace = (timeDuration*60)/(appendDist*1000);
-                
+              if (timeDuration != 0 && appendDist != 0) {
+                double timeInMinutes = timeDuration / (1000 * 60); // Convert time duration from milliseconds to minutes
+                double distanceInKm = appendDist / 1000; // Convert distance from meters to kilometers
+                pace = timeInMinutes / distanceInKm; // Calculate pace as time per kilometer
               }
             }
-            
-        }
-        lastTime = currentTime;
-        debugPrint('$pace');
+          }
+          lastTime = currentTime;
+          debugPrint('$pace');
         });
       }
-   
     });
-  }
+  } 
 }
-
