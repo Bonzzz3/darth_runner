@@ -1,13 +1,17 @@
 import 'package:darth_runner/bmi/bmi_home_screen.dart';
 import 'package:darth_runner/recommendation/recom_home.dart';
 import 'package:darth_runner/social/community_home.dart';
+import 'package:darth_runner/themes/themes_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
