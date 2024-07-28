@@ -290,7 +290,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
         ),
         const SizedBox(height: 8.0),
         const Text(
-          "Daily Target",
+          "Daily Target 5km",
           style: TextStyle(fontSize: 18.0),
         ),
       ],
