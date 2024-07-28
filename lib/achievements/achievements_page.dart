@@ -280,19 +280,24 @@ return runDataBox.length >= 100; // CHECK IF NO.OF RUNS IS 100
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Achievements"),
+        title: const Text("Achievements",style: TextStyle(color: Colors.white),),
+        backgroundColor: Color(0xFF424242),
       ),
-      body: ListView.builder(
-        itemCount: achievements.length,
-        itemBuilder: (context, index) {
-          final achievement = achievements[index];
-          return AchieveCard(
-            title: achievement['title'],
-            image: achievement['image'],
-            description: achievement['description'],
-            isCompleted: achievement['isCompleted'],
-          );
-        },
+      body: 
+      Container(
+        color: Color.fromARGB(179, 245, 245, 245),
+        child: ListView.builder(
+          itemCount: achievements.length,
+          itemBuilder: (context, index) {
+            final achievement = achievements[index];
+            return AchieveCard(
+              title: achievement['title'],
+              image: achievement['image'],
+              description: achievement['description'],
+              isCompleted: achievement['isCompleted'],
+            );
+          },
+        ),
       ),
     );
   }
