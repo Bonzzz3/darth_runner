@@ -346,7 +346,7 @@ Future<void> stopRunning() async {
     }
 
     locationSubscription = locationController.onLocationChanged.listen((LocationData currentLocation) {
-      if (!mounted) return;
+      
       LatLng loc = LatLng(currentLocation.latitude!, currentLocation.longitude!);
 
       if (currentLocation.latitude != null && currentLocation.longitude != null) {

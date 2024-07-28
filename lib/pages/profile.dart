@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darth_runner/achievements/achieve_home.dart';
+import 'package:darth_runner/achievements/achievements_page.dart';
 import 'package:darth_runner/auth/auth_service.dart';
 import 'package:darth_runner/widgets/button.dart';
 import 'package:darth_runner/widgets/text_box.dart';
@@ -210,7 +211,7 @@ class _ProfileState extends State<Profile> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const AchieveHome()));
+                                              const AchievementsHomePage()));
                                 },
                               ),
                             ),

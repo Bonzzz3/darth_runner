@@ -196,67 +196,70 @@ class _StatsDisplayState extends State<StatsDisplay> {
   }
 
   Widget _buildStatsPanel(double distance, int numRuns, List<Rundata> runs) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildCircularIndicator(distance),
-          const SizedBox(height: 16.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Day's Summary", 
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                children: [
-                  const Icon(Icons.directions_run, size: 24.0),
-                  const SizedBox(width: 8.0),
-                  Text(
-                    "Total Distance: ${distance.toStringAsFixed(2)} km",
-                    style: const TextStyle(fontSize: 18.0),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  const Icon(Icons.run_circle, size: 24.0),
-                  const SizedBox(width: 8.0),
-                  Text(
-                    "Number of Runs: $numRuns",
-                    style: const TextStyle(fontSize: 18.0),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16.0),
-              const Text(
-                "Individual Runs", 
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: runs.length,
-                itemBuilder: (context, index) {
-                  final run = runs[index];
-                  return ListTile(
-                    title: Text("Run ${index + 1}"),
-                    subtitle: Text("${run.hiveDistance.toStringAsFixed(2)} km"),
-                    trailing: Text("${run.hiveDate.toLocal()}"),
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(24.0)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildCircularIndicator(distance),
+            const SizedBox(height: 16.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Day's Summary", 
+                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    const Icon(Icons.directions_run, size: 24.0),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Total Distance: ${distance.toStringAsFixed(2)} km",
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    const Icon(Icons.run_circle, size: 24.0),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Number of Runs: $numRuns",
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
+                const Text(
+                  "Individual Runs", 
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8.0),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: runs.length,
+                  itemBuilder: (context, index) {
+                    final run = runs[index];
+                    return ListTile(
+                      title: Text("Run ${index + 1}"),
+                      subtitle: Text("${run.hiveDistance.toStringAsFixed(2)} km"),
+                      trailing: Text("${run.hiveDate.toLocal()}"),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
