@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:darth_runner/database/rundata.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image/image.dart' as img;
 import 'package:location/location.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:path_provider/path_provider.dart';
@@ -398,5 +396,5 @@ Future<void> stopRunning() async {
         });
       }
     });
-  }
+  } 
 }
