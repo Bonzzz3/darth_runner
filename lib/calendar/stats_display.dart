@@ -11,17 +11,20 @@ class StatsDisplay extends StatefulWidget {
 }
 
 class _StatsDisplayState extends State<StatsDisplay> {
-  CalendarFormat _calendarFormat = CalendarFormat.week; // Set default view to week
+  CalendarFormat _calendarFormat =
+      CalendarFormat.week; // Set default view to week
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   final runDataBox = Hive.box<Rundata>('runDataBox');
   final double _dailyTarget = 5.0; // Example daily target in kilometers
 
   List<Rundata> _getRunsForDate(DateTime date) {
-    return runDataBox.values.where((runData) =>
-      runData.hiveDate.year == date.year &&
-      runData.hiveDate.month == date.month &&
-      runData.hiveDate.day == date.day).toList();
+    return runDataBox.values
+        .where((runData) =>
+            runData.hiveDate.year == date.year &&
+            runData.hiveDate.month == date.month &&
+            runData.hiveDate.day == date.day)
+        .toList();
   }
 
   double _getCumulativeDistanceForDate(DateTime date) {
@@ -57,7 +60,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          "YOUR STATS",
+          "Stats",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -112,15 +115,19 @@ class _StatsDisplayState extends State<StatsDisplay> {
                     calendarStyle: const CalendarStyle(
                       defaultTextStyle: TextStyle(color: Colors.white),
                       weekendTextStyle: TextStyle(color: Colors.white),
-                      todayTextStyle:  TextStyle(color: Colors.white), // Match default color for visibility
-                      selectedTextStyle:  TextStyle(color: Colors.black),
-                      selectedDecoration:  BoxDecoration(
+                      todayTextStyle: TextStyle(
+                          color: Colors
+                              .white), // Match default color for visibility
+                      selectedTextStyle: TextStyle(color: Colors.black),
+                      selectedDecoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      todayDecoration:  BoxDecoration(
+                      todayDecoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.fromBorderSide(BorderSide(color: Colors.blue, width: 2.0)), // Add border instead of fill
+                        border: Border.fromBorderSide(BorderSide(
+                            color: Colors.blue,
+                            width: 2.0)), // Add border instead of fill
                       ),
                     ),
                     headerStyle: HeaderStyle(
@@ -143,7 +150,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
                     calendarBuilders: CalendarBuilders(
                       defaultBuilder: (context, date, _) {
                         double distance = _getCumulativeDistanceForDate(date);
-                        double progress = (distance / _dailyTarget).clamp(0.0, 1.0);
+                        double progress =
+                            (distance / _dailyTarget).clamp(0.0, 1.0);
                         return Stack(
                           alignment: Alignment.center,
                           children: [
@@ -154,7 +162,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
                                 value: progress,
                                 strokeWidth: 4.0,
                                 backgroundColor: Colors.grey[300],
-                                valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                    Colors.blue),
                               ),
                             ),
                             Center(
@@ -185,7 +194,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
                         : [];
 
                     return SingleChildScrollView(
-                      child: _buildStatsPanel(_selectedDayDistance, _numRuns, _runs),
+                      child: _buildStatsPanel(
+                          _selectedDayDistance, _numRuns, _runs),
                     );
                   },
                 ),
@@ -215,7 +225,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Day's Summary", 
+                  "Day's Summary",
                   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16.0),
@@ -242,7 +252,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
                 ),
                 const SizedBox(height: 16.0),
                 const Text(
-                  "Individual Runs", 
+                  "Individual Runs",
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8.0),
@@ -253,7 +263,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
                     final run = runs[index];
                     return ListTile(
                       title: Text("Run ${index + 1}"),
-                      subtitle: Text("${run.hiveDistance.toStringAsFixed(2)} km"),
+                      subtitle:
+                          Text("${run.hiveDistance.toStringAsFixed(2)} km"),
                       trailing: Text("${run.hiveDate.toLocal()}"),
                     );
                   },

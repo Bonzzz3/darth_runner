@@ -80,7 +80,6 @@ class AchieveCard extends StatelessWidget {
   }
 }
 
-
 class AchievementsHomePage extends StatefulWidget {
   const AchievementsHomePage({super.key});
 
@@ -89,24 +88,23 @@ class AchievementsHomePage extends StatefulWidget {
 }
 
 class _AchievementsHomePageState extends State<AchievementsHomePage> {
-
   late Box<Rundata> runDataBox;
   List<Map<String, dynamic>> achievements = [
     {
       'title': 'First Steps',
-      'image': "assets/badges/track.png", 
+      'image': "assets/badges/track.png",
       'description': 'Complete your first run.',
       'isCompleted': false,
     },
     {
       'title': 'Warm-up Lap',
-      'image': "assets/badges/workout.png", 
+      'image': "assets/badges/workout.png",
       'description': 'Run 1 kilometer.',
       'isCompleted': false,
     },
     {
       'title': '5K Champ',
-      'image': 'assets/badges/speed.png', 
+      'image': 'assets/badges/speed.png',
       'description': 'RUn 5 kilometers.',
       'isCompleted': false,
     },
@@ -118,89 +116,99 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
     },
     {
       'title': 'Quick Starter',
-      'image': 'assets/badges/footstep.png', 
+      'image': 'assets/badges/footstep.png',
       'description': 'Run for 10 minutes.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Half-Hour Hustle',
-      'image': 'assets/badges/walking.png', 
+      'image': 'assets/badges/walking.png',
       'description': 'Run for 30 minutes.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Endurance Expert',
-      'image': 'assets/badges/running.png', 
+      'image': 'assets/badges/running.png',
       'description': 'Run for 1 hour.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Consistency is Key',
-      'image': 'assets/badges/key.png', 
+      'image': 'assets/badges/key.png',
       'description': 'Run 3 times in one week.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Speedy Demon',
-      'image': 'assets/badges/helmet.png', 
+      'image': 'assets/badges/helmet.png',
       'description': 'Complete a kilometer in under 5 minutes.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Weekly Warrior',
-      'image': 'assets/img/spartan.png', 
+      'image': 'assets/img/spartan.png',
       'description': 'Run 7 times in one week.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': '10 Runs Completed',
-      'image': 'assets/badges/10.png', 
+      'image': 'assets/badges/10.png',
       'description': 'Complete 10 runs.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': '50 Runs Completed',
-      'image': 'assets/badges/50.png', 
+      'image': 'assets/badges/50.png',
       'description': 'Complete 50 runs.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': '100 Runs Completed',
-      'image': 'assets/badges/100.png', 
+      'image': 'assets/badges/100.png',
       'description': 'Complete 100 runs.',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Morning bird',
-      'image': 'assets/badges/toucan.png', 
+      'image': 'assets/badges/toucan.png',
       'description': 'Run between 3AM and 6AM',
       'isCompleted': false,
-    },{
+    },
+    {
       'title': 'Night Owl',
-      'image': 'assets/badges/owl.png', 
+      'image': 'assets/badges/owl.png',
       'description': 'Run between 12AM and 3AM',
       'isCompleted': false,
     },
     {
       'title': 'Half Marathon',
-      'image': 'assets/badges/marathon.png', 
+      'image': 'assets/badges/marathon.png',
       'description': 'Run 26.1 kilometers.',
       'isCompleted': false,
     },
     {
       'title': 'Marathon',
-      'image': 'assets/badges/marathon.png', 
+      'image': 'assets/badges/marathon.png',
       'description': 'Run 42.2 kilometers.',
       'isCompleted': false,
     },
   ];
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     runDataBox = Hive.box<Rundata>('runDataBox');
     _checkAchievements();
   }
 
   int durationToMinutes(String duration) {
-  List<String> parts = duration.split(':');
-  int hours = int.parse(parts[0]);
-  int minutes = int.parse(parts[1]);
-  int seconds = int.parse(parts[2]);
+    List<String> parts = duration.split(':');
+    int hours = int.parse(parts[0]);
+    int minutes = int.parse(parts[1]);
+    int seconds = int.parse(parts[2]);
 
-  return hours * 60 + minutes + (seconds / 60).round();
-}
+    return hours * 60 + minutes + (seconds / 60).round();
+  }
 
   void _checkAchievements() {
     setState(() {
@@ -227,65 +235,100 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
   bool userHasCompletedFirstRun() {
     return runDataBox.isNotEmpty; // CHECKS IF RUN DATA HAS ATLEAST 1 RUN
   }
+
   bool userHasCompleted1KRUn() {
-    return runDataBox.values.any((run) => run.hiveDistance >= 1.0); // CHECK IF ANY RUN HAS 1K DISTANCE
+    return runDataBox.values.any(
+        (run) => run.hiveDistance >= 1.0); // CHECK IF ANY RUN HAS 1K DISTANCE
   }
+
   bool userHasCompleted5KRun() {
-    return runDataBox.values.any((run) => run.hiveDistance >= 5.0); // CHECK IF ANY RUN HAS 5K DISTANCE
+    return runDataBox.values.any(
+        (run) => run.hiveDistance >= 5.0); // CHECK IF ANY RUN HAS 5K DISTANCE
   }
+
   bool userHasCompleted10KRun() {
-    return runDataBox.values.any((run) => run.hiveDistance >= 10.0); // CHECK IF ANY RUN HAS 10K DISTANCE
+    return runDataBox.values.any(
+        (run) => run.hiveDistance >= 10.0); // CHECK IF ANY RUN HAS 10K DISTANCE
   }
+
   bool userHasCompleted10MinRun() {
-    return runDataBox.values.any((run) => durationToMinutes(run.hiveTime) >= 10); // CHECK IF ANY RUN IS 10 MIN
+    return runDataBox.values.any((run) =>
+        durationToMinutes(run.hiveTime) >= 10); // CHECK IF ANY RUN IS 10 MIN
   }
+
   bool userHasCompleted30MinRun() {
-    return runDataBox.values.any((run) => durationToMinutes(run.hiveTime) >= 30); // CHECK IF ANY RUN IS 30 MIN
+    return runDataBox.values.any((run) =>
+        durationToMinutes(run.hiveTime) >= 30); // CHECK IF ANY RUN IS 30 MIN
   }
+
   bool userHasCompleted60MinRun() {
-    return runDataBox.values.any((run) => durationToMinutes(run.hiveTime) >= 60); // CHECK IF ANY RUN IS 60 MIN
+    return runDataBox.values.any((run) =>
+        durationToMinutes(run.hiveTime) >= 60); // CHECK IF ANY RUN IS 60 MIN
   }
+
   bool userHasCompleted3xWeek() {
     return false;
   }
+
   bool userHasCompleted1KIn5Min() {
     return false;
   }
+
   bool userHasCompleted7days() {
     return false;
   }
+
   bool userHasCompleted10Runs() {
     return runDataBox.length >= 10; // CHECK IF NO.OF RUNS IS 10
   }
+
   bool userHasCompleted50Runs() {
     return runDataBox.length >= 50; // CHECK IF NO.OF RUNS IS 50
   }
+
   bool userHasCompleted100Runs() {
-return runDataBox.length >= 100; // CHECK IF NO.OF RUNS IS 100
+    return runDataBox.length >= 100; // CHECK IF NO.OF RUNS IS 100
   }
-    bool userHasCompletedMorningBird() {
-      return false;
+
+  bool userHasCompletedMorningBird() {
+    return false;
   }
+
   bool userHasCompletedNightOwl() {
     return false;
   }
+
   bool userHasCompletedHalfMarathon() {
-    return runDataBox.values.any((run) => run.hiveDistance >= 26.1); // CHECK IF ANY RUN HAS 26.1K DISTANCE
+    return runDataBox.values.any((run) =>
+        run.hiveDistance >= 26.1); // CHECK IF ANY RUN HAS 26.1K DISTANCE
   }
+
   bool userHasCompletedMarathon() {
-    return runDataBox.values.any((run) => run.hiveDistance >= 42.2); // CHECK IF ANY RUN HAS 42.2K DISTANCE
+    return runDataBox.values.any((run) =>
+        run.hiveDistance >= 42.2); // CHECK IF ANY RUN HAS 42.2K DISTANCE
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Achievements",style: TextStyle(color: Colors.white),),
-        backgroundColor: Color(0xFF424242),
+        title: const Text(
+          "Achievements",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: 
-      Container(
-        color: Color.fromARGB(179, 245, 245, 245),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
+        ),
         child: ListView.builder(
           itemCount: achievements.length,
           itemBuilder: (context, index) {

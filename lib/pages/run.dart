@@ -35,7 +35,7 @@ class _RunState extends State<Run> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          'Run',
+          '  Run',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -46,23 +46,20 @@ class _RunState extends State<Run> {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 6, 4, 120),
-                  Color.fromARGB(255, 174, 12, 0),
-                ],
-              ),
-            ),
-          ),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/img/gradient red blue wp.png"),
+                    fit: BoxFit.cover),
+              )),
           isPageActive
               ? Column(
                   children: [
                     Expanded(
                       child: ValueListenableBuilder(
-                        valueListenable: Hive.box<Rundata>('runDataBox').listenable(),
+                        valueListenable:
+                            Hive.box<Rundata>('runDataBox').listenable(),
                         builder: (context, Box<Rundata> box, _) {
                           // LAZY LOADING
                           final fetchedRuns = box.values
@@ -88,13 +85,14 @@ class _RunState extends State<Run> {
                             itemCount: fetchedRuns.length,
                             itemBuilder: (context, index) {
                               Rundata runData = fetchedRuns[index];
-                              
+
                               // Debugging print statements
                               // print('Run Title: ${runData.hiveRunTitle}');
                               // print('Snapshot URL: ${runData.snapshotUrl}');
 
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 8.0),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15.0),
@@ -103,23 +101,34 @@ class _RunState extends State<Run> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        runData.snapshotUrl != null && runData.snapshotUrl!.isNotEmpty
+                                        runData.snapshotUrl != null &&
+                                                runData.snapshotUrl!.isNotEmpty
                                             ? Container(
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.grey,
                                                     width: 2.0,
                                                   ),
-                                                  borderRadius: BorderRadius.circular(15.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
                                                 ),
                                                 child: ClipRRect(
-                                                  borderRadius: BorderRadius.circular(13.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          13.0),
                                                   child: CachedNetworkImage(
-                                                    imageUrl: runData.snapshotUrl!,
-                                                    placeholder: (context, url) => const CircularProgressIndicator(),
-                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                                    imageUrl:
+                                                        runData.snapshotUrl!,
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        const CircularProgressIndicator(),
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        const Icon(Icons.error),
                                                     width: 100,
                                                     height: 100,
                                                     fit: BoxFit.cover,
@@ -134,19 +143,24 @@ class _RunState extends State<Run> {
                                                     color: Colors.grey,
                                                     width: 2.0,
                                                   ),
-                                                  borderRadius: BorderRadius.circular(15.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
                                                   color: Colors.grey[200],
                                                 ),
-                                                child: Icon(Icons.image, size: 50, color: Colors.grey[400]),
+                                                child: Icon(Icons.image,
+                                                    size: 50,
+                                                    color: Colors.grey[400]),
                                               ),
                                         const SizedBox(width: 16.0),
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 runData.hiveRunTitle,
-                                                style:const TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -154,22 +168,34 @@ class _RunState extends State<Run> {
                                               const SizedBox(height: 8.0),
                                               Text(
                                                 'Date: ${DateFormat('EEE, d/M/y').format(runData.hiveDate)}',
-                                                style: const TextStyle(fontSize: 14, color: Color.fromARGB(255, 45, 43, 43)),
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromARGB(
+                                                        255, 45, 43, 43)),
                                               ),
                                               const SizedBox(height: 4.0),
                                               Text(
                                                 'Distance: ${runData.hiveDistance} km',
-                                                style: const TextStyle(fontSize: 14, color:Color.fromARGB(255, 45, 43, 43)),
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromARGB(
+                                                        255, 45, 43, 43)),
                                               ),
                                               const SizedBox(height: 4.0),
                                               Text(
                                                 'Time: ${runData.hiveTime}',
-                                                style: const TextStyle(fontSize: 14, color:Color.fromARGB(255, 45, 43, 43)),
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromARGB(
+                                                        255, 45, 43, 43)),
                                               ),
                                               const SizedBox(height: 4.0),
                                               Text(
                                                 'Pace: ${runData.hivePace.toStringAsFixed(2)}',
-                                                style: const TextStyle(fontSize: 14, color:Color.fromARGB(255, 45, 43, 43)),
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromARGB(
+                                                        255, 45, 43, 43)),
                                               ),
                                             ],
                                           ),
