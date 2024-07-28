@@ -76,11 +76,13 @@ class _StatsDisplayState extends State<StatsDisplay> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: SlidingUpPanel(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(24.0)),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(24.0)),
             panel: _buildPanel(_selectedDayDistance, _numRuns),
             body: Column(children: [
               Padding(
@@ -126,7 +128,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
                     ),
                     headerStyle: HeaderStyle(
                       titleTextStyle: const TextStyle(color: Colors.white),
-                      formatButtonTextStyle: const TextStyle(color: Colors.black),
+                      formatButtonTextStyle:
+                          const TextStyle(color: Colors.black),
                       formatButtonDecoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.0),
@@ -180,7 +183,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Day's Summary", 
+                "Day's Summary",
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16.0),
@@ -218,7 +221,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
             ),
             Text(
               "${(progress * 100).toStringAsFixed(0)}%",
-              style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           ],
         ),

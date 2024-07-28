@@ -107,6 +107,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
+    - assets/img/recommend-icon-thumb-like.jpg
     - assets/img/gradient red blue wp.png
     - assets/img/logo.jpeg
     - assets/img/darthrunner_logo.jpeg

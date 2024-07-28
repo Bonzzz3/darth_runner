@@ -25,7 +25,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
     _bmiScore = _weight / pow(_height / 100, 2);
   }
 
-    bool _validateInputs() {
+  bool _validateInputs() {
     String message = '';
     if (_age < 1 || _age > 100) {
       message += 'Age must be between 1 and 100.\n';
@@ -80,7 +80,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: SingleChildScrollView(

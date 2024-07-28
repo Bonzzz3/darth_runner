@@ -24,7 +24,8 @@ class AchieveHome extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: const SafeArea(
           child: SingleChildScrollView(

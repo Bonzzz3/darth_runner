@@ -106,7 +106,7 @@ class _RunState extends State<Run> {
                               subtitle: Text(
                                   'Date: ${DateFormat('EEE, d/M/y').format(runData.hiveDate)}\n'
                                   'Distance: ${runData.hiveDistance} km\n'
-                                  'Time: ${runData.hiveTime}', style: TextStyle(fontWeight:FontWeight.bold),
+                                  'Time: ${runData.hiveTime}', style: const TextStyle(fontWeight:FontWeight.bold),
                               ),
                             ),
                           ),

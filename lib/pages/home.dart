@@ -43,7 +43,8 @@ class HomePage extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -139,7 +140,8 @@ class HomePage extends StatelessWidget {
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                       image: DecorationImage(
-                          image: AssetImage("assets/img/galaxy.jpeg"),
+                          image: AssetImage(
+                              "assets/img/recommend-icon-thumb-like.jpg"),
                           fit: BoxFit.cover),
                     ),
                     child: GestureDetector(
@@ -152,7 +154,7 @@ class HomePage extends StatelessWidget {
                       child: const Text(
                         "Recommendations",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
