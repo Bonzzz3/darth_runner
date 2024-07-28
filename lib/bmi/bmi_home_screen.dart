@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class BMIHomeScreen extends StatefulWidget {
-  const BMIHomeScreen({Key? key}) : super(key: key);
+  const BMIHomeScreen({super.key});
 
   @override
-  _BMIHomeScreenState createState() => _BMIHomeScreenState();
+  State<BMIHomeScreen> createState() => _BMIHomeScreenState();
 }
 
 class _BMIHomeScreenState extends State<BMIHomeScreen> {
@@ -19,8 +19,48 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
   int _height = 160;
   int _age = 25;
   int _weight = 60;
-  //bool _isFinished = false;
   double _bmiScore = 0;
+
+  void calculateBmi() {
+    _bmiScore = _weight / pow(_height / 100, 2);
+  }
+
+  bool _validateInputs() {
+    String message = '';
+    if (_age < 1 || _age > 100) {
+      message += 'Age must be between 1 and 100.\n';
+    }
+    if (_weight < 1 || _weight > 300) {
+      message += 'Weight must be between 1 and 300 kg.\n';
+    }
+    if (_height < 1 || _height > 260) {
+      message += 'Height must be between 1 and 260 cm.\n';
+    }
+
+    if (message.isNotEmpty) {
+      _showErrorDialog(message);
+      return false;
+    }
+    return true;
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Invalid Input'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +80,12 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         child: SafeArea(
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
                 const SizedBox(
@@ -77,7 +119,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                         },
                         title: "Age",
                         initValue: 25,
-                        min: 0,
+                        min: 1,
                         max: 100),
                     AgeWeightWidget(
                         onChange: (weightVal) {
@@ -85,8 +127,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                         },
                         title: "Weight(Kg)",
                         initValue: 60,
-                        min: 0,
-                        max: 200)
+                        min: 1,
+                        max: 300)
                   ],
                 ),
                 const SizedBox(
@@ -99,61 +141,27 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                   child: CustomButton(
                     label: "Calculate",
                     onPressed: () async {
-                      calculateBmi();
-                      await Navigator.push(
+                      if (_validateInputs()) {
+                        calculateBmi();
+                        await Navigator.push(
                           context,
                           PageTransition(
-                              child: ScoreScreen(
-                                bmiScore: _bmiScore,
-                                age: _age,
-                              ),
-                              type: PageTransitionType.fade));
+                            child: ScoreScreen(
+                              bmiScore: _bmiScore,
+                              age: _age,
+                            ),
+                            type: PageTransitionType.fade,
+                          ),
+                        );
+                      }
                     },
                   ),
-            
-                  // SwipeableButtonView(
-                  //   isFinished: _isFinished,
-                  //   onFinish: () async {
-                  //     await Navigator.push(
-                  //         context,
-                  //         PageTransition(
-                  //             child: ScoreScreen(
-                  //               bmiScore: _bmiScore,
-                  //               age: _age,
-                  //             ),
-                  //             type: PageTransitionType.fade));
-            
-                  //     setState(() {
-                  //       _isFinished = false;
-                  //     });
-                  //   },
-                  //   onWaitingProcess: () {
-                  //     //Calculate BMI here
-                  //     calculateBmi();
-            
-                  //     Future.delayed(Duration(seconds: 1), () {
-                  //       setState(() {
-                  //         _isFinished = true;
-                  //       });
-                  //     });
-                  //   },
-                  //   activeColor: Colors.grey,
-                  //   buttonWidget: const Icon(
-                  //     Icons.arrow_forward_ios_rounded,
-                  //     color: Colors.blue,
-                  //   ),
-                  //   buttonText: "CALCULATE",
-                  // ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  void calculateBmi() {
-    _bmiScore = _weight / pow(_height / 100, 2);
   }
 }

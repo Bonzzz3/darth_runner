@@ -66,12 +66,28 @@ class AchieveCard extends StatelessWidget {
             ),
           ),
           // status
+
+          widget.isCompleted!
+              ? const Text(
+                  "Completed",
+                  style: TextStyle(
+                    color: Colors.green,
+                  ),
+                )
+              : const Text(
+                  "Incomplete",
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+
           Text(
             isCompleted ? "Completed" : "Incomplete",
             style: TextStyle(
               color: isCompleted ? Colors.green : Colors.red,
             ),
           ),
+
         ],
       ),
     );

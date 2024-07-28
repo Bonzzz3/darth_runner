@@ -64,7 +64,7 @@ class _HomeSocialState extends State<HomeSocial> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/img/gradient.png"),
+                image: AssetImage("assets/img/gradient red blue wp.png"),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(
@@ -77,7 +77,7 @@ class _HomeSocialState extends State<HomeSocial> {
                         .collection("Communities")
                         .doc(widget.comName)
                         .collection("User Posts")
-                        .orderBy("TimeStamp", descending: false)
+                        .orderBy("TimeStamp", descending: true)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {

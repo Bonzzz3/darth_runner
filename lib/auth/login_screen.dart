@@ -40,106 +40,118 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              const Spacer(),
-              const Text("Login",
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white)),
-              const SizedBox(height: 50),
-              CustomTextField(
-                hint: "Enter Email",
-                label: "Email",
-                controller: _email,
-                isEmail: true,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                hint: "Enter Password",
-                label: "Password",
-                controller: _password,
-                isPassword: true,
-              ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ForgotPassword()));
-                    },
-                    child: const Text(
-                      "Forgot Password?",
-                      style: TextStyle(color: Colors.white70),
-                    ),
-                  )),
-              const SizedBox(height: 30),
-
-              //login button
-              _isLoading
-                  ? const CircularProgressIndicator(
-                      color: Colors.white,
-                    )
-                  : CustomButton(
-                      label: "Login",
-                      onPressed: () async {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        await login();
-                        setState(() {
-                          _isLoading = false;
-                        });
-                      }),
-              const SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: _isSuccess
-                    ? const Text("")
-                    : Text(
-                        _errorMessage,
-                        style: const TextStyle(
-                          color: Colors.red,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  const Text("Login",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white)),
+                  const SizedBox(height: 50),
+                  CustomTextField(
+                    hint: "Enter Email",
+                    label: "Email",
+                    controller: _email,
+                    isEmail: true,
+                  ),
+                  const SizedBox(height: 20),
+                  CustomTextField(
+                    hint: "Enter Password",
+                    label: "Password",
+                    controller: _password,
+                    isPassword: true,
+                  ),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPassword()));
+                        },
+                        child: const Text(
+                          "Forgot Password?",
+                          style: TextStyle(color: Colors.white70),
                         ),
-                        textAlign: TextAlign.center,
+                      )),
+                  const SizedBox(height: 30),
+
+                  //login button
+                  _isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : CustomButton(
+                          label: "Login",
+                          onPressed: () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            await login();
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          }),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: _isSuccess
+                        ? const Text("")
+                        : Text(
+                            _errorMessage,
+                            style: const TextStyle(
+                              color: Colors.red,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                  ),
+                  const SizedBox(height: 10),
+                  // isLoading
+                  //     ? const CircularProgressIndicator()
+                  //     : CustomButton(
+                  //         label: "Sign In with Google",
+                  //         onPressed: () async {
+                  //           setState(() {
+                  //             isLoading = true;
+                  //           });
+                  //           await _auth.loginWithGoogle();
+                  //           setState(() {
+                  //             isLoading = false;
+                  //           });
+                  //         },
+                  //       ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(color: Colors.grey),
                       ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () => goToSignup(context),
+                        child: const Text("Sign Up",
+                            style: TextStyle(color: Colors.red)),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              // isLoading
-              //     ? const CircularProgressIndicator()
-              //     : CustomButton(
-              //         label: "Sign In with Google",
-              //         onPressed: () async {
-              //           setState(() {
-              //             isLoading = true;
-              //           });
-              //           await _auth.loginWithGoogle();
-              //           setState(() {
-              //             isLoading = false;
-              //           });
-              //         },
-              //       ),
-              const SizedBox(height: 5),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text(
-                  "Don't have an account?",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                  onTap: () => goToSignup(context),
-                  child: const Text("Sign Up",
-                      style: TextStyle(color: Colors.red)),
-                )
-              ]),
-              const Spacer()
-            ],
+            ),
           ),
         ),
       ),
