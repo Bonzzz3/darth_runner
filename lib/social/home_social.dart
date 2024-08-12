@@ -126,7 +126,7 @@ class _HomeSocialState extends State<HomeSocial> {
                     ),
                   ),
 
-                  //logged in as user
+                  // LOGGED IN AS USER
                   Text(
                     "Logged in as: ${currentUser.displayName}, ${currentUser.email!}",
                     style: const TextStyle(color: Colors.white),

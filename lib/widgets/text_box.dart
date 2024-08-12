@@ -18,7 +18,7 @@ class MyTextBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.only(left: 15, bottom: 15),
-        margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+        margin: const EdgeInsets.only(top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

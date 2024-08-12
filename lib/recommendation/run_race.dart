@@ -186,7 +186,7 @@ class _RunRaceState extends State<RunRace> {
 
                 const SizedBox(height: 12),
 
-                // User's plans
+                // USER'S PLANS
                 Scrollbar(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: usersCollection
@@ -274,7 +274,7 @@ class _RunRaceState extends State<RunRace> {
                   ),
                 ),
 
-                // Youtube thumbnail
+                // YOUTUBE THUMBNAIL
                 const Text(
                   "Recommended Race Videos and Tips",
                   style: TextStyle(

@@ -189,7 +189,7 @@ class _DietWeightlossState extends State<DietWeightloss> {
 
                 const SizedBox(height: 12),
 
-                // User's plans
+                // USER'S PLANS
                 Scrollbar(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: usersCollection
@@ -277,7 +277,7 @@ class _DietWeightlossState extends State<DietWeightloss> {
                   ),
                 ),
 
-                // Youtube thumbnail
+                // YOUTUBE THUMBNAIL
                 const Text(
                   "Recommended Diet Videos and Tips",
                   style: TextStyle(

@@ -21,7 +21,8 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _isValid = false;
   String _errorMessage = '';
 
-  // Function to validate the password
+  // FUNCTION TO VALIDATE NAME, EMAIL AND PASSWORD
+
   bool _validateFields(String name, String email, String password) {
     // Reset error message
     _errorMessage = '';
@@ -67,6 +68,9 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
+
+                // USERNAME, EMAIL AND PASSWORD TEXT FIELD, SIGN UP BUTTON AND LOGIN NAV BUTTON
+
                 children: [
                   const SizedBox(
                     height: 100,
@@ -111,7 +115,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Signup Button and validate before creating acc
+                  // SIGNUP BUTTON AND VALIDATE BEFORE CREATING USER ACCOUNT
+
                   Center(
                     child: _isLoading
                         ? const CircularProgressIndicator(
@@ -180,6 +185,8 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  // NAVIGATE TO LOGIN PAGE
+
   goToLogin(BuildContext context) => Navigator.push(
         context,
         MaterialPageRoute(
@@ -188,6 +195,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 )),
       );
 
+  // CREATE NEW USER
+  
   _signup() async {
     await _auth.createUserWithUsernameEmailAndPassword(
         _name.text, _email.text, _password.text);

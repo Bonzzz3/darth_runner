@@ -31,7 +31,8 @@ class _RecomHomeState extends State<RecomHome> {
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 3,
             indicatorColor: Colors.white,
-            dividerColor: Colors.transparent,
+            dividerColor: Colors.grey,
+            //dividerColor: Colors.transparent,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
             tabs: <Widget>[

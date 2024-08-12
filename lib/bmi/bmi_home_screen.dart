@@ -21,9 +21,13 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
   int _weight = 60;
   double _bmiScore = 0;
 
+  // FUNCTION TO CALCULATE BMI
+
   void calculateBmi() {
     _bmiScore = _weight / pow(_height / 100, 2);
   }
+
+  // VALIDATE AGE, WEIGHT AND HEIGHT INPUT AND PRODUCE ERROR MESSAGE IF THE INPUT IS INVALID
 
   bool _validateInputs() {
     String message = '';
@@ -43,6 +47,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
     }
     return true;
   }
+
+  // ERROR DIALOG TO LET USER KNOW THEY HAVE KEYED IN INVALID INPUT
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -91,7 +97,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                // Gender
+
+                // GENDER
                 GenderWidget(
                   onChange: (genderVal) {
                     _gender = genderVal;
@@ -100,7 +107,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                // Height
+
+                // HEIGHT
                 HeightWidget(
                   onChange: (heightVal) {
                     _height = heightVal;
@@ -109,7 +117,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                // Age and Weight
+
+                // AGE AND WEIGHT
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -134,7 +143,8 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                // Button
+                
+                // CALCULATE BUTTON
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 60),

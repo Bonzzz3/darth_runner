@@ -9,53 +9,55 @@ class RecomRun extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RecomCard(
-          mainText: "Beginner",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RunBeginner(),
-              ),
-            );
-          },
-        ),
-        RecomCard(
-          mainText: "Marathon",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RunMarathon(),
-              ),
-            );
-          },
-        ),
-        RecomCard(
-          mainText: "Race",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RunRace(),
-              ),
-            );
-          },
-        ),
-        // RecomCard(
-        //   mainText: "Expert",
-        //   onTap: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => const RunExpert(),
-        //       ),
-        //     );
-        //   },
-        // ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          RecomCard(
+            mainText: "Beginner",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RunBeginner(),
+                ),
+              );
+            },
+          ),
+          RecomCard(
+            mainText: "Marathon",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RunMarathon(),
+                ),
+              );
+            },
+          ),
+          RecomCard(
+            mainText: "Race",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RunRace(),
+                ),
+              );
+            },
+          ),
+          // RecomCard(
+          //   mainText: "Expert",
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const RunExpert(),
+          //       ),
+          //     );
+          //   },
+          // ),
+        ],
+      ),
     );
   }
 }

@@ -29,7 +29,7 @@ class _PlanCardState extends State<PlanCard> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   final usersCollection = FirebaseFirestore.instance.collection("Users");
 
-  // Text editing controllers
+  // TEXT EDITING CONTROLLERS
   late TextEditingController _titleController;
   late TextEditingController _contentController;
 
@@ -47,7 +47,7 @@ class _PlanCardState extends State<PlanCard> {
     super.dispose();
   }
 
-  // edit plan
+  // EDIT PLAN
   void editPlan() {
     showDialog(
       context: context,
@@ -102,9 +102,11 @@ class _PlanCardState extends State<PlanCard> {
     );
   }
 
-  //delete plan
+  // FUNCTION TO DELETE PLAN
+
   void deletePlan() {
-    //show dialog to confirm
+
+    // SHOW DIALOG TO CONFIRM
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -142,7 +144,7 @@ class _PlanCardState extends State<PlanCard> {
     return Padding(
       padding: const EdgeInsets.only(right: 12),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 340),
+        constraints: const BoxConstraints(maxWidth: 320),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),

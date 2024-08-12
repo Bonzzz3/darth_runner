@@ -261,6 +261,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
               image: AssetImage("assets/img/gradient red blue wp.png"),
               fit: BoxFit.cover),
         ),
+        padding: const EdgeInsets.all(20),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -274,28 +275,29 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          //gender
+
+                          // GENDER
                           MyTextBox(
                             text: userData['Gender'],
                             sectionName: 'Gender',
                             onPressed: () => editGender(userData['Gender']),
                           ),
 
-                          //age
+                          // AGE
                           MyTextBox(
                             text: userData['Age'],
                             sectionName: 'Age',
                             onPressed: () => editNumField('Age'),
                           ),
 
-                          //height
+                          // HEIGHT
                           MyTextBox(
                             text: userData['Height'],
                             sectionName: 'Height (cm)',
                             onPressed: () => editNumField('Height'),
                           ),
 
-                          //weight
+                          // WEIGHT
                           MyTextBox(
                             text: userData['Weight'],
                             sectionName: 'Weight (kg)',

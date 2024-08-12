@@ -43,6 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
+                
+                // EMAIL AND PASSWORD TEXTFIELD, FORGOT PASSWORD INKWELL, LOGIN BUTTON, SIGNUP NAV BUTTON
+
                 children: [
                   const SizedBox(
                     height: 100,
@@ -158,10 +161,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // NAVIGATE TO SIGNUP SCREEN
+
   goToSignup(BuildContext context) => Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const SignupScreen()),
       );
+
+  // METHOD TO CHECK IF LOGIN IS SUCCESS, OTHERWISE AN ERROR MESSAGE WILL BE SHOWN
 
   login() async {
     //await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);

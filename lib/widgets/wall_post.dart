@@ -121,9 +121,10 @@ class WallPostState extends State<WallPost> {
             ));
   }
 
-  //delete post
+  // FUNCTION TO DELETE POST
   void deletePost() {
-    //show dialog to confirm
+
+    // SHOW DIALOG TO CONFIRM
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -190,12 +191,12 @@ class WallPostState extends State<WallPost> {
         children: [
           const SizedBox(width: 25),
 
-          // seperate content with cancel button
+          // SEPARATE CONTENT FROM CANCEL BUTTON
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // main post message and user and time
+              // MAIN POST MESSAGE, USER AND TIME
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,7 +212,7 @@ class WallPostState extends State<WallPost> {
                 ),
               ),
 
-              // delete button
+              // DELETE BUTTON
               if (widget.userEmail == currentUser.email)
                 DeleteButton(
                   onTap: deletePost,
@@ -222,7 +223,8 @@ class WallPostState extends State<WallPost> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              //user
+
+              // USER
               Text(
                 widget.user,
                 style: TextStyle(
@@ -230,7 +232,8 @@ class WallPostState extends State<WallPost> {
                   fontSize: 12,
                 ),
               ),
-              //time
+
+              // TIME
               Text(
                 widget.time,
                 style: TextStyle(
@@ -248,7 +251,8 @@ class WallPostState extends State<WallPost> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //like button
+
+              // LIKE BUTTON
               Column(
                 children: [
                   LikeButton(
@@ -269,7 +273,7 @@ class WallPostState extends State<WallPost> {
                 width: 20,
               ),
 
-              //comment button
+              // COMMENT BUTTON
               Column(
                 children: [
                   CommentButton(
@@ -308,7 +312,7 @@ class WallPostState extends State<WallPost> {
             height: 10,
           ),
 
-          //comment lists
+          // COMMENT LISTS
           StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("Communities")

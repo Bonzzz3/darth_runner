@@ -9,42 +9,44 @@ class RecomDiet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RecomCard(
-          mainText: "Runners",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const DietRunners(),
-              ),
-            );
-          },
-        ),
-        RecomCard(
-          mainText: "Weight Loss",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const DietWeightloss(),
-              ),
-            );
-          },
-        ),
-        RecomCard(
-          mainText: "Muscle Growth",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const DietMuscleGrowth(),
-              ),
-            );
-          },
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          RecomCard(
+            mainText: "Runners",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DietRunners(),
+                ),
+              );
+            },
+          ),
+          RecomCard(
+            mainText: "Weight Loss",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DietWeightloss(),
+                ),
+              );
+            },
+          ),
+          RecomCard(
+            mainText: "Muscle Growth",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DietMuscleGrowth(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

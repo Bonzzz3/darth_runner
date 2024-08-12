@@ -22,7 +22,7 @@ class AchieveCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.black, width: 2),
+        //border: Border.all(color: Colors.black, width: 2),
       ),
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
       padding: const EdgeInsets.all(25),
@@ -314,7 +314,7 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
       appBar: AppBar(
         title: const Text(
           "Achievements",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -324,6 +324,7 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        padding: const EdgeInsets.only(bottom: 20),
         decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/img/gradient red blue wp.png"),

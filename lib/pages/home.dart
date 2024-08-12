@@ -54,37 +54,36 @@ class HomePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 20),
-
-                // BMI button
-                SizedBox(
-                  width: 300,
-                  height: 200,
+                // BMI BUTTON
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BMIHomeScreen()));
+                  },
                   child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    padding: const EdgeInsets.all(20),
+                    height: 200,
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
                       image: DecorationImage(
                           image: AssetImage("assets/img/redstairs.jpg"),
                           fit: BoxFit.cover),
                     ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BMIHomeScreen()));
-                      },
-                      child: const Text(
-                        "BMI Calculator",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding: const EdgeInsets.all(25),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "BMI Calculator",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
@@ -99,73 +98,73 @@ class HomePage extends StatelessWidget {
                 //   },
                 // ),
 
-                const SizedBox(height: 20),
-                // Communities button
-                SizedBox(
-                  width: 300,
-                  height: 200,
+                // COMMUNITIES BUTTON
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CommunityHome()));
+                  },
                   child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    padding: const EdgeInsets.all(20),
+                    height: 200,
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
                       image: DecorationImage(
                           image: AssetImage("assets/img/communities.jpg"),
                           fit: BoxFit.cover),
                     ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CommunityHome()));
-                      },
-                      child: const Text(
-                        "Communities",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding: const EdgeInsets.all(25),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Communities",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 20),
-
-                SizedBox(
-                  width: 300,
-                  height: 200,
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RecomHome()));
+                  },
                   child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    padding: const EdgeInsets.all(20),
+                    height: 200,
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
                       image: DecorationImage(
                           image: AssetImage(
                               "assets/img/recommend-icon-thumb-like.jpg"),
                           fit: BoxFit.cover),
                     ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RecomHome()));
-                      },
-                      child: const Text(
-                        "Recommendations",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding: const EdgeInsets.all(25),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Recommendations",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
+
                 // Heartrate button
                 // SizedBox(
                 //   width: 350,

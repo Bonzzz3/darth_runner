@@ -82,7 +82,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
@@ -209,7 +210,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
 
   Widget _buildStatsPanel(double distance, int numRuns, List<Rundata> runs) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(20.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(

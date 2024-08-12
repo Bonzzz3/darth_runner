@@ -15,7 +15,8 @@ class IntroPage extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                //logo
+
+                // LOGO
                 Padding(
                   padding: const EdgeInsets.only(left: 50, top: 200, right: 50),
                   child: Image.asset(
@@ -24,7 +25,7 @@ class IntroPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
 
-                // Welcome Text
+                // WELCOME TEXT
                 const Text(
                   'Welcome to Darth Runner',
                   textAlign: TextAlign.center,
@@ -37,7 +38,7 @@ class IntroPage extends StatelessWidget {
                   height: 10,
                 ),
 
-                // Start button
+                // START BUTTON
                 GestureDetector(
                   onTap: () async {
                     Navigator.push(

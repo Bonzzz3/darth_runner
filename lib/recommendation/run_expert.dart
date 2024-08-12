@@ -187,7 +187,7 @@ class _RunExpertState extends State<RunExpert> {
 
                 const SizedBox(height: 12),
 
-                // User's plans
+                // USER'S PLANS
                 Scrollbar(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: usersCollection
@@ -273,7 +273,7 @@ class _RunExpertState extends State<RunExpert> {
                   ),
                 ),
 
-                // Youtube thumbnail
+                // YOUTUBE THUMBNAIL
                 const Text(
                   "Recommended Expert Videos and Tips",
                   style: TextStyle(

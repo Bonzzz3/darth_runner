@@ -88,8 +88,10 @@ class _ProfileState extends State<Profile> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient red blue wp.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
+        padding: const EdgeInsets.all(20),
         child: SafeArea(
           child: SingleChildScrollView(
             //physics: NeverScrollableScrollPhysics(),
@@ -104,7 +106,8 @@ class _ProfileState extends State<Profile> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          //profile picture
+
+                          // PROFILE PICTURE
                           const Center(
                             child: Icon(
                               Icons.person,
@@ -116,7 +119,7 @@ class _ProfileState extends State<Profile> {
                             height: 20,
                           ),
 
-                          //user email
+                          // USER EMAIL
                           Center(
                             child: Text(
                               currentUser.email!,
@@ -128,7 +131,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           const SizedBox(height: 10),
 
-                          //personal details
+                          // PERSONAL DETAILS
                           Center(
                             child: FilledButton(
                               onPressed: () {
@@ -151,15 +154,12 @@ class _ProfileState extends State<Profile> {
 
                           const SizedBox(height: 10),
 
-                          //details
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              'My Details',
-                              style: TextStyle(
-                                  color: Colors.grey[300], fontSize: 20),
-                              textAlign: TextAlign.left,
-                            ),
+                          // DETAILS
+                          Text(
+                            'My Details',
+                            style: TextStyle(
+                                color: Colors.grey[300], fontSize: 20),
+                            textAlign: TextAlign.left,
                           ),
 
                           // MyTextBox(
@@ -177,8 +177,7 @@ class _ProfileState extends State<Profile> {
                               ),
                               padding:
                                   const EdgeInsets.only(left: 15, bottom: 15),
-                              margin: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 20),
+                              margin: const EdgeInsets.only(top: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -216,7 +215,7 @@ class _ProfileState extends State<Profile> {
                             height: 30,
                           ),
 
-                          // achievements
+                          // ACHIEVEMENTS
                           Center(
                             child: SizedBox(
                               width: 300,
@@ -245,7 +244,7 @@ class _ProfileState extends State<Profile> {
                             height: 80,
                           ),
 
-                          // Signout button
+                          // SIGNOUT BUTTON
                           Center(
                             child: _isLoading
                                 ? const CircularProgressIndicator(

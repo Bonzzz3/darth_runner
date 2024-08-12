@@ -38,6 +38,9 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
   //     widget.onChange(counter);
   //   }
   // }
+
+  // FUNCTION TO SET COUNTER VALUE TO WHAT THE USER HAS CHANGED TO
+
   void _onFieldChanged(String value) {
     final intValue = int.tryParse(value) ?? widget.initValue;
     setState(() {
@@ -77,7 +80,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    // decrease
+                    // DECREASE
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
@@ -98,6 +101,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                       width: 15,
                     ),
 
+                    // USER FILL IN TEXTFIELD WITH NUMBERS ONLY
                     SizedBox(
                       width: 50,
                       height: 50,
@@ -124,7 +128,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                       width: 15,
                     ),
 
-                    // increase
+                    // INCREASE
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,

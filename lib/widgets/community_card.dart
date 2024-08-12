@@ -26,7 +26,8 @@ class _CommunityCardState extends State<CommunityCard> {
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   void deleteCommunity() {
-    //show dialog to confirm
+
+    // SHOW DIALOG TO CONFIRM
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -40,14 +41,16 @@ class _CommunityCardState extends State<CommunityCard> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    // delete the posts after deleting comments
+
+                    // DELETE THE POSTS AFTER DELETING COMMENTS
                     final postDocs = await FirebaseFirestore.instance
                         .collection("Communities")
                         .doc(widget.comName)
                         .collection("User Posts")
                         .get();
                     for (var doc in postDocs.docs) {
-                      //delete comments
+
+                      // DELETE COMMENTS
                       final commentDocs = await FirebaseFirestore.instance
                           .collection("Communities")
                           .doc(widget.comName)
@@ -73,7 +76,7 @@ class _CommunityCardState extends State<CommunityCard> {
                           .delete();
                     }
 
-                    // finally delete community
+                    // FINALLY DELETE COMMUNITY
                     FirebaseFirestore.instance
                         .collection("Communities")
                         .doc(widget.comName)
@@ -113,12 +116,12 @@ class _CommunityCardState extends State<CommunityCard> {
           children: [
             const SizedBox(width: 25),
 
-            // seperate content with cancel button
+            // SEPARATE CONTENT WITH CANCEL BUTTON
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // title, user and time
+                // TITLE, USER AND TIME
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +140,7 @@ class _CommunityCardState extends State<CommunityCard> {
                   ),
                 ),
 
-                // delete button
+                // DELETE BUTTON
                 if (widget.userEmail == currentUser.email)
                   DeleteButton(
                     //onTap: () {},
@@ -149,7 +152,7 @@ class _CommunityCardState extends State<CommunityCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //user
+                // USER
                 Text(
                   "Created by: ${widget.username}",
                   style: TextStyle(
@@ -157,7 +160,7 @@ class _CommunityCardState extends State<CommunityCard> {
                       fontSize: 12,
                       fontWeight: FontWeight.bold),
                 ),
-                //time
+                // TIME
                 Text(
                   widget.time,
                   style: TextStyle(

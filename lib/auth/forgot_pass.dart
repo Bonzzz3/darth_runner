@@ -31,6 +31,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+
+              // DESCRIPTION, TEXTFIELD AND BUTTON TO SEND PASSWORD RESET LINK
               children: [
                 const Text(
                   "Enter email to send you a password reset email",

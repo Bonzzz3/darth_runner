@@ -12,6 +12,8 @@ class AuthService {
       : _auth = auth ?? FirebaseAuth.instance,
         _firestore = firestore ?? FirebaseFirestore.instance;
 
+  // SEND EMAIL VERIFICATION LINK TO USER EMAIL
+
   Future<void> sendEmailVerificationLink() async {
     try {
       await _auth.currentUser?.sendEmailVerification();
@@ -20,6 +22,8 @@ class AuthService {
     }
   }
 
+  // SEND PASSWORD RESET LINK TO EMAIL PROVIDED
+
   Future<void> sendPasswordResetLink(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -27,6 +31,8 @@ class AuthService {
       log(e.toString());
     }
   }
+
+  // CREATE A NEW USER WITH EMAIL, PASSWORD AND USER DISPLAY NAME
 
   Future<User?> createUserWithUsernameEmailAndPassword(
       String username, String email, String password) async {
@@ -48,6 +54,8 @@ class AuthService {
     return null;
   }
 
+  // SIGN IN WITH USER EMAIL AND PASSWORD
+
   Future<User?> loginUserWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -62,6 +70,8 @@ class AuthService {
     return null;
   }
 
+  // SIGN OUT USER
+
   Future<void> signout() async {
     try {
       await _auth.signOut();
@@ -70,6 +80,7 @@ class AuthService {
     }
   }
 
+  // SOME COMMON EXCEPTIONS TO HANDLE
   exceptionHandler(String code) {
     switch (code) {
       case "invalid-credential":

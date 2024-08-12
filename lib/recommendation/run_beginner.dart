@@ -187,7 +187,7 @@ class _RunBeginnerState extends State<RunBeginner> {
 
                 const SizedBox(height: 12),
 
-                // User's plans
+                // USER'S PLANS
                 Scrollbar(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: usersCollection
@@ -275,7 +275,7 @@ class _RunBeginnerState extends State<RunBeginner> {
                   ),
                 ),
 
-                // Youtube thumbnail
+                // YOUTUBE THUMBNAIL
                 const Text(
                   "Recommended Beginner Videos and Tips",
                   style: TextStyle(

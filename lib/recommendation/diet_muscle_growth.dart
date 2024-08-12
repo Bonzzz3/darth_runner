@@ -157,7 +157,8 @@ class _DietMuscleGrowthState extends State<DietMuscleGrowth> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/img/gradient red blue wp.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/img/gradient red blue wp.png"),
+              fit: BoxFit.cover),
         ),
         padding: const EdgeInsets.all(20),
         child: SafeArea(
@@ -188,7 +189,7 @@ class _DietMuscleGrowthState extends State<DietMuscleGrowth> {
 
                 const SizedBox(height: 12),
 
-                // User's plans
+                // USER'S PLANS
                 Scrollbar(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: usersCollection
@@ -276,7 +277,7 @@ class _DietMuscleGrowthState extends State<DietMuscleGrowth> {
                   ),
                 ),
 
-                // Youtube thumbnail
+                // YOUTUBE THUMBNAIL
                 const Text(
                   "Recommended Diet Videos and Tips",
                   style: TextStyle(

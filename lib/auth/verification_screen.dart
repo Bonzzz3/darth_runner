@@ -16,6 +16,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
   final _auth = AuthService();
   late Timer timer;
 
+  // CHECK IF USER HAS VERIFIED THEIR EMAIL
+  // IF VERIFIED, PAGE IS REDIRECTED TO THE WRAPPER PAGE TO CHECK FOR USER AUTHENTICATION CHANGES
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +66,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+
+              // INSTRUCTIONS TO VERIFY EMAIL AND A BUTTON TO RECEIVE A NEW VERIFICATION LINK
               children: [
                 const Text(
                   "We have sent an email for verification. You will only be able to proceed after verifying.",
@@ -73,7 +78,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       color: Colors.white),
                 ),
                 const Text(
-                  "Please wait for a few seconds for the screen to reload after verifying. If you did not receive an email, please tap on resend.",
+                  "Please wait for a few seconds for the screen to reload after verifying and DO NOT PRESS THE BACK BUTTON. If you did not receive an email, please tap on resend.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 16,

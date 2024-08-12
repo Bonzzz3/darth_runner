@@ -92,10 +92,10 @@ class _RunState extends State<Run> {
 
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 8.0),
+                                    horizontal: 20.0, vertical: 8.0),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderRadius: BorderRadius.circular(16.0),
                                   ),
                                   elevation: 5,
                                   child: Padding(

@@ -17,6 +17,8 @@ class _HeightWidgetState extends State<HeightWidget> {
   int _height = 160;
   TextEditingController _heightcon = TextEditingController();
 
+  // CHANGE HEIGHT VALUE AUTOMATICALLY WHEN THE HEIGHT INPUT IS INVALID
+
   void _validateHeight(String value) {
     final intValue = int.tryParse(value);
     if (value.isEmpty || intValue == null || intValue > 260) {
@@ -59,7 +61,7 @@ class _HeightWidgetState extends State<HeightWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // height value
+                  // HEIGHT VALUE
                   SizedBox(
                     width: 80,
                     height: 80,

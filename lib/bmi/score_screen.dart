@@ -17,6 +17,29 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // BMI SCORE AND COMMENTS WITH SOME COLOR DIFFERENCE
+    
+    void setBmiInterpretation() {
+      if (bmiScore > 30) {
+        bmiStatus = "Obese";
+        bmiInterpretation = "Please work to reduce obesity";
+        bmiStatusColor = Colors.pink;
+      } else if (bmiScore >= 25) {
+        bmiStatus = "Overweight";
+        bmiInterpretation = "Do regular exercise & reduce the weight";
+        bmiStatusColor = Colors.yellow;
+      } else if (bmiScore >= 18.5) {
+        bmiStatus = "Normal";
+        bmiInterpretation = "Enjoy, You are fit";
+        bmiStatusColor = Colors.green;
+      } else if (bmiScore < 18.5) {
+        bmiStatus = "Underweight";
+        bmiInterpretation = "Try to increase the weight";
+        bmiStatusColor = Colors.red;
+      }
+    }
+
     setBmiInterpretation();
     return Scaffold(
       appBar: AppBar(
@@ -133,25 +156,5 @@ class ScoreScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void setBmiInterpretation() {
-    if (bmiScore > 30) {
-      bmiStatus = "Obese";
-      bmiInterpretation = "Please work to reduce obesity";
-      bmiStatusColor = Colors.pink;
-    } else if (bmiScore >= 25) {
-      bmiStatus = "Overweight";
-      bmiInterpretation = "Do regular exercise & reduce the weight";
-      bmiStatusColor = Colors.yellow;
-    } else if (bmiScore >= 18.5) {
-      bmiStatus = "Normal";
-      bmiInterpretation = "Enjoy, You are fit";
-      bmiStatusColor = Colors.green;
-    } else if (bmiScore < 18.5) {
-      bmiStatus = "Underweight";
-      bmiInterpretation = "Try to increase the weight";
-      bmiStatusColor = Colors.red;
-    }
   }
 }
