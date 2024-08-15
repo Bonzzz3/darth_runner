@@ -99,6 +99,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 ),
 
                 // GENDER
+
                 GenderWidget(
                   onChange: (genderVal) {
                     _gender = genderVal;
@@ -109,6 +110,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 ),
 
                 // HEIGHT
+
                 HeightWidget(
                   onChange: (heightVal) {
                     _height = heightVal;
@@ -119,6 +121,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 ),
 
                 // AGE AND WEIGHT
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -145,6 +148,7 @@ class _BMIHomeScreenState extends State<BMIHomeScreen> {
                 ),
                 
                 // CALCULATE BUTTON
+                
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 60),

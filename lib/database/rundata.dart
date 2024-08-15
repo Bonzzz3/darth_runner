@@ -1,3 +1,9 @@
+
+// IMPORTANT HIVE INITIALIZATION
+// DO NOT EDIT rundata.g.dart MANUALLY.
+// USE BUILD COMMAND IN TERMINAL
+
+
 import 'package:hive/hive.dart';
 
 part 'rundata.g.dart';

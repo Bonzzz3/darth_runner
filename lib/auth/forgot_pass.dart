@@ -32,7 +32,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
 
-              // DESCRIPTION, TEXTFIELD AND BUTTON TO SEND PASSWORD RESET LINK
+              // DESCRIPTION, TEXTFIELD AND BUTTON TO SEND PASSWORD RESET LINK.
+
               children: [
                 const Text(
                   "Enter email to send you a password reset email",
@@ -61,11 +62,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         content: Text(
                             "An email for password reset has been sent to your email")));
                     Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
+                },
+              )
+            ],
           ),
-        ));
+        ),
+      )
+    );
   }
 }

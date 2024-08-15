@@ -24,7 +24,9 @@ class _SignupScreenState extends State<SignupScreen> {
   // FUNCTION TO VALIDATE NAME, EMAIL AND PASSWORD
 
   bool _validateFields(String name, String email, String password) {
-    // Reset error message
+    
+    // RESET ERROR MESSAGE.
+
     _errorMessage = '';
 
     if (name.isEmpty) {
@@ -34,12 +36,13 @@ class _SignupScreenState extends State<SignupScreen> {
     if (!EmailValidator.validate(email)) {
       _errorMessage += 'Enter a valid Email.\n';
     }
-    // Password length at least 8
+    //PASSWORD LENGTH MUST BE ATLEAST 8 CHARAFCTERS LONG.
+
     if (password.length < 8) {
       _errorMessage += 'Password must be at least 8 characters.\n';
     }
 
-    // If there are no error messages, the password is valid
+    //IF THERE ARE NO ERROR MESSAGES THE PASSWORD IS VALID.
     return _errorMessage.isEmpty;
   }
 

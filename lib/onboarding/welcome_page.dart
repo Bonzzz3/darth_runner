@@ -1,8 +1,9 @@
 import 'package:darth_runner/pages/navigation.dart';
 import 'package:flutter/material.dart';
 
-// THis is the intro page with a first time per new account,
-// tutorial screen
+// INTRO PAGE FOR EVERY FIRST TIME USER
+// TUTORIAL SCREEN
+
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
@@ -17,6 +18,7 @@ class IntroPage extends StatelessWidget {
               children: [
 
                 // LOGO
+
                 Padding(
                   padding: const EdgeInsets.only(left: 50, top: 200, right: 50),
                   child: Image.asset(
@@ -26,6 +28,7 @@ class IntroPage extends StatelessWidget {
                 const SizedBox(height: 40),
 
                 // WELCOME TEXT
+
                 const Text(
                   'Welcome to Darth Runner',
                   textAlign: TextAlign.center,
@@ -39,6 +42,7 @@ class IntroPage extends StatelessWidget {
                 ),
 
                 // START BUTTON
+
                 GestureDetector(
                   onTap: () async {
                     Navigator.push(
@@ -62,13 +66,16 @@ class IntroPage extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: 20,
-                          ),
-                        ))),
+                        ),
+                      )
+                    )
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        ));
+        ),
+      )
+    );
   }
 }

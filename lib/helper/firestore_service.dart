@@ -5,7 +5,7 @@ class FirestoreService {
 
   final FirebaseFirestore firestore;
 
-  /// Collection Operations
+  /// COLLECTION OPERATIONS
 
   Future<DocumentReference<Map<String, dynamic>>> addToMessageCollection({
     required String comName,
@@ -41,7 +41,7 @@ class FirestoreService {
     return firestore.collection(collectionPath).snapshots();
   }
 
-  /// Document Operations
+  /// DOCUMENT OPERATIONS
 
   Future<void> deleteDocumentFromCollection(
       {required String collectionPath, required String documentPath}) async {

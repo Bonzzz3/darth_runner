@@ -2,19 +2,23 @@ import 'package:darth_runner/database/rundata.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+// WIDGET TO DISPLAY SEPARATE ACHIEVEMENTS IN A CARD/LIST TILE FORMAT.
+
 class AchieveCard extends StatelessWidget {
   final String title;
   final String image;
   final String description;
   final bool isCompleted;
 
-  const AchieveCard({
+  const AchieveCard(
+    {
     super.key,
     required this.title,
     required this.image,
     required this.description,
     this.isCompleted = false,
-  });
+    }
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +84,9 @@ class AchieveCard extends StatelessWidget {
   }
 }
 
+//ACTUAL ACHIEVEMENTS PAGE
+
+
 class AchievementsHomePage extends StatefulWidget {
   const AchievementsHomePage({super.key});
 
@@ -89,6 +96,9 @@ class AchievementsHomePage extends StatefulWidget {
 
 class _AchievementsHomePageState extends State<AchievementsHomePage> {
   late Box<Rundata> runDataBox;
+
+  //LIST OF MAPS TO HOLD ACHIEVEMENT DATA.
+
   List<Map<String, dynamic>> achievements = [
     {
       'title': 'First Steps',
@@ -201,6 +211,8 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
     _checkAchievements();
   }
 
+  //FUNCTION TO CONVERT TIME FROM STOPWATCH FORMAT TO MINUTES FOR STANDARDISED CALCULATIONS.
+
   int durationToMinutes(String duration) {
     List<String> parts = duration.split(':');
     int hours = int.parse(parts[0]);
@@ -209,6 +221,8 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
 
     return hours * 60 + minutes + (seconds / 60).round();
   }
+
+  //FUNCTION TO UPDATE STATE OF ACHIEVEMENTS CALLING RESPECTING ACHIEVEMENT FUCNTIONS.
 
   void _checkAchievements() {
     setState(() {
@@ -231,6 +245,8 @@ class _AchievementsHomePageState extends State<AchievementsHomePage> {
       achievements[16]['isCompleted'] = userHasCompletedMarathon();
     });
   }
+
+  //BOOLS TO UPDATE STATUS OF EACH ACHIEVEMENT. THERE MIGHT BE A MORE EFFICIENT WAY TO DO THIS.
 
   bool userHasCompletedFirstRun() {
     return runDataBox.isNotEmpty; // CHECKS IF RUN DATA HAS ATLEAST 1 RUN

@@ -1,3 +1,8 @@
+// CODE NOT EXECUTED IN FINAL PRODUCT.
+// USEFULL FOR FUTURE INTEGRATION WITH SENSOR DATA.
+
+
+
 import 'package:flutter/material.dart';
 import 'package:heart_bpm/heart_bpm.dart';
 //import 'package:heart_bpm/chart.dart';

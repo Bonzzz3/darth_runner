@@ -102,10 +102,11 @@ class _HeightWidgetState extends State<HeightWidget> {
                     _heightcon.text = _height.toString();
                   });
                   widget.onChange(_height);
-                },
-              )
-            ],
-          )),
+              },
+            )
+          ],
+        )
+      ),
     );
   }
 }

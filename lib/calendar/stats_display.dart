@@ -16,7 +16,9 @@ class _StatsDisplayState extends State<StatsDisplay> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   final runDataBox = Hive.box<Rundata>('runDataBox');
-  final double _dailyTarget = 5.0; // Example daily target in kilometers
+  final double _dailyTarget = 5.0; // CURRENT SET DAILY TARGET THAT CAN BE EDITED BY USER IN FUTURE ITERATIONS.
+
+  // GETTING RUN DATA FOR THE CURRENT DAY.
 
   List<Rundata> _getRunsForDate(DateTime date) {
     return runDataBox.values
@@ -26,6 +28,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
             runData.hiveDate.day == date.day)
         .toList();
   }
+
+  // CALCULATING THE CUMULATIVE DISTANCE RUN ON THE SELECTED DAY.
 
   double _getCumulativeDistanceForDate(DateTime date) {
     double totalDistanceCalendar = 0.0;
@@ -118,7 +122,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
                       weekendTextStyle: TextStyle(color: Colors.white),
                       todayTextStyle: TextStyle(
                           color: Colors
-                              .white), // Match default color for visibility
+                              .white), 
                       selectedTextStyle: TextStyle(color: Colors.black),
                       selectedDecoration: BoxDecoration(
                         color: Colors.white,
@@ -128,7 +132,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
                         shape: BoxShape.circle,
                         border: Border.fromBorderSide(BorderSide(
                             color: Colors.blue,
-                            width: 2.0)), // Add border instead of fill
+                            width: 2.0)), 
                       ),
                     ),
                     headerStyle: HeaderStyle(
@@ -159,6 +163,9 @@ class _StatsDisplayState extends State<StatsDisplay> {
                             SizedBox(
                               width: 40,
                               height: 40,
+
+                              // TO DISPLAY THE CIRCULAR PROGRESS BAR ON EACH DATE OF THE CALENDAR.
+
                               child: CircularProgressIndicator(
                                 value: progress,
                                 strokeWidth: 4.0,
@@ -181,6 +188,9 @@ class _StatsDisplayState extends State<StatsDisplay> {
                 ),
               ),
               Expanded(
+
+                // TO BUILD STATS PANEL AND LISTEN FOR RUN DATA.
+
                 child: ValueListenableBuilder(
                   valueListenable: runDataBox.listenable(),
                   builder: (context, Box<Rundata> box, _) {
@@ -207,6 +217,8 @@ class _StatsDisplayState extends State<StatsDisplay> {
       ),
     );
   }
+
+  // THE STATS PANEL WIDGGET.
 
   Widget _buildStatsPanel(double distance, int numRuns, List<Rundata> runs) {
     return Padding(
@@ -278,11 +290,13 @@ class _StatsDisplayState extends State<StatsDisplay> {
     );
   }
 
+ // THEcIRCULAR INDICATOR FOR THE STATS PANeL.
+
   Widget _buildCircularIndicator(double distance) {
     double progress = (distance / _dailyTarget).clamp(0.0, 1.0);
     return Column(
       children: [
-        const SizedBox(height: 24.0), // Add padding from the top edge
+        const SizedBox(height: 24.0), 
         Stack(
           alignment: Alignment.center,
           children: [
@@ -291,7 +305,7 @@ class _StatsDisplayState extends State<StatsDisplay> {
               height: 150,
               child: CircularProgressIndicator(
                 value: progress,
-                strokeWidth: 16.0, // Increase stroke width for more volume
+                strokeWidth: 16.0,
                 backgroundColor: Colors.grey[300],
                 valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
               ),

@@ -11,3 +11,6 @@ final ThemeData darkmode = ThemeData(
   primaryColor: const Color.fromRGBO(235, 33, 46, 1),
 
 );
+
+// STORING THE DIFFERENT COLOURS AND SETTINGS FOR DIFFTHEMES.
+// NOT IMPLEMENTED.

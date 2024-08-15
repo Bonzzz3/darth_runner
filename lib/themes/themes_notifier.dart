@@ -16,3 +16,5 @@ class ThemeNotifier with ChangeNotifier{
     notifyListeners();
   }
 }
+
+// TO IMPLEMENT COLOUR THEME CHANGES IN THE FUTURE.

@@ -33,7 +33,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   }
 
   bool _validateHeight(String height) {
-    // Reset error message
+    // RESET ERROR MESSAGE
     _errorMessage = '';
     final tempHeight = int.tryParse(height);
 
@@ -49,7 +49,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   }
 
   bool _validateWeight(String weight) {
-    // Reset error message
+    // RESET ERROR MESSAGE
     _errorMessage = '';
     final tempWeight = int.tryParse(weight);
 
@@ -143,7 +143,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       },
     );
 
-    // update in firestore if valid
+    // UPDATE IN FIRESTORE IF VALID
     if (newGender.trim().isNotEmpty && isValid) {
       await usersCollection
           .doc(currentUser.email)
@@ -204,7 +204,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // validate input based on the field type
+                    // VAIDATE INPUT BASED ON FIELD TYPE
                     if (field == 'Age') {
                       isValid = _validateAge(newValue);
                     } else if (field == 'Height') {
@@ -216,7 +216,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     if (isValid) {
                       Navigator.of(context).pop(newValue);
                     } else {
-                      // Update the dialog state to show the error message
+                      // UPDATE DIALOG STATE TO SHOW ERROR TYPE
                       setState(() {});
                     }
                   },
@@ -232,7 +232,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       },
     );
 
-    // update in firestore if valid
+    // UPDATE FIRESTORE IF VALID
     if (newValue.trim().isNotEmpty && isValid) {
       await usersCollection.doc(currentUser.email).update({field: newValue});
     }

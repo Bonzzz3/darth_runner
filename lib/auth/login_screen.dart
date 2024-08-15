@@ -86,7 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       )),
                   const SizedBox(height: 30),
 
-                  //login button
+                  //LOGIN BUTTON
+                  
                   _isLoading
                       ? const CircularProgressIndicator(
                           color: Colors.white,

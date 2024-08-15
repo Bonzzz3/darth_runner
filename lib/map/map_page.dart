@@ -84,14 +84,19 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
+
+//CAPTURE SCREENSHOT OF MAP.
+
   Future<String?> captureAndUploadSnapshot(List<LatLng> path) async {
     final filePath = await generateStaticMap(path);
 
-    // Upload to Firebase Storage
+    // UPLOAD TO FIREBASE STORAGE.
     final storageRef = FirebaseStorage.instance.ref().child('run_images/${DateTime.now().millisecondsSinceEpoch}.png');
     await storageRef.putFile(File(filePath));
     return await storageRef.getDownloadURL();
   }
+
+// LOGIC EXECUTED ON STOP BUTTON PRESSED.  
 
 Future<void> stopRunning() async {
     String? runTitle = await showTitleDialog(context);
@@ -318,6 +323,8 @@ Future<void> stopRunning() async {
     );
   }
 
+  // FUNCTION TO POSITION USER LOCATION ON CENTER OF THE SCREEN EVERY TIME THEY MOVE.
+
   Future<void> cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await mapController.future;
     CameraPosition newCameraPosition = CameraPosition(
@@ -326,6 +333,8 @@ Future<void> stopRunning() async {
     );
     await controller.animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
   }
+
+  // FUCNTION TO GET USER CURRENT LOCATION TOGETHER WITH PERMISSIONS IF LOCATION SERVICES ARE DISABLED.
 
   Future<void> fetchLocation() async {
     bool serviceEnabled;
@@ -385,9 +394,9 @@ Future<void> stopRunning() async {
               int timeDuration = currentTime - lastTime;
 
               if (timeDuration != 0 && appendDist != 0) {
-                double timeInMinutes = timeDuration / (1000 * 60); // Convert time duration from milliseconds to minutes
-                double distanceInKm = appendDist / 1000; // Convert distance from meters to kilometers
-                pace = timeInMinutes / distanceInKm; // Calculate pace as time per kilometer
+                double timeInMinutes = timeDuration / (1000 * 60); 
+                double distanceInKm = appendDist / 1000; 
+                pace = timeInMinutes / distanceInKm; 
               }
             }
           }

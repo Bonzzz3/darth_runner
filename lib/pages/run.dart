@@ -53,6 +53,8 @@ class _RunState extends State<Run> {
                     image: AssetImage("assets/img/gradient red blue wp.png"),
                     fit: BoxFit.cover),
               )),
+
+          // TO ONLY GET DATA IF THE PAGE IS ACTIVE. MIGHT NEED TO CLOSE DATABASE WHEN DATA SETS GET LARGER.
           isPageActive
               ? Column(
                   children: [
@@ -215,6 +217,8 @@ class _RunState extends State<Run> {
               : const Center(
                   child: Text('Loading'),
                 ),
+
+           // BUTTON TO NAV TO MAP PAGE
           Positioned(
             bottom: 20,
             right: 20,

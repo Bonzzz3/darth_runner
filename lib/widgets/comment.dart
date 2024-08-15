@@ -71,7 +71,7 @@ class _CommentState extends State<Comment> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //comment
+          //COMMENT 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -87,11 +87,11 @@ class _CommentState extends State<Comment> {
               //   ),
             ],
           ),
-          //user and time
+          //USER AND TIME
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              //user
+              //USER
               Text(
                 widget.user,
                 style: TextStyle(
@@ -99,7 +99,7 @@ class _CommentState extends State<Comment> {
                   fontSize: 12,
                 ),
               ),
-              //time
+              //TIME
               Text(
                 widget.time,
                 style: TextStyle(

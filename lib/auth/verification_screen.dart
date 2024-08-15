@@ -68,6 +68,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
 
               // INSTRUCTIONS TO VERIFY EMAIL AND A BUTTON TO RECEIVE A NEW VERIFICATION LINK
+              
               children: [
                 const Text(
                   "We have sent an email for verification. You will only be able to proceed after verifying.",

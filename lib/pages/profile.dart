@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
       ),
     );
 
-    //update in Firestore
+    //UPDATE IN FIRESTORE
     if (newValue.trim().isNotEmpty) {
       await usersCollection.doc(currentUser.email).update({field: newValue});
     }

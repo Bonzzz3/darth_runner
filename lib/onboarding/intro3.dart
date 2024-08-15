@@ -26,7 +26,9 @@ class _Intro3State extends State<Intro3> {
   final usersCollection = FirebaseFirestore.instance.collection("Users");
 
   bool _validateHeightWeight(String height, String weight) {
-    // Reset error message
+
+    // RESET ERROR MESSAGE.
+
     _errorMessage = '';
     final tempHeight = int.tryParse(height);
     final tempWeight = int.tryParse(weight);
@@ -49,6 +51,8 @@ class _Intro3State extends State<Intro3> {
     return _errorMessage.isEmpty;
   }
 
+  // FUNCTION TO GET HEIGHT AND WEIGHT
+
   Future<void> _loadHeightWeight() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -59,11 +63,15 @@ class _Intro3State extends State<Intro3> {
     });
   }
 
+  // FUNCTION TO SAVE HEIGHT AND WEIGHT.
+
   Future<void> _saveHeightWeight(String height, String weight) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('height', height);
     prefs.setString('weight', weight);
   }
+
+  // TO SAVE TO FIREBASE
 
   void _saveToFirebase(String gender, String age, String height, String weight,
       bool doneOnboarding) {
@@ -157,7 +165,8 @@ class _Intro3State extends State<Intro3> {
                     ),
             ),
 
-            // Submit Button + save to firebase
+            // SUBMIT BUTTON + SAVE TO FIREBASE
+
             Center(
               child: _isLoading
                   ? const CircularProgressIndicator(
@@ -205,7 +214,8 @@ class _Intro3State extends State<Intro3> {
                     ),
             ),
 
-            // Back Button
+            // BACK BUTTON
+            
             TextButton(
               onPressed: () async {
                 setState(() {

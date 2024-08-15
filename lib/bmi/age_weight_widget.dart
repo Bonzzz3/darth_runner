@@ -80,7 +80,9 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
+
                     // DECREASE
+
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
@@ -102,6 +104,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                     ),
 
                     // USER FILL IN TEXTFIELD WITH NUMBERS ONLY
+
                     SizedBox(
                       width: 50,
                       height: 50,
@@ -129,6 +132,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                     ),
 
                     // INCREASE
+
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
@@ -143,11 +147,14 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                           }
                         });
                         widget.onChange(counter);
-                      },
-                    ),
-                  ],
-                ),
-              )
-            ])));
+                    },
+                  ),
+                ],
+              ),
+            )
+          ]
+        )
+      )
+    );
   }
 }

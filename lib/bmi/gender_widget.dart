@@ -93,9 +93,10 @@ class _GenderWidgetState extends State<GenderWidget> {
                   const Text(
                     "Female",
                     style: TextStyle(fontSize: 18),
-                  )
-                ],
-              ))
+                )
+              ],
+            )
+          )
         ],
       ),
     );
