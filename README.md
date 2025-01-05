@@ -9,9 +9,9 @@ Darth Runner is an Android fitness mobile application that offers a fun, simple,
 
 ## Installation
 
-- Install the [APK file](https://drive.google.com/file/d/1IY_jDTiTzuEF7ks27Cs98D0st02rmCSl/view?usp=sharing) onto your Android device.
-- Allow necessary permissions and security scans if needed.
-- Sign up and enjoy the features of Darth Runner!
+1. Install the [APK file](https://drive.google.com/file/d/1IY_jDTiTzuEF7ks27Cs98D0st02rmCSl/view?usp=sharing) onto your Android device.
+2. Allow necessary permissions and security scans if needed.
+3. Sign up and enjoy the features of Darth Runner!
 
     
 ## Features
@@ -26,13 +26,14 @@ Darth Runner is an Android fitness mobile application that offers a fun, simple,
 
 
 ## Demo
-
-<p align="center">
-  <video controls src="assets/video/demo.mp4" title="Demo"></video>
-</p>
+[Click me!](https://drive.google.com/file/d/1Ck7H5w49o30lFV2Kp-9N33nDH96-A3sf/view?usp=drive_link)
 
 ## Authors
 
-- [@Bonzzz3](https://www.github.com/Bonzzz3)
-- [@Cjoshd](https://github.com/Cjoshd)
+- [@Bonzzz3](https://www.github.com/Bonzzz3) - Computer Science Student
+- [@Cjoshd](https://github.com/Cjoshd) - Mechanical Engineering Student
 
+
+## Appendix
+
+This project has received Apollo 11 (Advanced Level) as a level of achievement in the NUS SoC Orbital Programme.
