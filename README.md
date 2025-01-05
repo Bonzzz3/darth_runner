@@ -1,16 +1,38 @@
-# darth_runner
+# Darth Runner
 
-A new Flutter project.
+Darth Runner is an Android fitness mobile application that offers a fun, simple, and user-friendly interface for consistently monitoring running progress. Quickly track distance and time ran. Set weekly goals to stay motivated and check your BMI score with an inbuilt BMI calculator. Join social groups for encouragement and access to recommended diets and training plans to achieve specific fitness goals. Earn cute badges as you complete various achievements!<br/>
 
-## Getting Started
+<p align="center">
+  <img src="assets/img/onboarding_screen.png" alt="drawing" width="200"/>
+</p>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Install the [APK file](https://drive.google.com/file/d/1IY_jDTiTzuEF7ks27Cs98D0st02rmCSl/view?usp=sharing) onto your Android device.
+- Allow necessary permissions and security scans if needed.
+- Sign up and enjoy the features of Darth Runner!
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    
+## Features
+
+- User Authentication and Onboarding Pages
+- Distance Tracker
+- Calendar
+- BMI Calculator
+- Social Groups and Interactions
+- Recommendations on Training and Diet Plans
+- Badges and Achievements
+
+
+## Demo
+
+<p align="center">
+  <video controls src="assets/video/demo.mp4" title="Demo"></video>
+</p>
+
+## Authors
+
+- [@Bonzzz3](https://www.github.com/Bonzzz3)
+- [@Cjoshd](https://github.com/Cjoshd)
+
